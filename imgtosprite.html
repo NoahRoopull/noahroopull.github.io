@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image To Sprite</title>
+  <link rel="stylesheet" href="css/imgtosprite.css">
+</head>
+<body>
+<h1>Image To Sprite</h1>
+<input type="file" id="image-upload" accept="image/*"/>
+<br>
+<div id="uploaded-container">
+  <img id="uploaded-image">
+</div>
+<div>
+  <label for="cropx">Crop X: </label>
+  <input type="range" id="cropx" min="0" max="0" value="0">
+  <span id="cropx-value">0</span>
+</div>
+<div>
+  <label for="cropy">Crop Y: </label>
+  <input type="range" id="cropy" min="0" max="0" value="0">
+  <span id="cropy-value">0</span>
+</div>
+<div>
+  <label for="cropw">Crop W: </label>
+  <input type="range" id="cropw" min="0" max="0" value="0">
+  <span id="cropw-value">0</span>
+</div>
+<div>
+  <label for="croph">Crop H: </label>
+  <input type="range" id="croph" min="0" max="0" value="0">
+  <span id="croph-value">0</span>
+</div>
+<br>
+<table id="palette">
+  <thead>
+    <tr>
+      <th>Key</th>
+      <th>Hex</th>
+      <th>R</th>
+      <th>G</th>
+      <th>B</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+<button id="reset-palette">Reset Palette</button>
+<div>
+  <label for="lock-aspect-ratio" class="checkbox-container">
+    Lock Aspect Ratio?
+    <input type="checkbox" id="lock-aspect-ratio" checked>
+    <span class="checkmark"></span>
+  </label>
+</div>
+<div>
+  <label for="width">Width: </label>
+  <input type="range" id="width" min="8" max="160" value="160">
+  <span id="width-value">160</span>
+</div>
+<div>
+  <label for="height">Height: </label>
+  <input type="range" id="height" min="8" max="120" value="120">
+  <span id="height-value">120</span>
+</div>
+<br>
+<canvas id="offscreen-canvas" style="display:none;"></canvas>
+<canvas id="quantized-canvas"></canvas>
+<textarea id="output-text" readonly rows="16" columns="16"></textarea>
+<br>
+<button id="copy-output">Copy</button>
+<script src="js/imgtosprite.js"></script>
+</body>
+</html>

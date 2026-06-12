@@ -1,0 +1,23 @@
+* {
+  display:grid;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  justify-self:center;
+  align-self:center;
+}
+body {
+  margin-top:150px;
+}
+body,a {
+  font-family:Courier,monospace;
+  font-size:1.2em;
+  background-color:#000;
+  color:#fff;
+}
+h1 {
+  font-size:2em;
+}
+a {
+  font-size:1.5em;
+}
