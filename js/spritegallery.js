@@ -80,8 +80,8 @@ function createCanvas(pixelInfo) {
     gallery.appendChild(copyTarget);
     copyTarget.focus({preventScroll:true});
     copyTarget.select();
-    document.execCommand('copy');
     copyTarget.setSelectionRange(0,0);
+    document.execCommand('copy');
     copyTarget.remove();
     let oldLabel=label.textContent;
     label.textContent='Copied!';
