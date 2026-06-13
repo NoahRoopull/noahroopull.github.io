@@ -86,7 +86,7 @@ function createCanvas(pixelInfo) {
     let oldLabel=label.textContent;
     label.textContent='Copied!';
     setTimeout(function() {
-      label.textContent=oldLabel;
+      label.textContent=(pixelInfo.label||'Untitled')+`\n(${pixelInfo.width}×${pixelInfo.height})`;
     },3000);
   });
 }
