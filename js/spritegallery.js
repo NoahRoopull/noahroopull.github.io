@@ -83,7 +83,6 @@ function createCanvas(pixelInfo) {
     copyTarget.setSelectionRange(0,0);
     document.execCommand('copy');
     copyTarget.remove();
-    let oldLabel=label.textContent;
     label.textContent='Copied!';
     setTimeout(function() {
       label.textContent=(pixelInfo.label||'Untitled')+`\n(${pixelInfo.width}×${pixelInfo.height})`;
