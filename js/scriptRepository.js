@@ -223,6 +223,119 @@ proxPrompt.Triggered:Connect(function(player)
   end
   open=not open
 end)`
+  },
+  {
+    "label": "NPC Walking",
+    "script":`
+--Walk.lua
+--Attached to the Rig model, in the same level as the Humanoid
+--Workspace should have a Folder named Waypoints with parts labelled as numbers.
+--Waypoints must be accessible.
+
+--CUSTOMIZE:
+-- How long the NPC waits after reaching each waypoint, in seconds. Should be positive or 0.
+local waitTime=0
+
+
+local waypoints=game.Workspace.Waypoints
+local npc=script.Parent:WaitForChild("Humanoid")
+
+while true do
+  for wp=1,#waypoints:GetChildren()-1 do
+    npc:MoveTo(waypoints[wp].Position)
+    npc.MoveToFinished:Wait()
+    wait(math.max(0,waitTime))
+  end
+end`
+  },
+  {
+    "label": "NPC Talking (Random)",
+    "script":`
+--Talk.lua
+--Attached to the Rig model, in the same level as the Humanoid
+--The Rig must have a ProximityPrompt
+--Workspace should have a Folder named Waypoints with parts labelled as numbers.
+--Waypoints must be accessible.
+
+--CUSTOMIZE:
+-- Chat lines. Every line should be in quotes, and all except the last should have a comma afterward.
+local chatList={
+  "Hello!",
+  "My name is Joe",
+  "Hi-yah!"
+}
+
+
+local ChatService=game:GetService("Chat")
+local head=script.Parent.Head
+local prompt=head.ProximityPrompt
+
+prompt.Triggered:Connect(function()
+  ChatService:Chat(head,chatList[math.random(1,#chatList)])
+end)`
+  },
+  {
+    "label": "NPC Talking (Ordered)",
+    "script":`
+--Talk.lua
+--Attached to the Rig model, in the same level as the Humanoid
+--The Rig must have a ProximityPrompt
+--Workspace should have a Folder named Waypoints with parts labelled as numbers.
+--Waypoints must be accessible.
+
+--CUSTOMIZE:
+-- Chat lines. Every line should be in quotes, and all except the last should have a comma afterward.
+local chatList={
+  "Hello!",
+  "My name is Joe",
+  "Hi-yah!"
+}
+
+
+local ChatService=game:GetService("Chat")
+local head=script.Parent.Head
+local prompt=head.ProximityPrompt
+local index=1
+
+prompt.Triggered:Connect(function()
+  ChatService:Chat(head,chatList[index])
+  index=index+1
+  if index>#chatList then
+    index=1
+  end
+end)`
+  },
+  {
+    "label": "Jumping Part",
+    "script":`
+--Jump.lua
+--Attached to the Part that should jump
+--The part must not be anchored
+
+--CUSTOMIZE:
+-- Horizontal force. Default is 10.
+local horizontalForce=10
+-- Vertical force. Default is 50.
+local verticalForce=50
+-- Duration of jumps, in seconds. Default is 3. Must be positive.
+local jumpTime=3
+-- Minimum time between jumps, in seconds. Default is 0.5. Must be positive.
+local minWaitTime=0.5
+-- Maximum time between jumps, in seconds. Default is 1. Must be positive.
+local maxWaitTime=1
+-- Does the part change color as it jumps?
+local changeColor=false
+
+local part=script.Parent
+while true do
+  part.Velocity=Vector3.new(math.random(-horizontalForce,horizontalForce),verticalForce,math.random(-horizontalForce,horizontalForce))
+  if changeColor then
+    part.BrickColor=BrickColor.random()
+  end
+  wait(jumpTime)
+  part.Velocity=Vector3.new(0,0,0)
+  wait(math.random(minJumpTime,maxJumpTime))
+end`
   }
 ]
 repo.innerHTML='';
