@@ -52,7 +52,7 @@ function createCanvas(pixelInfo) {
     label.textContent=`[${pixelInfo.series}] `;
     container.classList.add(pixelInfo.series.toLowerCase());
   }
-  let height=pixelInfo.string.split('\n').length;
+  let height=pixelInfo.string.split('\n').length-1;
   let width=pixelInfo.string.split('\n')[0].length;
   console.log(`${pixelInfo.label} (${width}x${height})`);
   label.textContent+=(pixelInfo.label||'Untitled')+`\n(${width}×${height})`;
@@ -619,7 +619,8 @@ cddcdddddddddddcddc........
 ...ccccccccccccc...........`
   },
   {
-    "label": "[Galaga] Boss Galaga (1/2)",
+    "series": "Galaga",
+    "label": "Boss Galaga (1/2)",
     "string": `......6.6......
 ......6.6......
 ...664464466...
@@ -638,7 +639,8 @@ cddcdddddddddddcddc........
 .66.........66.`
   },
   {
-    "label": "[Galaga] Boss Galaga (2/2)",
+    "series": "Galaga",
+    "label": "Boss Galaga (2/2)",
     "string": `......6.6......
 ......6.6......
 ...664464466...
@@ -697,7 +699,8 @@ cddcdddddddddddcddc........
 ...............`
   },
   {
-    "label": "[Galaga] Goei (1/2)",
+    "series": "Galaga",
+    "label": "Goei (1/2)",
     "string": `...............
 ...............
 ...............
@@ -716,7 +719,8 @@ cddcdddddddddddcddc........
 ...............`
   },
   {
-    "label": "[Galaga] Goei (2/2)",
+    "series": "Galaga",
+    "label": "Goei (2/2)",
     "string": `...............
 ...............
 ...............
@@ -775,7 +779,8 @@ cddcdddddddddddcddc........
 ...............`
   },
   {
-    "label": "[Galaga] Momiji (1/3)",
+    "series": "Galaga",
+    "label": "Momiji (1/3)",
     "string": `....22..........
 .....22....61...
 .....222..611...
@@ -793,7 +798,8 @@ cddcdddddddddddcddc........
 6..........22...`
   },
   {
-    "label": "[Galaga] Momiji (2/3)",
+    "series": "Galaga",
+    "label": "Momiji (2/3)",
     "string": `.........22.....
 .........2261...
 ........22611...
@@ -811,7 +817,8 @@ cddcdddddddddddcddc........
 6......22.......`
   },
   {
-    "label": "[Galaga] Momiji (3/3)",
+    "series": "Galaga",
+    "label": "Momiji (3/3)",
     "string": `................
 ..222......61...
 ...2222...6112..
@@ -869,7 +876,8 @@ cddcdddddddddddcddc........
 ...............`
   },
   {
-    "label": "[Galaga] Zako (1/2)",
+    "series": "Galaga",
+    "label": "Zako (1/2)",
     "string": `...............
 ...............
 ...............
@@ -888,7 +896,8 @@ cddcdddddddddddcddc........
 ...............`
   },
   {
-    "label": "[Galaga] Zako (2/2)",
+    "series": "Galaga",
+    "label": "Zako (2/2)",
     "string": `...............
 ...............
 ...............
@@ -2509,7 +2518,8 @@ ccffcccfccbbccccccbb52bbbee
 ....ff.........fff.........`
   },
   {
-    "label": "[PKMN] Pikachu (F) Back",
+    "series": "PKMN",
+    "label": "Pikachu (F) Back",
     "string": `fff........fff.
 fccf.eeee.fccf.
 fcc5f5555f5ccf.
@@ -2528,7 +2538,8 @@ fcc5f5555f5ccf.
 ...ff...ff.....`
   },
   {
-    "label": "[PKMN] Pikachu (F) Front",
+    "series": "PKMN",
+    "label": "Pikachu (F) Front",
     "string": `fff..........fff
 fccf........fccf
 fcc5f......f5ccf
@@ -2549,7 +2560,8 @@ ceecfc4444cfc...
 ....ff....ff....`
   },
   {
-    "label": "[PKMN] Pikachu (F) Side",
+    "series": "PKMN",
+    "label": "Pikachu (F) Side",
     "string": `....ffff.........
 ....fcccff.......
 .....fcce4f......
@@ -2569,7 +2581,8 @@ e444c4ee444ee54c.
 .........eff.....`
   },
   {
-    "label": "[PKMN] Pikachu (M) Back",
+    "series": "PKMN",
+    "label": "Pikachu (M) Back",
     "string": `fff........fff.
 fccf.eeee.fccf.
 fcc5f5555f5ccf.
@@ -2588,7 +2601,8 @@ fcc5f5555f5ccf.
 ...ff...ff.....`
   },
   {
-    "label": "[PKMN] Pikachu (M) Front",
+    "series": "PKMN",
+    "label": "Pikachu (M) Front",
     "string": `fff..........fff
 fccf........fccf
 fcc5f......f5ccf
@@ -2609,7 +2623,8 @@ ceecfc4444cfc...
 ....ff....ff....`
   },
   {
-    "label": "[PKMN] Pikachu (M) Side",
+    "series": "PKMN",
+    "label": "Pikachu (M) Side",
     "string": `....ffff.........
 ....fcccff.......
 .....fcce4f......
@@ -3078,7 +3093,8 @@ c6666c......cffff4466666f..
 .........fc.......ff.......`
   },
   {
-    "label": "[PKMN] Venusaur (F) Back",
+    "series": "PKMN",
+    "label": "Venusaur (F) Back",
     "string": `........eeeee.eeeee........
 .......ebbd3beb3dbbe.......
 .....eeee33bbbbb33eeee.....
@@ -3103,7 +3119,8 @@ c777777fbbfc444cfbbf777777c
 .....fff...........fff.....`
   },
   {
-    "label": "[PKMN] Venusaur (F) Front",
+    "series": "PKMN",
+    "label": "Venusaur (F) Front",
     "string": `.......eeeee.eeeee.......
 ......ebbd3beb3dbbe......
 ....eeee3bbbebbb3eeee....
@@ -3130,7 +3147,8 @@ f777777ff77ccc77ff777777f
 ...fff....fffff....fff...`
   },
   {
-    "label": "[PKMN] Venusaur (F) Side",
+    "series": "PKMN",
+    "label": "Venusaur (F) Side",
     "string": `.....eeeee.eeeee..........
 ....ebbd3beb3dbbe.........
 ..eeee3bbbebbb3eeee.......
@@ -3156,7 +3174,8 @@ f777cf777c777fee999999999c
 ...ffff.....ffff..........`
   },
   {
-    "label": "[PKMN] Venusaur (M) Back",
+    "series": "PKMN",
+    "label": "Venusaur (M) Back",
     "string": `........eeeee.eeeee........
 .......ebbd3beb3dbbe.......
 .....eeee33bbbbb33eeee.....
@@ -3181,7 +3200,8 @@ c777777fbbfc444cfbbf777777c
 .....fff...........fff.....`
   },
   {
-    "label": "[PKMN] Venusaur (M) Front",
+    "series": "PKMN",
+    "label": "Venusaur (M) Front",
     "string": `.......eeeee.eeeee.......
 ......ebbd3beb3dbbe......
 ....eeee3bbbebbb3eeee....
@@ -3208,7 +3228,8 @@ f777777ff77ccc77ff777777f
 ...fff....fffff....fff...`
   },
   {
-    "label": "[PKMN] Venusaur (M) Side",
+    "series": "PKMN",
+    "label": "Venusaur (M) Side",
     "string": `.....eeeee.eeeee..........
 ....ebbd3beb3dbbe.........
 ..eeee3bbbebbb3eeee.......
@@ -4717,7 +4738,7 @@ ff.....ff8f...
   },
   {
     "series": "IMPACT",
-    "label": "Archaeology Background",
+    "label": "Background (Archaeology)",
     "string": `9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
 9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
 9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
@@ -4842,7 +4863,7 @@ ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
   },
   {
     "series": "IMPACT",
-    "label": "Tropical Background",
+    "label": "Background (Tropical)",
     "string": `7777777777776999967777777777777777777777777776999999999999999999999999999999999999999999999999999999999999999999999677777777777777777777777777699999677777777777
 7776777777769999967777777777777777777777777777699999999999999999999999999999999999999999999999999999999999999999996777777777777777777777777777769999966777777777
 7776777777699999967777777777777666666777777777769999999999999999999999999999999999999999999999999999999999999999996777777777776666667777777777769999996777777777
@@ -4967,7 +4988,7 @@ eeeeeed1111111111111111111111111111111111111111111111111111111111111111111111111
   },
   {
     "series": "IMPACT",
-    "label": "Soccer Field Background",
+    "label": "Background (Soccer Field)",
     "string": `7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111777777777777777777777777777777711111117
 7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111111111111111111111111111111111111111111
 7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111117717177717771771771777177177717777717

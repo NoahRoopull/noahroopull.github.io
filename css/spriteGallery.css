@@ -21,7 +21,7 @@ main {
   gap:20px;
 }
 .canvas-container {
-  background-color:#111;
+  background-color:#333;
   border:1px solid #777;
   border-radius:8px;
   overflow:hidden;
