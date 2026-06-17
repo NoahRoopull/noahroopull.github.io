@@ -5,7 +5,6 @@ function createScript(scriptInfo) {
   container.classList.add('script-container');
   const label=document.createElement('div');
   label.classList.add('script-label');
-  console.log(scriptInfo.type);
   if (scriptInfo.type) {
     container.classList.add(scriptInfo.type.toLowerCase());
     label.textContent=`[${scriptInfo.type}] `;

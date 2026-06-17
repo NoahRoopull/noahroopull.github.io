@@ -48,7 +48,11 @@ function createCanvas(pixelInfo) {
   container.classList.add('canvas-container');
   const label=document.createElement('div');
   label.classList.add('canvas-label');
-  label.textContent=(pixelInfo.label||'Untitled')+`\n(${pixelInfo.width}×${pixelInfo.height})`;
+  if (pixelInfo.series) {
+    label.textContent=`[${pixelInfo.series}] `;
+    container.classList.add(pixelInfo.series.toLowerCase());
+  }
+  label.textContent+=(pixelInfo.label||'Untitled')+`\n(${pixelInfo.width}×${pixelInfo.height})`;
   const canvas=document.createElement('canvas');
   canvas.width=parseInt(pixelInfo.width);
   canvas.height=parseInt(pixelInfo.height);
@@ -126,7 +130,8 @@ document.addEventListener('DOMContentLoaded',function() {
 data=[
   {
     "height": 40,
-    "label": "[DELTARUNE] Jevil Dance",
+    "series": "DELTARUNE",
+    "label": "Jevil Dance",
     "string": `.............................fff.............
 ....................fff...fffffff............
 ..................ff666f.fffffffff...........
@@ -171,7 +176,8 @@ f6666666f.........f9f5f99f5ff9fff............
   },
   {
     "height": 40,
-    "label": "[DELTARUNE] Jevil Idle",
+    "series": "DELTARUNE",
+    "label": "Jevil Idle",
     "string": `.........................fff..............
 .......................ffffff.............
 ................fff...ffffffff............
@@ -216,7 +222,8 @@ f66666f66f.6ffffff6fffffffffff............
   },
   {
     "height": 40,
-    "label": "[DELTARUNE] Jevil Teleport",
+    "series": "DELTARUNE",
+    "label": "Jevil Teleport",
     "string": `.........................fff..............
 .......................ffffff.............
 ................fff...ffffffff............
@@ -261,7 +268,8 @@ f6666666f.....f9fffffffff9ff.....f6666f...
   },
   {
     "height": 34,
-    "label": "[DELTARUNE] Lancer",
+    "series": "DELTARUNE",
+    "label": "Lancer",
     "string": `..............fff.............
 .............ff6ff............
 ............ff666ff...........
@@ -300,7 +308,8 @@ ffff111f11111cccccc111111ff...
   },
   {
     "height": 42,
-    "label": "[DELTARUNE] Papyrus",
+    "series": "DELTARUNE",
+    "label": "Papyrus",
     "string": `........fffffffff........
 .......ff1111111ff.......
 .......f111111111f.......
@@ -347,7 +356,8 @@ ffffff11f2222222f11ffffff
   },
   {
     "height": 40,
-    "label": "[DELTARUNE] Ralsei",
+    "series": "DELTARUNE",
+    "label": "Ralsei",
     "string": `.....fff.....fff.....
 ....ff3f.....f3ff....
 ...ff3fffffffff3ff...
@@ -392,7 +402,8 @@ fff666666666666666fff
   },
   {
     "height": 43,
-    "label": "[DELTARUNE] Ralsei Hat",
+    "series": "DELTARUNE",
+    "label": "Ralsei Hat",
     "string": `.........fff...........
 ........ff7ff..........
 ........f777f..........
@@ -440,7 +451,8 @@ fff77767677777767777fff
   },
   {
     "height": 57,
-    "label": "[DELTARUNE] Rouxls Kaard",
+    "series": "DELTARUNE",
+    "label": "Rouxls Kaard",
     "string": `......................888......................
 .....................81118.....................
 ....................8111118....................
@@ -502,7 +514,8 @@ fff77767677777767777fff
   },
   {
     "height": 30,
-    "label": "[DELTARUNE] Sans",
+    "series": "DELTARUNE",
+    "label": "Sans",
     "string": `......fffffffffff......
 ....fff111111111fff....
 ....f1111111111111f....
@@ -537,7 +550,8 @@ ff666f66f11111f66f666ff
   },
   {
     "height": 34,
-    "label": "[DELTARUNE] Spamton",
+    "series": "DELTARUNE",
+    "label": "Spamton",
     "string": `.........bbbbbbb.......bb
 .......bbfffffffbbbbbbbfb
 ......bffffffffffffffffb.
@@ -576,7 +590,8 @@ b11fb..bffffffffb..bfb1b.
   },
   {
     "height": 43,
-    "label": "[DELTARUNE] Water Cooler",
+    "series": "DELTARUNE",
+    "label": "Water Cooler",
     "string": `....ccccccccccc............
 ...c66666666666c...........
 ..c6699999999966c..........
@@ -666,7 +681,8 @@ cddcdddddddddddcddc........
   },
   {
     "height": 16,
-    "label": "[Galaga] Enterprise",
+    "series": "Galaga",
+    "label": "Enterprise",
     "string": `.....66166.....
 ....6661666....
 ...666616666...
@@ -687,7 +703,8 @@ cddcdddddddddddcddc........
   },
   {
     "height": 16,
-    "label": "[Galaga] Galaxian Flagship",
+    "series": "Galaga",
+    "label": "Galaxian Flagship",
     "string": `...............
 ...............
 .......e.......
@@ -750,7 +767,8 @@ cddcdddddddddddcddc........
   },
   {
     "height": 16,
-    "label": "[Galaga] Gyaraga",
+    "series": "Galaga",
+    "label": "Gyaraga",
     "string": `.......1.......
 .......1.......
 .......1.......
@@ -771,7 +789,8 @@ cddcdddddddddddcddc........
   },
   {
     "height": 16,
-    "label": "[Galaga] Midori",
+    "series": "Galaga",
+    "label": "Midori",
     "string": `...............
 ...............
 .......7.......
@@ -852,7 +871,8 @@ cddcdddddddddddcddc........
   },
   {
     "height": 16,
-    "label": "[Galaga] Scorpion",
+    "series": "Galaga",
+    "label": "Scorpion",
     "string": `...............
 ...............
 ...............
@@ -873,7 +893,8 @@ cddcdddddddddddcddc........
   },
   {
     "height": 16,
-    "label": "[Galaga] Tombow",
+    "series": "Galaga",
+    "label": "Tombow",
     "string": `...............
 ...............
 .....22.22.....
@@ -936,7 +957,8 @@ cddcdddddddddddcddc........
   },
   {
     "height": 25,
-    "label": "[PKMN] Absol Back",
+    "series": "PKMN",
+    "label": "Absol Back",
     "string": `..........fff......
 ...........fccf....
 ............fcbc...
@@ -966,7 +988,8 @@ cccbdddddddddddfcc.
   },
   {
     "height": 25,
-    "label": "[PKMN] Absol Front",
+    "series": "PKMN",
+    "label": "Absol Front",
     "string": `......fff.........
 ....fccf..........
 ...cbcf...........
@@ -996,7 +1019,8 @@ cccccbdddcbcdddddc
   },
   {
     "height": 23,
-    "label": "[PKMN] Absol Side",
+    "series": "PKMN",
+    "label": "Absol Side",
     "string": `...................ccc....
 .................cccf.....
 ................cbcf......
@@ -1024,7 +1048,8 @@ ccc..........fcbc111111cbc
   },
   {
     "height": 39,
-    "label": "[PKMN] Arceus Back",
+    "series": "PKMN",
+    "label": "Arceus Back",
     "string": `............cc............
 ...........c11c...........
 ...........c11c...........
@@ -1068,7 +1093,8 @@ fe..fcbddbf.cc.fbddbcf..ef
   },
   {
     "height": 39,
-    "label": "[PKMN] Arceus Front",
+    "series": "PKMN",
+    "label": "Arceus Front",
     "string": `............cc............
 ...........c11c...........
 ...........c11c...........
@@ -1112,7 +1138,8 @@ fe..f4efcbbbbbbbbcfe4f..ef
   },
   {
     "height": 33,
-    "label": "[PKMN] Arceus Side",
+    "series": "PKMN",
+    "label": "Arceus Side",
     "string": `..........................bc.......
 ....................ccccccbbb......
 ................ccccb11111ccc......
@@ -1150,7 +1177,8 @@ c111ccc.....f5eee4ee...fbbbcffff...
   },
   {
     "height": 24,
-    "label": "[PKMN] Blastoise Back",
+    "series": "PKMN",
+    "label": "Blastoise Back",
     "string": `...........cccc...........
 .........ccbbbbcc.........
 .......ffcb6666bcff.......
@@ -1179,7 +1207,8 @@ f1dddcfbb66666666bbfcddd1f
   },
   {
     "height": 23,
-    "label": "[PKMN] Blastoise Front",
+    "series": "PKMN",
+    "label": "Blastoise Front",
     "string": `..........cccccc..........
 .......ccc666666ccc.......
 ......c666b6666b666c......
@@ -1207,7 +1236,8 @@ f1dddcfbb66666666bbfcddd1f
   },
   {
     "height": 22,
-    "label": "[PKMN] Blastoise Side",
+    "series": "PKMN",
+    "label": "Blastoise Side",
     "string": `................ccc......
 .............fccbb6cc....
 ........cc..f66bc6666cc..
@@ -1234,7 +1264,8 @@ f66bfffdb66ffdfeeef......
   },
   {
     "height": 15,
-    "label": "[PKMN] Bulbasaur Back",
+    "series": "PKMN",
+    "label": "Bulbasaur Back",
     "string": `..cc.....cc..
 .c77ccccc77c.
 .c766ccc667c.
@@ -1254,7 +1285,8 @@ f666fffff666f
   },
   {
     "height": 16,
-    "label": "[PKMN] Bulbasaur Front",
+    "series": "PKMN",
+    "label": "Bulbasaur Front",
     "string": `......ccc......
 .....c7c7c.....
 ...ff77777ff...
@@ -1275,7 +1307,8 @@ c6f777776777f6c
   },
   {
     "height": 15,
-    "label": "[PKMN] Bulbasaur Side",
+    "series": "PKMN",
+    "label": "Bulbasaur Side",
     "string": `.....cccc..........
 ..ffc7777c.ccc.....
 .f77777777ff67cc...
@@ -1295,7 +1328,8 @@ c777777f6777777777c
   },
   {
     "height": 24,
-    "label": "[PKMN] Charizard Back",
+    "series": "PKMN",
+    "label": "Charizard Back",
     "string": `............eeee............
 ..........eeeeeeee..........
 .........eeee44eeee.........
@@ -1324,7 +1358,8 @@ fffeeeeeeeef44feeeeeeeeeefff
   },
   {
     "height": 24,
-    "label": "[PKMN] Charizard Front",
+    "series": "PKMN",
+    "label": "Charizard Front",
     "string": `..........e......e..........
 .........e4e....e4e.........
 .........f4e....e4f.........
@@ -1353,7 +1388,8 @@ ee...cccfef4e44e4fefccc...ee
   },
   {
     "height": 23,
-    "label": "[PKMN] Charizard Side",
+    "series": "PKMN",
+    "label": "Charizard Side",
     "string": `............eee.............
 ............eeeee...........
 .............eeeeeee........
@@ -1381,7 +1417,8 @@ ee...cccfef4e44e4fefccc...ee
   },
   {
     "height": 17,
-    "label": "[PKMN] Charmander Back",
+    "series": "PKMN",
+    "label": "Charmander Back",
     "string": `...eeeee...
 ..e44444e..
 .ee44444ee.
@@ -1403,7 +1440,8 @@ eee4eeefeee
   },
   {
     "height": 16,
-    "label": "[PKMN] Charmander Front",
+    "series": "PKMN",
+    "label": "Charmander Front",
     "string": `...eeeee...
 ..e44444e..
 .ee44444ee.
@@ -1424,7 +1462,8 @@ eeefeeefeee
   },
   {
     "height": 16,
-    "label": "[PKMN] Charmander Side",
+    "series": "PKMN",
+    "label": "Charmander Side",
     "string": `..........eeee....
 ..2......e4444e...
 ..2.....e444444e..
@@ -1445,7 +1484,8 @@ feeeee444e4eeffe..
   },
   {
     "height": 16,
-    "label": "[PKMN] Eevee Back",
+    "series": "PKMN",
+    "label": "Eevee Back",
     "string": `fff....ff.ff..fff
 fe4ff.f4ff4fff4ef
 .f444fe4e4ef444f.
@@ -1466,7 +1506,8 @@ fe4ff.f4ff4fff4ef
   },
   {
     "height": 16,
-    "label": "[PKMN] Eevee Front",
+    "series": "PKMN",
+    "label": "Eevee Front",
     "string": `........ff.......
 fff..ff.f4f...fff
 fe4fff4fe4efff4ef
@@ -1487,7 +1528,8 @@ fe4fff4fe4efff4ef
   },
   {
     "height": 16,
-    "label": "[PKMN] Eevee Side",
+    "series": "PKMN",
+    "label": "Eevee Side",
     "string": `.....fff..........
 .....feeff.f.ff...
 ......feeef4f4f...
@@ -1508,7 +1550,8 @@ fdd444ffbfeeeeeef.
   },
   {
     "height": 21,
-    "label": "[PKMN] Espeon Back",
+    "series": "PKMN",
+    "label": "Espeon Back",
     "string": `cc.................cc
 fdcff...........ffcdf
 fddddff.......ffddddf
@@ -1534,7 +1577,8 @@ fddddff.......ffddddf
   },
   {
     "height": 26,
-    "label": "[PKMN] Espeon Front",
+    "series": "PKMN",
+    "label": "Espeon Front",
     "string": `..........ccc........
 .........cdddc.......
 ........cdbbcc.......
@@ -1565,7 +1609,8 @@ fddddfccdddddccfddddf
   },
   {
     "height": 22,
-    "label": "[PKMN] Espeon Side",
+    "series": "PKMN",
+    "label": "Espeon Side",
     "string": `..............cc.......
 .............cdc.......
 .............cdc.......
@@ -1592,7 +1637,8 @@ fbdc........ccdddcf1ddf
   },
   {
     "height": 20,
-    "label": "[PKMN] Flareon Back",
+    "series": "PKMN",
+    "label": "Flareon Back",
     "string": `ff.....cdc.....ff
 c4cf..c44dc..fc4c
 c444f.ce44c.f444c
@@ -1617,7 +1663,8 @@ c444f.ce44c.f444c
   },
   {
     "height": 23,
-    "label": "[PKMN] Flareon Front",
+    "series": "PKMN",
+    "label": "Flareon Front",
     "string": `.......cccc......
 ......c4ddc......
 ....ccdd4c.......
@@ -1645,7 +1692,8 @@ c4e4fc44dc4cf4e4c
   },
   {
     "height": 20,
-    "label": "[PKMN] Flareon Side",
+    "series": "PKMN",
+    "label": "Flareon Side",
     "string": `.........................
 ............ccc....ce....
 ............ceecc.cde....
@@ -1670,7 +1718,8 @@ c44dddddddd4feccc444444e.
   },
   {
     "height": 24,
-    "label": "[PKMN] Furret Back",
+    "series": "PKMN",
+    "label": "Furret Back",
     "string": `ff...........ff
 fdf.........fdf
 fddf.......fddf
@@ -1699,7 +1748,8 @@ fddf.......fddf
   },
   {
     "height": 26,
-    "label": "[PKMN] Furret Front",
+    "series": "PKMN",
+    "label": "Furret Front",
     "string": `........ff.....
 ......ec1f.....
 .....fe1ef.....
@@ -1730,7 +1780,8 @@ fddfecccccefddf
   },
   {
     "height": 19,
-    "label": "[PKMN] Furret Side",
+    "series": "PKMN",
+    "label": "Furret Side",
     "string": `.....ccc..................
 ...cc11c..................
 ..f1c1c.......ccc.........
@@ -1754,7 +1805,8 @@ fdd1eee1ee1ee1eeeeeeee11ee
   },
   {
     "height": 25,
-    "label": "[PKMN] Gliscor Back",
+    "series": "PKMN",
+    "label": "Gliscor Back",
     "string": `......fcc...........ccf......
 ......fbbcc..ccc..ccbbf......
 ...ff.fbbbbccbbbccbbbbf.ff...
@@ -1784,7 +1836,8 @@ cbfbbbbffffccbbbccffffbbbbfbc
   },
   {
     "height": 25,
-    "label": "[PKMN] Gliscor Front",
+    "series": "PKMN",
+    "label": "Gliscor Front",
     "string": `......fcc...........ccf......
 ......fbbcc.......ccbbf......
 ......febbbc.ccc.cbbbef......
@@ -1814,7 +1867,8 @@ fbbcbbfefbfcdcccdcfbfefbbcbbf
   },
   {
     "height": 23,
-    "label": "[PKMN] Gliscor Side",
+    "series": "PKMN",
+    "label": "Gliscor Side",
     "string": `........ccc........
 ........cbbc.......
 .......fffbbc......
@@ -1842,7 +1896,8 @@ fbbcbbceccbbc......
   },
   {
     "height": 24,
-    "label": "[PKMN] Houndoom Back",
+    "series": "PKMN",
+    "label": "Houndoom Back",
     "string": `..ccc.......ccc..
 .fbbbc.....cbbbf.
 f11bbbf...fbbb11f
@@ -1871,7 +1926,8 @@ f1f.cbbcccbbc.f1f
   },
   {
     "height": 22,
-    "label": "[PKMN] Houndoom Front",
+    "series": "PKMN",
+    "label": "Houndoom Front",
     "string": `..ccc.......ccc..
 .fbbbc.....cbbbf.
 fbbb11fffff11bbbf
@@ -1898,7 +1954,8 @@ fbc.c11ccc11c.cbf
   },
   {
     "height": 22,
-    "label": "[PKMN] Houndoom Side",
+    "series": "PKMN",
+    "label": "Houndoom Side",
     "string": `..............ccc........
 .............cbbbc.......
 ............fffbbbc......
@@ -1925,7 +1982,8 @@ fcfffcf1f1ccb1fcccf......
   },
   {
     "height": 22,
-    "label": "[PKMN] Jolteon Back",
+    "series": "PKMN",
+    "label": "Jolteon Back",
     "string": `.cc......cc.....cc.
 cc5c...ccc5c...c5cc
 c555c.c5c55cc.c555c
@@ -1952,7 +2010,8 @@ c555c.c5c55cc.c555c
   },
   {
     "height": 22,
-    "label": "[PKMN] Jolteon Front",
+    "series": "PKMN",
+    "label": "Jolteon Front",
     "string": `.....cc...cc.....
 .....c5c.c5c.....
 ...cce5ece5ec....
@@ -1979,7 +2038,8 @@ f4c5f5555555f5c4f
   },
   {
     "height": 18,
-    "label": "[PKMN] Jolteon Side",
+    "series": "PKMN",
+    "label": "Jolteon Side",
     "string": `.........cccc...........
 .........c444ccc........
 ...cc.....c44444cff.....
@@ -2002,7 +2062,8 @@ f455555554cbbbcc454c155f
   },
   {
     "height": 23,
-    "label": "[PKMN] Lucario Back",
+    "series": "PKMN",
+    "label": "Lucario Back",
     "string": `.....c.....c.....
 ....c9c...c9c....
 ....c9c...c9c....
@@ -2030,7 +2091,8 @@ fd6c.feeceef.ccf.
   },
   {
     "height": 23,
-    "label": "[PKMN] Lucario Front",
+    "series": "PKMN",
+    "label": "Lucario Front",
     "string": `.....c.....c.....
 ....c9c...c9c....
 ....c9c...c9c....
@@ -2058,7 +2120,8 @@ fd6cffe4d4eff66f.
   },
   {
     "height": 25,
-    "label": "[PKMN] Lucario Side",
+    "series": "PKMN",
+    "label": "Lucario Side",
     "string": `.........c.........
 ........c6c........
 ........c6c........
@@ -2088,7 +2151,8 @@ ccccc66fcdfc66c....
   },
   {
     "height": 40,
-    "label": "[PKMN] Lugia Back 1",
+    "series": "PKMN",
+    "label": "Lugia Back 1",
     "string": `.....ff..............................ff.....
 ....f11f............................f11f....
 ...f111f.............ff.............f111f...
@@ -2133,7 +2197,8 @@ fddddddd1111c.....cdd11ddc.....c1111dddddddf
   },
   {
     "height": 39,
-    "label": "[PKMN] Lugia Back 2",
+    "series": "PKMN",
+    "label": "Lugia Back 2",
     "string": `...............ff...............
 ..............f11f..............
 ..............f11f..............
@@ -2177,7 +2242,8 @@ fdbddddf....f8c11c8f....fddddbdf
   },
   {
     "height": 34,
-    "label": "[PKMN] Lugia Front 1",
+    "series": "PKMN",
+    "label": "Lugia Front 1",
     "string": `.....ff..............................ff.....
 ....f11f............................f11f....
 ...f111f............................f111f...
@@ -2216,7 +2282,8 @@ fdddddddd11dc....c11f11f.......cd11ddddddddf
   },
   {
     "height": 37,
-    "label": "[PKMN] Lugia Front 2",
+    "series": "PKMN",
+    "label": "Lugia Front 2",
     "string": `..............ff..............
 .............f1f..............
 .........ffc.f1fcff...........
@@ -2258,7 +2325,8 @@ fdbdddbdc............cdbdddbdf
   },
   {
     "height": 35,
-    "label": "[PKMN] Lugia Side 1",
+    "series": "PKMN",
+    "label": "Lugia Side 1",
     "string": `...................cc.......................
 ..................cddcc.....................
 ................cccdcddc....................
@@ -2298,7 +2366,8 @@ f11ccc8c....ccc118b18bcbddddddf.............
   },
   {
     "height": 37,
-    "label": "[PKMN] Lugia Side 2",
+    "series": "PKMN",
+    "label": "Lugia Side 2",
     "string": `..............................cffffff.......
 ...........................ccc1111111bcc....
 ..........................c111111111111bc...
@@ -2340,7 +2409,8 @@ f11ccc8c....ccc118b18b11111bddf.............
   },
   {
     "height": 27,
-    "label": "[PKMN] Mewtwo Back",
+    "series": "PKMN",
+    "label": "Mewtwo Back",
     "string": `.......cf.......fc.......
 ......c11f.....f11c......
 ......c11fcccccf11c......
@@ -2372,7 +2442,8 @@ ccbbbffc.ccbbbcc.cbbdbbbc
   },
   {
     "height": 27,
-    "label": "[PKMN] Mewtwo Front",
+    "series": "PKMN",
+    "label": "Mewtwo Front",
     "string": `......cf.......fc......
 .....c11f.....f11c.....
 .....c11fcccccf11c.....
@@ -2404,7 +2475,8 @@ fdc....cbccbccbbc.fcbbf
   },
   {
     "height": 26,
-    "label": "[PKMN] Mewtwo Side",
+    "series": "PKMN",
+    "label": "Mewtwo Side",
     "string": `.........cc..........
 ........cd1c.........
 ........cffdccc......
@@ -2435,7 +2507,8 @@ caacfcccccccbbfff....
   },
   {
     "height": 18,
-    "label": "[PKMN] Mew Back",
+    "series": "PKMN",
+    "label": "Mew Back",
     "string": `....cccc....
 .ccc3dd3ccc.
 cdd3dddd3ddc
@@ -2458,7 +2531,8 @@ c33fffd3c33c
   },
   {
     "height": 22,
-    "label": "[PKMN] Mew Front",
+    "series": "PKMN",
+    "label": "Mew Front",
     "string": `........ccc.
 .......cdddf
 ......bddd3f
@@ -2485,7 +2559,8 @@ cd6fddddf6dc
   },
   {
     "height": 19,
-    "label": "[PKMN] Mew Side",
+    "series": "PKMN",
+    "label": "Mew Side",
     "string": `............cf......
 ...........f3df.....
 ..........cbb3dcc...
@@ -2509,7 +2584,8 @@ f3dddc..c3dfddbdddc.
   },
   {
     "height": 23,
-    "label": "[PKMN] Mightyena Back",
+    "series": "PKMN",
+    "label": "Mightyena Back",
     "string": `..c........c..
 .cbc......cbc.
 .cbf.cccc.fbc.
@@ -2537,7 +2613,8 @@ fccccfffccccf.
   },
   {
     "height": 26,
-    "label": "[PKMN] Mightyena Front",
+    "series": "PKMN",
+    "label": "Mightyena Front",
     "string": `..........ffcc....
 ........ffcccc....
 .......fccccc.....
@@ -2568,7 +2645,8 @@ ccccfbfbbbbfbfcccc
   },
   {
     "height": 22,
-    "label": "[PKMN] Mightyena Side",
+    "series": "PKMN",
+    "label": "Mightyena Side",
     "string": `...............cc..........
 ...............cbc.........
 ...............cbbc........
@@ -2727,7 +2805,8 @@ f444ce44444ee54c.
   },
   {
     "height": 41,
-    "label": "[PKMN] Rayquaza Back",
+    "series": "PKMN",
+    "label": "Rayquaza Back",
     "string": `......ff.........................ff........
 ......f7f.......................f7f........
 ......f77f.....................f77f........
@@ -2773,7 +2852,8 @@ f2f6fff6f62f.22222fff664ff.................
   },
   {
     "height": 40,
-    "label": "[PKMN] Rayquaza Front",
+    "series": "PKMN",
+    "label": "Rayquaza Front",
     "string": `............22..........................
 ............222.fff.....................
 .......fffff26ff66f............fffff....
@@ -2818,7 +2898,8 @@ f2f6fff6f62f.22222fff664ff.................
   },
   {
     "height": 37,
-    "label": "[PKMN] Rayquaza Side",
+    "series": "PKMN",
+    "label": "Rayquaza Side",
     "string": `........................................ff....
 ...............................fff.....f6f....
 ...............................f6f....f66f....
@@ -2860,7 +2941,8 @@ fff2ff64ff6666fffffffff66f.44ff6666f66ff7f66f.
   },
   {
     "height": 24,
-    "label": "[PKMN] Seviper Back",
+    "series": "PKMN",
+    "label": "Seviper Back",
     "string": `.........ff.....
 ........fbbf....
 .......fbbbbf...
@@ -2889,7 +2971,8 @@ ff..fccccccccccf
   },
   {
     "height": 25,
-    "label": "[PKMN] Seviper Front",
+    "series": "PKMN",
+    "label": "Seviper Front",
     "string": `..............22
 ............cc22
 .....ff...fcc22.
@@ -2919,7 +3002,8 @@ fccc2ca2cccf....
   },
   {
     "height": 18,
-    "label": "[PKMN] Seviper Side 1",
+    "series": "PKMN",
+    "label": "Seviper Side 1",
     "string": `.....222.....ffffff......
 ...22222...ffb24555ff....
 ..f22cf...fbbb2554442f...
@@ -2942,7 +3026,8 @@ f22ccf....fccccb555222bf.
   },
   {
     "height": 18,
-    "label": "[PKMN] Seviper Side 2",
+    "series": "PKMN",
+    "label": "Seviper Side 2",
     "string": `................ffffff......
 .....222......ffb24555ff....
 ...22222.....fbbb2554442f...
@@ -2965,7 +3050,8 @@ f22ccf........fcccc4555bbbbf
   },
   {
     "height": 15,
-    "label": "[PKMN] Squirtle Back",
+    "series": "PKMN",
+    "label": "Squirtle Back",
     "string": `....ccc....
 ..cc999cc..
 .c9999999c.
@@ -2985,7 +3071,8 @@ c6d4699cd6c
   },
   {
     "height": 15,
-    "label": "[PKMN] Squirtle Front",
+    "series": "PKMN",
+    "label": "Squirtle Front",
     "string": `....ccc....
 ..cc999cc..
 .c9999999c.
@@ -3005,7 +3092,8 @@ c99cfffc99c
   },
   {
     "height": 15,
-    "label": "[PKMN] Squirtle Side",
+    "series": "PKMN",
+    "label": "Squirtle Side",
     "string": `.......ccccc...
 ......c69999c..
 .....c6999999c.
@@ -3025,7 +3113,8 @@ f966f44dd9ccc..
   },
   {
     "height": 22,
-    "label": "[PKMN] Umbreon Back",
+    "series": "PKMN",
+    "label": "Umbreon Back",
     "string": `ff...............ff
 fcff...........ffcf
 fcccf.........fcccf
@@ -3052,7 +3141,8 @@ fcc54f.......f45ccf
   },
   {
     "height": 24,
-    "label": "[PKMN] Umbreon Front",
+    "series": "PKMN",
+    "label": "Umbreon Front",
     "string": `..........ff.......
 .........fcf.......
 ........fccf.......
@@ -3081,7 +3171,8 @@ fcc44ffcccccff44ccf
   },
   {
     "height": 20,
-    "label": "[PKMN] Umbreon Side",
+    "series": "PKMN",
+    "label": "Umbreon Side",
     "string": `...........fff..........
 ...........fccff........
 ............fcc5f.......
@@ -3106,7 +3197,8 @@ fccc5ef.....ffcccfccc4cf
   },
   {
     "height": 24,
-    "label": "[PKMN] Vaporeon Back",
+    "series": "PKMN",
+    "label": "Vaporeon Back",
     "string": `.........f.........
 ........f6f........
 ........f6f........
@@ -3135,7 +3227,8 @@ f66fcc6666666cff66f
   },
   {
     "height": 27,
-    "label": "[PKMN] Vaporeon Front",
+    "series": "PKMN",
+    "label": "Vaporeon Front",
     "string": `.....fcc...ccf.....
 .....f966.696f.....
 .....c6666666c.....
@@ -3167,7 +3260,8 @@ f66fff6666666fff66f
   },
   {
     "height": 20,
-    "label": "[PKMN] Vaporeon Side",
+    "series": "PKMN",
+    "label": "Vaporeon Side",
     "string": `..............fff..........
 ..............f66ff........
 ..cc...........f666ff......
@@ -3360,7 +3454,8 @@ f777cf777c777fee999999999c
   },
   {
     "height": 21,
-    "label": "[PKMN] Zangoose Back",
+    "series": "PKMN",
+    "label": "Zangoose Back",
     "string": `....ee.........cc.....
 ...fe2e.......c1bf....
 ...f2e2f.....f1b1f....
@@ -3386,7 +3481,8 @@ e22221fbc11111111ffe..
   },
   {
     "height": 21,
-    "label": "[PKMN] Zangoose Front",
+    "series": "PKMN",
+    "label": "Zangoose Front",
     "string": `....ff.........ee....
 ...ff1f.......e2ef...
 ...f1b1f.....f2e2f...
@@ -3412,7 +3508,8 @@ e22221f11212221f2f2e.
   },
   {
     "height": 21,
-    "label": "[PKMN] Zangoose Left",
+    "series": "PKMN",
+    "label": "Zangoose Left",
     "string": `.........cc...........
 ........b1cc..........
 .......c1b1c..........
@@ -3438,7 +3535,8 @@ f11efa3211bfcb11111bcc
   },
   {
     "height": 21,
-    "label": "[PKMN] Zangoose Right",
+    "series": "PKMN",
+    "label": "Zangoose Right",
     "string": `...........ee.........
 ..........ee2e........
 ..........e222e.......
@@ -3464,7 +3562,8 @@ c1bbb1111cfb1111afe11f
   },
   {
     "height": 16,
-    "label": "[SMB1] Mario Idle",
+    "series": "SMB1",
+    "label": "Mario Idle",
     "string": `.....22222......
 ....222222222...
 ....eee44e4.....
@@ -3485,7 +3584,8 @@ c1bbb1111cfb1111afe11f
   },
   {
     "height": 32,
-    "label": "[SMB1] Super Mario Idle",
+    "series": "SMB1",
+    "label": "Super Mario Idle",
     "string": `......22222.....
 ....2222224.....
 ...22222244.....
@@ -3522,7 +3622,8 @@ eeeeee....eeeeee`,
   },
   {
     "height": 20,
-    "label": "[SMBW] Mario Idle",
+    "series": "SMBW",
+    "label": "Mario Idle",
     "string": `......ccccc...
 ....cc22252c..
 ...c2222551c..
@@ -3547,7 +3648,8 @@ cf4dfddf44444e
   },
   {
     "height": 28,
-    "label": "[SMBW] Super Mario Idle",
+    "series": "SMBW",
+    "label": "Super Mario Idle",
     "string": `.......ccccc...
 .....cc22522c..
 ....c2225512c..
@@ -3580,7 +3682,8 @@ cf4dfddf44444e
   },
   {
     "height": 15,
-    "label": "[SBM1] Boo",
+    "series": "SBM1",
+    "label": "Boo",
     "string": `......fffff.....
 ....ff11111ff...
 ...fdd1111111f..
@@ -3600,7 +3703,8 @@ fdd11111222221f.
   },
   {
     "height": 25,
-    "label": "[PKMN] Luxray Back",
+    "series": "PKMN",
+    "label": "Luxray Back",
     "string": `.......ff........
 .......fcf.......
 ..ff..fcccf..ff..
@@ -3630,7 +3734,8 @@ ffe4efffffff.....
   },
   {
     "height": 29,
-    "label": "[PKMN] Luxray Front",
+    "series": "PKMN",
+    "label": "Luxray Front",
     "string": `............ee...
 ...........e5e...
 .........eee5ee..
@@ -3664,7 +3769,8 @@ fc949fcccccf949cf
   },
   {
     "height": 22,
-    "label": "[PKMN] Luxray Side",
+    "series": "PKMN",
+    "label": "Luxray Side",
     "string": `............fffff........
 ............fcccccf......
 .............fcccccf.....
@@ -3691,7 +3797,8 @@ e55544e...fcccf996fccccf.
   },
   {
     "height": 24,
-    "label": "[SMB1] Blooper 1",
+    "series": "SMB1",
+    "label": "Blooper 1",
     "string": `......deed......
 .....dedded.....
 ....dedddded....
@@ -3720,7 +3827,8 @@ dddeddddddddeddd
   },
   {
     "height": 16,
-    "label": "[SMB1] Blooper 2",
+    "series": "SMB1",
+    "label": "Blooper 2",
     "string": `......deed......
 .....dedded.....
 ....dedddded....
@@ -3741,7 +3849,8 @@ dddd.dd..dd.dddd
   },
   {
     "height": 32,
-    "label": "[SMB1] Bowser 1",
+    "series": "SMB1",
+    "label": "Bowser 1",
     "string": `............111.................
 ........661114..................
 .......6661144..................
@@ -3778,7 +3887,8 @@ dddd.dd..dd.dddd
   },
   {
     "height": 32,
-    "label": "[SMB1] Bowser 2",
+    "series": "SMB1",
+    "label": "Bowser 2",
     "string": `............111.................
 ........661114..................
 .......6661144..................
@@ -3815,7 +3925,8 @@ dddd.dd..dd.dddd
   },
   {
     "height": 16,
-    "label": "[SMB1] Goomba",
+    "series": "SMB1",
+    "label": "Goomba",
     "string": `......eeee......
 .....eeeeee.....
 ....eeeeeeee....
@@ -3836,7 +3947,8 @@ eeeeeeeeeeeeeeee
   },
   {
     "height": 23,
-    "label": "[SMB1] Piranha Plant 1",
+    "series": "SMB1",
+    "label": "Piranha Plant 1",
     "string": `..6..........6..
 .6411......1146.
 .661........166.
@@ -3864,7 +3976,8 @@ eeeeeeeeeeeeeeee
   },
   {
     "height": 24,
-    "label": "[SMB1] Piranha Plant 2",
+    "series": "SMB1",
+    "label": "Piranha Plant 2",
     "string": `......6..6......
 .....64..46.....
 ....666..666....
