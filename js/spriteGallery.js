@@ -52,10 +52,13 @@ function createCanvas(pixelInfo) {
     label.textContent=`[${pixelInfo.series}] `;
     container.classList.add(pixelInfo.series.toLowerCase());
   }
-  label.textContent+=(pixelInfo.label||'Untitled')+`\n(${pixelInfo.width}×${pixelInfo.height})`;
+  let height=pixelInfo.string.split('\n').length;
+  let width=pixelInfo.string.split('\n')[0].length;
+  console.log(`${pixelInfo.label} (${width}x${height})`);
+  label.textContent+=(pixelInfo.label||'Untitled')+`\n(${width}×${height})`;
   const canvas=document.createElement('canvas');
-  canvas.width=parseInt(pixelInfo.width);
-  canvas.height=parseInt(pixelInfo.height);
+  canvas.width=width;
+  canvas.height=height;
   const ctx=canvas.getContext('2d');
   let compressedString=pixelInfo.string.replace(/\s/g,'')
   const pixels=new Uint8ClampedArray(compressedString.length*4);
@@ -89,7 +92,7 @@ function createCanvas(pixelInfo) {
     copyTarget.remove();
     label.textContent='Copied!';
     setTimeout(function() {
-      label.textContent=(pixelInfo.label||'Untitled')+`\n(${pixelInfo.width}×${pixelInfo.height})`;
+      label.textContent=(pixelInfo.label||'Untitled')+`\n(${width}×${height})`;
     },3000);
   });
 }
@@ -129,7 +132,6 @@ document.addEventListener('DOMContentLoaded',function() {
 */
 data=[
   {
-    "height": 40,
     "series": "DELTARUNE",
     "label": "Jevil Dance",
     "string": `.............................fff.............
@@ -171,11 +173,9 @@ f6666666f.........f9f5f99f5ff9fff............
 ................fff........fffff55fff........
 ...........................fffff55555f.......
 ..............................ffff555f.......
-..................................fff........`,
-    "width": 45
+..................................fff........`
   },
   {
-    "height": 40,
     "series": "DELTARUNE",
     "label": "Jevil Idle",
     "string": `.........................fff..............
@@ -217,11 +217,9 @@ f66666f66f.6ffffff6fffffffffff............
 .............fffff999f.f9999fffff.........
 ............f55555ffff.fffff55555f........
 ............f55555ffff.fffff55555f........
-............ffffff........fffffff.........`,
-    "width": 42
+............ffffff........fffffff.........`
   },
   {
-    "height": 40,
     "series": "DELTARUNE",
     "label": "Jevil Teleport",
     "string": `.........................fff..............
@@ -263,11 +261,9 @@ f6666666f.....f9fffffffff9ff.....f6666f...
 ...........f5ff9ff.........f9fff55f.......
 ............fffff...........ffff5f........
 .............ff..............ffff.........
-..............................ff..........`,
-    "width": 42
+..............................ff..........`
   },
   {
-    "height": 34,
     "series": "DELTARUNE",
     "label": "Lancer",
     "string": `..............fff.............
@@ -303,11 +299,9 @@ ffff111f11111cccccc111111ff...
 .......ffcc11ff..fff111cfff...
 ......ff66ccff.....ffcc666ff..
 ......f66666f.......ff66666f..
-......fffffff........fffffff..`,
-    "width": 30
+......fffffff........fffffff..`
   },
   {
-    "height": 42,
     "series": "DELTARUNE",
     "label": "Papyrus",
     "string": `........fffffffff........
@@ -351,11 +345,9 @@ ffffff11f2222222f11ffffff
 .....ffff22fff22ffff.....
 .....f222f2fff2f222f.....
 .....f22222fff22222f.....
-.....fffffffffffffff.....`,
-    "width": 25
+.....fffffffffffffff.....`
   },
   {
-    "height": 40,
     "series": "DELTARUNE",
     "label": "Ralsei",
     "string": `.....fff.....fff.....
@@ -397,11 +389,9 @@ fff666666666666666fff
 ..ffcc1111c1111ccff..
 ..fc111111c111111cf..
 ..fc1c1c1cfc1c1c1cf..
-..ffcccccfffcccccff..`,
-    "width": 21
+..ffcccccfffcccccff..`
   },
   {
-    "height": 43,
     "series": "DELTARUNE",
     "label": "Ralsei Hat",
     "string": `.........fff...........
@@ -446,11 +436,9 @@ fff77767677777767777fff
 ....fff6ff6f6ff6fff....
 ...ff66fff6f6fff66ff...
 ...f6fffff6f6fffff6f...
-...f666666fff666666f...`,
-    "width": 23
+...f666666fff666666f...`
   },
   {
-    "height": 57,
     "series": "DELTARUNE",
     "label": "Rouxls Kaard",
     "string": `......................888......................
@@ -509,11 +497,9 @@ fff77767677777767777fff
 .................8188881888818.................
 ................818881181188818................
 ................8111188.8811118................
-.................8888.....8888.................`,
-    "width": 47
+.................8888.....8888.................`
   },
   {
-    "height": 30,
     "series": "DELTARUNE",
     "label": "Sans",
     "string": `......fffffffffff......
@@ -545,11 +531,9 @@ ff666f66f11111f66f666ff
 ....ffffff...ffffff....
 ..fff1111f...f1111fff..
 ..f11111ff...ff11111f..
-..fffffff.....fffffff..`,
-    "width": 23
+..fffffff.....fffffff..`
   },
   {
-    "height": 34,
     "series": "DELTARUNE",
     "label": "Spamton",
     "string": `.........bbbbbbb.......bb
@@ -585,11 +569,9 @@ b11fb..bffffffffb..bfb1b.
 .........bf1111b.........
 ..........b1f11b.........
 ..........b1f1b..........
-...........bbbb..........`,
-    "width": 25
+...........bbbb..........`
   },
   {
-    "height": 43,
     "series": "DELTARUNE",
     "label": "Water Cooler",
     "string": `....ccccccccccc............
@@ -634,11 +616,9 @@ cddcdddddddddddcddc........
 .cdcccccccccccccdc.........
 .cdcdddddddddddcdc.........
 ..cdddddddddddddc..........
-...ccccccccccccc...........`,
-    "width": 27
+...ccccccccccccc...........`
   },
   {
-    "height": 16,
     "label": "[Galaga] Boss Galaga (1/2)",
     "string": `......6.6......
 ......6.6......
@@ -655,11 +635,9 @@ cddcdddddddddddcddc........
 6446.......6446
 6446.......6446
 6666.......6666
-.66.........66.`,
-    "width": 15
+.66.........66.`
   },
   {
-    "height": 16,
     "label": "[Galaga] Boss Galaga (2/2)",
     "string": `......6.6......
 ......6.6......
@@ -676,11 +654,9 @@ cddcdddddddddddcddc........
 ...66.....66...
 ....66...66....
 .....66.66.....
-......6.6......`,
-    "width": 15
+......6.6......`
   },
   {
-    "height": 16,
     "series": "Galaga",
     "label": "Enterprise",
     "string": `.....66166.....
@@ -698,11 +674,9 @@ cddcdddddddddddcddc........
 .66.2266622.66.
 .66..26662..66.
 ......161......
-......161......`,
-    "width": 15
+......161......`
   },
   {
-    "height": 16,
     "series": "Galaga",
     "label": "Galaxian Flagship",
     "string": `...............
@@ -720,11 +694,9 @@ cddcdddddddddddcddc........
 .......5.......
 ...............
 ...............
-...............`,
-    "width": 15
+...............`
   },
   {
-    "height": 16,
     "label": "[Galaga] Goei (1/2)",
     "string": `...............
 ...............
@@ -741,11 +713,9 @@ cddcdddddddddddcddc........
 ....2..8..2....
 ...............
 ...............
-...............`,
-    "width": 15
+...............`
   },
   {
-    "height": 16,
     "label": "[Galaga] Goei (2/2)",
     "string": `...............
 ...............
@@ -762,11 +732,9 @@ cddcdddddddddddcddc........
 ...22..8..22...
 ...............
 ...............
-...............`,
-    "width": 15
+...............`
   },
   {
-    "height": 16,
     "series": "Galaga",
     "label": "Gyaraga",
     "string": `.......1.......
@@ -784,11 +752,9 @@ cddcdddddddddddcddc........
 111112111211111
 111.2211122.111
 11..22.1.22..11
-1......1......1`,
-    "width": 15
+1......1......1`
   },
   {
-    "height": 16,
     "series": "Galaga",
     "label": "Midori",
     "string": `...............
@@ -806,11 +772,9 @@ cddcdddddddddddcddc........
 ..7....7....7..
 .......7.......
 ...............
-...............`,
-    "width": 15
+...............`
   },
   {
-    "height": 15,
     "label": "[Galaga] Momiji (1/3)",
     "string": `....22..........
 .....22....61...
@@ -826,11 +790,9 @@ cddcdddddddddddcddc........
 .6.6....2222....
 ..6......222....
 .6.6.....2222...
-6..........22...`,
-    "width": 16
+6..........22...`
   },
   {
-    "height": 15,
     "label": "[Galaga] Momiji (2/3)",
     "string": `.........22.....
 .........2261...
@@ -846,11 +808,9 @@ cddcdddddddddddcddc........
 .6.6..2222......
 ..6...2222......
 .6.6..222.......
-6......22.......`,
-    "width": 16
+6......22.......`
   },
   {
-    "height": 15,
     "label": "[Galaga] Momiji (3/3)",
     "string": `................
 ..222......61...
@@ -866,11 +826,9 @@ cddcdddddddddddcddc........
 .6.222..........
 ..6.............
 .6.6............
-6...............`,
-    "width": 16
+6...............`
   },
   {
-    "height": 16,
     "series": "Galaga",
     "label": "Scorpion",
     "string": `...............
@@ -888,11 +846,9 @@ cddcdddddddddddcddc........
 ....4..4.......
 .....44........
 ...............
-...............`,
-    "width": 15
+...............`
   },
   {
-    "height": 16,
     "series": "Galaga",
     "label": "Tombow",
     "string": `...............
@@ -910,11 +866,9 @@ cddcdddddddddddcddc........
 .......6.......
 .......6.......
 ...............
-...............`,
-    "width": 15
+...............`
   },
   {
-    "height": 16,
     "label": "[Galaga] Zako (1/2)",
     "string": `...............
 ...............
@@ -931,11 +885,9 @@ cddcdddddddddddcddc........
 .888...2...888.
 ...............
 ...............
-...............`,
-    "width": 15
+...............`
   },
   {
-    "height": 16,
     "label": "[Galaga] Zako (2/2)",
     "string": `...............
 ...............
@@ -952,11 +904,9 @@ cddcdddddddddddcddc........
 ...88..2..88...
 ...............
 ...............
-...............`,
-    "width": 15
+...............`
   },
   {
-    "height": 25,
     "series": "PKMN",
     "label": "Absol Back",
     "string": `..........fff......
@@ -983,11 +933,9 @@ cccbdddddddddddfcc.
 ....ccdc.cdcc......
 ...cbcdf.fdcbc.....
 ...ccbbf.fbbcc.....
-....cfff.fffc......`,
-    "width": 19
+....cfff.fffc......`
   },
   {
-    "height": 25,
     "series": "PKMN",
     "label": "Absol Front",
     "string": `......fff.........
@@ -1014,11 +962,9 @@ cccccbdddcbcdddddc
 .....cdddcccdddc..
 .....ccdcc.ccdcc..
 .....cccff.ffccc..
-.......ff...ff....`,
-    "width": 18
+.......ff...ff....`
   },
   {
-    "height": 23,
     "series": "PKMN",
     "label": "Absol Side",
     "string": `...................ccc....
@@ -1043,11 +989,9 @@ ccc..........fcbc111111cbc
 .....cddbccc..ccddc.......
 .....cdbf.......cdbf......
 .....fddcf......fbdcf.....
-......ffff.......ffff.....`,
-    "width": 26
+......ffff.......ffff.....`
   },
   {
-    "height": 39,
     "series": "PKMN",
     "label": "Arceus Back",
     "string": `............cc............
@@ -1088,11 +1032,9 @@ fe..fcbddbf.cc.fbddbcf..ef
 .......cbf......fbc.......
 .......c4f......f4c.......
 .......f4f......f4f.......
-.......ff........ff.......`,
-    "width": 26
+.......ff........ff.......`
   },
   {
-    "height": 39,
     "series": "PKMN",
     "label": "Arceus Front",
     "string": `............cc............
@@ -1133,11 +1075,9 @@ fe..f4efcbbbbbbbbcfe4f..ef
 ........cbf....fbc........
 ........c4f....f4c........
 ........f4f....f4f........
-........ff......ff........`,
-    "width": 26
+........ff......ff........`
   },
   {
-    "height": 33,
     "series": "PKMN",
     "label": "Arceus Side",
     "string": `..........................bc.......
@@ -1172,11 +1112,9 @@ c111ccc.....f5eee4ee...fbbbcffff...
 .......fbbc.......ff.....fbbc......
 .......f4e...............fe4c......
 .......f4f................f4f......
-.......ff..................ff......`,
-    "width": 35
+.......ff..................ff......`
   },
   {
-    "height": 24,
     "series": "PKMN",
     "label": "Blastoise Back",
     "string": `...........cccc...........
@@ -1202,11 +1140,9 @@ f1dddcfbb66666666bbfcddd1f
 ....fcccdfcbbbbcfdcccf....
 .....fcccccbbbbcccccf.....
 .....fcccf.ffff.fcccf.....
-......fff........fff......`,
-    "width": 26
+......fff........fff......`
   },
   {
-    "height": 23,
     "series": "PKMN",
     "label": "Blastoise Front",
     "string": `..........cccccc..........
@@ -1231,11 +1167,9 @@ f1dddcfbb66666666bbfcddd1f
 ....cb66bbfeeeefbb66bc....
 .....cbbbbcffffcbbbbc.....
 .....fd1bf......fb1df.....
-......fff........fff......`,
-    "width": 26
+......fff........fff......`
   },
   {
-    "height": 22,
     "series": "PKMN",
     "label": "Blastoise Side",
     "string": `................ccc......
@@ -1259,11 +1193,9 @@ f66bfffdb66ffdfeeef......
 ..ffbbcfcbb66bc44f.......
 ....ffffcbbbbfeff........
 .......fbdbd1bf..........
-........ffffff...........`,
-    "width": 25
+........ffffff...........`
   },
   {
-    "height": 15,
     "series": "PKMN",
     "label": "Bulbasaur Back",
     "string": `..cc.....cc..
@@ -1280,11 +1212,9 @@ c77777777777c
 c66ccccccc66c
 f66666666666f
 f666fffff666f
-.fff.....fff.`,
-    "width": 13
+.fff.....fff.`
   },
   {
-    "height": 16,
     "series": "PKMN",
     "label": "Bulbasaur Front",
     "string": `......ccc......
@@ -1302,11 +1232,9 @@ c6f777776777f6c
 .cf667777766fc.
 .c6ff66766ff6c.
 .f66cfffffc66f.
-..ff.......ff..`,
-    "width": 15
+..ff.......ff..`
   },
   {
-    "height": 15,
     "series": "PKMN",
     "label": "Bulbasaur Side",
     "string": `.....cccc..........
@@ -1323,11 +1251,9 @@ c777777f6777777777c
 ...f6677766ccfff...
 ..f6666ff666cc.....
 ..f66ffcccf66f.....
-...ff......ff......`,
-    "width": 19
+...ff......ff......`
   },
   {
-    "height": 24,
     "series": "PKMN",
     "label": "Charizard Back",
     "string": `............eeee............
@@ -1353,11 +1279,9 @@ fffeeeeeeeef44feeeeeeeeeefff
 .......eeefeeeeeeeeee.......
 .......eeefeeeeeeeeee.......
 ........feefeeeeeeef........
-.........ff.ffff.ff.........`,
-    "width": 28
+.........ff.ffff.ff.........`
   },
   {
-    "height": 24,
     "series": "PKMN",
     "label": "Charizard Front",
     "string": `..........e......e..........
@@ -1383,11 +1307,9 @@ ee...cccfef4e44e4fefccc...ee
 ......feeef444444feeef......
 .......feeef4444feeef.......
 .......fbebfeeeefbebf.......
-........fff......fff........`,
-    "width": 28
+........fff......fff........`
   },
   {
-    "height": 23,
     "series": "PKMN",
     "label": "Charizard Side",
     "string": `............eee.............
@@ -1412,11 +1334,9 @@ ee...cccfef4e44e4fefccc...ee
 ....eeeeeeeeee44ee4e........
 .....eeeeeefeeeeeee.........
 ........eeefeebfe...........
-............fff.............`,
-    "width": 28
+............fff.............`
   },
   {
-    "height": 17,
     "series": "PKMN",
     "label": "Charmander Back",
     "string": `...eeeee...
@@ -1435,11 +1355,9 @@ ee444e4e4ee
 ee44e44f4ee
 eee4eeefeee
 .eeeeffeef.
-..ff...ff..`,
-    "width": 11
+..ff...ff..`
   },
   {
-    "height": 16,
     "series": "PKMN",
     "label": "Charmander Front",
     "string": `...eeeee...
@@ -1457,11 +1375,9 @@ fec44444cef
 eeffdddffee
 eee4ddd4eee
 eeefeeefeee
-.ff.....ff.`,
-    "width": 11
+.ff.....ff.`
   },
   {
-    "height": 16,
     "series": "PKMN",
     "label": "Charmander Side",
     "string": `..........eeee....
@@ -1479,11 +1395,9 @@ feeeee444e4eeffe..
 ..ffeeee44e4e.....
 ....ffeeeeeee.....
 .......efeee......
-.........fff......`,
-    "width": 18
+.........fff......`
   },
   {
-    "height": 16,
     "series": "PKMN",
     "label": "Eevee Back",
     "string": `fff....ff.ff..fff
@@ -1501,11 +1415,9 @@ fe4ff.f4ff4fff4ef
 ....fefeeefef....
 ....feefefef.....
 .....fefffef.....
-......ff.ff......`,
-    "width": 17
+......ff.ff......`
   },
   {
-    "height": 16,
     "series": "PKMN",
     "label": "Eevee Front",
     "string": `........ff.......
@@ -1523,11 +1435,9 @@ fe4fff4fe4efff4ef
 ...fbbdddddbbf...
 ....ffbbebbff....
 .....ffefeff.....
-......ff.ff......`,
-    "width": 17
+......ff.ff......`
   },
   {
-    "height": 16,
     "series": "PKMN",
     "label": "Eevee Side",
     "string": `.....fff..........
@@ -1545,11 +1455,9 @@ fdd444ffbfeeeeeef.
 ...feeeeefbbdddf..
 ...feeeffeffbdf...
 ...feff..fefff....
-....ff....ff......`,
-    "width": 18
+....ff....ff......`
   },
   {
-    "height": 21,
     "series": "PKMN",
     "label": "Espeon Back",
     "string": `cc.................cc
@@ -1572,11 +1480,9 @@ fddddff.......ffddddf
 ......f333b333f......
 ......f33cfc33f......
 .......c3c.c3c.......
-........ff.ff........`,
-    "width": 21
+........ff.ff........`
   },
   {
-    "height": 26,
     "series": "PKMN",
     "label": "Espeon Front",
     "string": `..........ccc........
@@ -1604,11 +1510,9 @@ fddddfccdddddccfddddf
 ......cff333ffc......
 ......cbbfffbbc......
 ......c3c...c3c......
-.......ff...ff.......`,
-    "width": 21
+.......ff...ff.......`
   },
   {
-    "height": 22,
     "series": "PKMN",
     "label": "Espeon Side",
     "string": `..............cc.......
@@ -1632,11 +1536,9 @@ fbdc........ccdddcf1ddf
 ......fbddbccb33c......
 .....fbbbff..c33c......
 .....fbff.....fbf......
-......ff.......ff......`,
-    "width": 23
+......ff.......ff......`
   },
   {
-    "height": 20,
     "series": "PKMN",
     "label": "Flareon Back",
     "string": `ff.....cdc.....ff
@@ -1658,11 +1560,9 @@ c444f.ce44c.f444c
 ...cef444444fc...
 ...ceffeeecff....
 ....fecccccef....
-.....ff...ff.....`,
-    "width": 17
+.....ff...ff.....`
   },
   {
-    "height": 23,
     "series": "PKMN",
     "label": "Flareon Front",
     "string": `.......cccc......
@@ -1687,11 +1587,9 @@ c4e4fc44dc4cf4e4c
 ..c4dd4fff4dd4c..
 ...cedd444ddec...
 ....feeccceef....
-.....ff...ff.....`,
-    "width": 17
+.....ff...ff.....`
   },
   {
-    "height": 20,
     "series": "PKMN",
     "label": "Flareon Side",
     "string": `.........................
@@ -1713,11 +1611,9 @@ c44dddddddd4feccc444444e.
 ........ceeeeefeed4d4c...
 .......ceeeeeccccec4c....
 .......cecfcc....cef.....
-........ff........ff.....`,
-    "width": 25
+........ff........ff.....`
   },
   {
-    "height": 24,
     "series": "PKMN",
     "label": "Furret Back",
     "string": `ff...........ff
@@ -1743,11 +1639,9 @@ fddf.......fddf
 ..cfdeeeeedfc..
 ..ccfdddddfcc..
 ..fecfcccfcef..
-...ff.....ff...`,
-    "width": 15
+...ff.....ff...`
   },
   {
-    "height": 26,
     "series": "PKMN",
     "label": "Furret Front",
     "string": `........ff.....
@@ -1775,11 +1669,9 @@ fddfecccccefddf
 ..fedf111fdef..
 ..ceedd1ddeec..
 ..feeceeeceef..
-...ff.....ff...`,
-    "width": 15
+...ff.....ff...`
   },
   {
-    "height": 19,
     "series": "PKMN",
     "label": "Furret Side",
     "string": `.....ccc..................
@@ -1800,11 +1692,9 @@ fdd1eee1ee1ee1eeeeeeee11ee
 ....ffeeddeedeeedddeee....
 ......feffffdeeeeee.......
 .......fddfffffdef........
-........fff....ff.........`,
-    "width": 26
+........fff....ff.........`
   },
   {
-    "height": 25,
     "series": "PKMN",
     "label": "Gliscor Back",
     "string": `......fcc...........ccf......
@@ -1831,11 +1721,9 @@ cbfbbbbffffccbbbccffffbbbbfbc
 ...........cbbbbbc...........
 ...........cbbbbbc...........
 ............cbcbc............
-.............c.c.............`,
-    "width": 29
+.............c.c.............`
   },
   {
-    "height": 25,
     "series": "PKMN",
     "label": "Gliscor Front",
     "string": `......fcc...........ccf......
@@ -1862,11 +1750,9 @@ fbbcbbfefbfcdcccdcfbfefbbcbbf
 ...........cbbbbbc...........
 ...........cbbbbbc...........
 ............cbcbc............
-.............c.c.............`,
-    "width": 29
+.............c.c.............`
   },
   {
-    "height": 23,
     "series": "PKMN",
     "label": "Gliscor Side",
     "string": `........ccc........
@@ -1891,11 +1777,9 @@ fbbcbbceccbbc......
 .....ff.cbbcbbbc...
 .........cbbbbc....
 ..........ccbbbc...
-............ccc....`,
-    "width": 19
+............ccc....`
   },
   {
-    "height": 24,
     "series": "PKMN",
     "label": "Houndoom Back",
     "string": `..ccc.......ccc..
@@ -1921,11 +1805,9 @@ f1f.cbbcccbbc.f1f
 ...ffccfefcccf...
 ...fbbf..fccff...
 ...ffcf...fbbf...
-....fff...fcff...`,
-    "width": 17
+....fff...fcff...`
   },
   {
-    "height": 22,
     "series": "PKMN",
     "label": "Houndoom Front",
     "string": `..ccc.......ccc..
@@ -1949,11 +1831,9 @@ fbc.c11ccc11c.cbf
 ....ffccbcfccf...
 ....fbbfcccff....
 ....ffcf.fbbf....
-.....fff.fcff....`,
-    "width": 17
+.....fff.fcff....`
   },
   {
-    "height": 22,
     "series": "PKMN",
     "label": "Houndoom Side",
     "string": `..............ccc........
@@ -1977,11 +1857,9 @@ fcfffcf1f1ccb1fcccf......
 ...fcccff....fccf........
 ...fbbf.......cbf........
 ...fccf.......fccf.......
-....fff........fff.......`,
-    "width": 25
+....fff........fff.......`
   },
   {
-    "height": 22,
     "series": "PKMN",
     "label": "Jolteon Back",
     "string": `.cc......cc.....cc.
@@ -2005,11 +1883,9 @@ c555c.c5c55cc.c555c
 ...cce4eccce4ecc...
 .....f4ec.ce4f.....
 .....fef...fef.....
-......ff...ff......`,
-    "width": 19
+......ff...ff......`
   },
   {
-    "height": 22,
     "series": "PKMN",
     "label": "Jolteon Front",
     "string": `.....cc...cc.....
@@ -2033,11 +1909,9 @@ f4c5f5555555f5c4f
 ...cdbbfffbbdc...
 ...cccdbdbdccc...
 ....f44ccc44f....
-.....ff...ff.....`,
-    "width": 17
+.....ff...ff.....`
   },
   {
-    "height": 18,
     "series": "PKMN",
     "label": "Jolteon Side",
     "string": `.........cccc...........
@@ -2057,11 +1931,9 @@ f455555554cbbbcc454c155f
 .....ce444ee44ffdcdc....
 ....ceeecfcce44cc.c.....
 ....ceff....cf4c........
-.....ff.......ff........`,
-    "width": 24
+.....ff.......ff........`
   },
   {
-    "height": 23,
     "series": "PKMN",
     "label": "Lucario Back",
     "string": `.....c.....c.....
@@ -2086,11 +1958,9 @@ fd6c.feeceef.ccf.
 ...f66fc6cf66f...
 ...fc6cf6fc6cf...
 ....fcff6ffcf....
-....ff..f..ff....`,
-    "width": 17
+....ff..f..ff....`
   },
   {
-    "height": 23,
     "series": "PKMN",
     "label": "Lucario Front",
     "string": `.....c.....c.....
@@ -2115,11 +1985,9 @@ fd6cffe4d4eff66f.
 ...f66ccccc66f...
 ...fc66ccc66cf...
 ....fcf...fcf....
-....ff.....ff....`,
-    "width": 17
+....ff.....ff....`
   },
   {
-    "height": 25,
     "series": "PKMN",
     "label": "Lucario Side",
     "string": `.........c.........
@@ -2146,11 +2014,9 @@ ccccc66fcdfc66c....
 .....cccffc66f.....
 .......cfccff......
 ........cfccf......
-..........ff.......`,
-    "width": 19
+..........ff.......`
   },
   {
-    "height": 40,
     "series": "PKMN",
     "label": "Lugia Back 1",
     "string": `.....ff..............................ff.....
@@ -2192,11 +2058,9 @@ fddddddd1111c.....cdd11ddc.....c1111dddddddf
 .................f88c11c88f.................
 .................ffc.f1fcff.................
 .....................f1f....................
-......................ff....................`,
-    "width": 44
+......................ff....................`
   },
   {
-    "height": 39,
     "series": "PKMN",
     "label": "Lugia Back 2",
     "string": `...............ff...............
@@ -2237,11 +2101,9 @@ fdbddddf....f8c11c8f....fddddbdf
 ..cdbddf...ffc.f1fcff...fddbdc..
 ..fdcddf.......f1f......fddcdf..
 ...ffddf........ff......fddff...
-.....ff..................ff.....`,
-    "width": 32
+.....ff..................ff.....`
   },
   {
-    "height": 34,
     "series": "PKMN",
     "label": "Lugia Front 1",
     "string": `.....ff..............................ff.....
@@ -2277,11 +2139,9 @@ fdddddddd11dc....c11f11f.......cd11ddddddddf
 ...............cbbff6666ffbbc...............
 ................ffbcffffcbff................
 ................cbbc....cbbc................
-................ccc......ccc................`,
-    "width": 44
+................ccc......ccc................`
   },
   {
-    "height": 37,
     "series": "PKMN",
     "label": "Lugia Front 2",
     "string": `..............ff..............
@@ -2320,11 +2180,9 @@ fdbdddbdc............cdbdddbdf
 .ffdbdcbf............fbcdbdff.
 ..fdcddf..............fddcdf..
 ...ffddf..............fddff...
-.....ff................ff.....`,
-    "width": 30
+.....ff................ff.....`
   },
   {
-    "height": 35,
     "series": "PKMN",
     "label": "Lugia Side 1",
     "string": `...................cc.......................
@@ -2361,11 +2219,9 @@ f11ccc8c....ccc118b18bcbddddddf.............
 ................cbbbccc.....................
 ................cbbc........................
 ................cbbc........................
-................ccc.........................`,
-    "width": 44
+................ccc.........................`
   },
   {
-    "height": 37,
     "series": "PKMN",
     "label": "Lugia Side 2",
     "string": `..............................cffffff.......
@@ -2404,11 +2260,9 @@ f11ccc8c....ccc118b18b11111bddf.............
 ..................fdddbdbddcdf..............
 ..................fddcddcddcc...............
 ...................ffcddcddf................
-......................ff.ff.................`,
-    "width": 44
+......................ff.ff.................`
   },
   {
-    "height": 27,
     "series": "PKMN",
     "label": "Mewtwo Back",
     "string": `.......cf.......fc.......
@@ -2437,11 +2291,9 @@ ccbbbffc.ccbbbcc.cbbdbbbc
 .......fbbfcccfbbf.......
 .......cccbfffbccc.......
 .......cbbc...cbbc.......
-........ff.....ff........`,
-    "width": 25
+........ff.....ff........`
   },
   {
-    "height": 27,
     "series": "PKMN",
     "label": "Mewtwo Front",
     "string": `......cf.......fc......
@@ -2470,11 +2322,9 @@ fdc....cbccbccbbc.fcbbf
 ......fddbfcfbddf......
 ......cffc...cffc......
 ......cbbc...cbbc......
-.......cc.....cc.......`,
-    "width": 23
+.......cc.....cc.......`
   },
   {
-    "height": 26,
     "series": "PKMN",
     "label": "Mewtwo Side",
     "string": `.........cc..........
@@ -2502,11 +2352,9 @@ caacfcccccccbbfff....
 .......ffccfbbbf.....
 .........ffcfffc.....
 ............cbbc.....
-.............cc......`,
-    "width": 21
+.............cc......`
   },
   {
-    "height": 18,
     "series": "PKMN",
     "label": "Mew Back",
     "string": `....cccc....
@@ -2526,11 +2374,9 @@ c33fffd3c33c
 .fb3bc3b3bf.
 ..f3cbbc3f..
 ..c3c..c3c..
-...cc..cc...`,
-    "width": 12
+...cc..cc...`
   },
   {
-    "height": 22,
     "series": "PKMN",
     "label": "Mew Front",
     "string": `........ccc.
@@ -2554,11 +2400,9 @@ cd6fddddf6dc
 .fcbb33bbcf.
 ..fccccccc..
 ..cbc..cbc..
-...cc..cc...`,
-    "width": 12
+...cc..cc...`
   },
   {
-    "height": 19,
     "series": "PKMN",
     "label": "Mew Side",
     "string": `............cf......
@@ -2579,11 +2423,9 @@ f3dddc..c3dfddbdddc.
 ......ffcb33bc......
 ........cbcfc.......
 ........c3c.........
-........cc..........`,
-    "width": 20
+........cc..........`
   },
   {
-    "height": 23,
     "series": "PKMN",
     "label": "Mightyena Back",
     "string": `..c........c..
@@ -2608,11 +2450,9 @@ fcccfcccfcccf.
 fccccfffccccf.
 .ccccc..cccc..
 .fccc...cccf..
-.fff.....fff..`,
-    "width": 14
+.fff.....fff..`
   },
   {
-    "height": 26,
     "series": "PKMN",
     "label": "Mightyena Front",
     "string": `..........ffcc....
@@ -2640,11 +2480,9 @@ ccccfbfbbbbfbfcccc
 ...ccccffffcccc...
 ...ccccc..ccccc...
 ...fbcdf..fdcbf...
-....fff....fff....`,
-    "width": 18
+....fff....fff....`
   },
   {
-    "height": 22,
     "series": "PKMN",
     "label": "Mightyena Side",
     "string": `...............cc..........
@@ -2668,11 +2506,9 @@ ccffcccfccbbccccccbb52bbbee
 ...ccccccc...ccccc.........
 ...ccccc......cccc.........
 ...fcdf.......cccdc........
-....ff.........fff.........`,
-    "width": 27
+....ff.........fff.........`
   },
   {
-    "height": 16,
     "label": "[PKMN] Pikachu (F) Back",
     "string": `fff........fff.
 fccf.eeee.fccf.
@@ -2689,11 +2525,9 @@ fcc5f5555f5ccf.
 .f444efeefef...
 .fe444fefeef...
 ..f44ccc44f....
-...ff...ff.....`,
-    "width": 15
+...ff...ff.....`
   },
   {
-    "height": 18,
     "label": "[PKMN] Pikachu (F) Front",
     "string": `fff..........fff
 fccf........fccf
@@ -2712,11 +2546,9 @@ ceecfc4444cfc...
 ..e4ff4444ff4e..
 ...e44444444e...
 ...fe4cccc4ef...
-....ff....ff....`,
-    "width": 16
+....ff....ff....`
   },
   {
-    "height": 17,
     "label": "[PKMN] Pikachu (F) Side",
     "string": `....ffff.........
 ....fcccff.......
@@ -2734,11 +2566,9 @@ e444c4ee444ee54c.
 ..ffe4444444c....
 ...fef44444ee....
 ....eefffe44f....
-.........eff.....`,
-    "width": 17
+.........eff.....`
   },
   {
-    "height": 16,
     "label": "[PKMN] Pikachu (M) Back",
     "string": `fff........fff.
 fccf.eeee.fccf.
@@ -2755,11 +2585,9 @@ fcc5f5555f5ccf.
 .f444efeefef...
 .fe444fefeef...
 ..f44ccc44f....
-...ff...ff.....`,
-    "width": 15
+...ff...ff.....`
   },
   {
-    "height": 18,
     "label": "[PKMN] Pikachu (M) Front",
     "string": `fff..........fff
 fccf........fccf
@@ -2778,11 +2606,9 @@ ceecfc4444cfc...
 ..e4ff4444ff4e..
 ...e44444444e...
 ...fe4cccc4ef...
-....ff....ff....`,
-    "width": 16
+....ff....ff....`
   },
   {
-    "height": 17,
     "label": "[PKMN] Pikachu (M) Side",
     "string": `....ffff.........
 ....fcccff.......
@@ -2800,11 +2626,9 @@ f444ce44444ee54c.
 ..ffe444444ee....
 ...fec4444ee.....
 ....feefe44f.....
-........eff......`,
-    "width": 17
+........eff......`
   },
   {
-    "height": 41,
     "series": "PKMN",
     "label": "Rayquaza Back",
     "string": `......ff.........................ff........
@@ -2847,11 +2671,9 @@ f2f6fff6f62f.22222fff664ff.................
 .....f455566644ffff42f.....................
 ......f66656624ffff42......................
 ........ffffff244442.......................
-...............2222........................`,
-    "width": 43
+...............2222........................`
   },
   {
-    "height": 40,
     "series": "PKMN",
     "label": "Rayquaza Front",
     "string": `............22..........................
@@ -2893,11 +2715,9 @@ f2f6fff6f62f.22222fff664ff.................
 .................fff6666644446ff662f....
 ..................fff666666666f222f.....
 ....................ffff66666fff........
-.......................fffffff..........`,
-    "width": 40
+.......................fffffff..........`
   },
   {
-    "height": 37,
     "series": "PKMN",
     "label": "Rayquaza Side",
     "string": `........................................ff....
@@ -2936,11 +2756,9 @@ fff2ff64ff6666fffffffff66f.44ff6666f66ff7f66f.
 ...............f26666fffff4fff................
 ................f22666ffffff..................
 .................2f222fff.....................
-...................2fff.......................`,
-    "width": 46
+...................2fff.......................`
   },
   {
-    "height": 24,
     "series": "PKMN",
     "label": "Seviper Back",
     "string": `.........ff.....
@@ -2966,11 +2784,9 @@ ff..fccccccccccf
 ....fccccccccff.
 ....ffcccccccff.
 .....ffcccccff..
-.......fffff....`,
-    "width": 16
+.......fffff....`
   },
   {
-    "height": 25,
     "series": "PKMN",
     "label": "Seviper Front",
     "string": `..............22
@@ -2997,11 +2813,9 @@ fccc2ca2cccf....
 .fcccaacccf.....
 .ffccacccff.....
 ..ffcaccff......
-...ffffff.......`,
-    "width": 16
+...ffffff.......`
   },
   {
-    "height": 18,
     "series": "PKMN",
     "label": "Seviper Side 1",
     "string": `.....222.....ffffff......
@@ -3021,11 +2835,9 @@ f22ccf....fccccb555222bf.
 ...fcccccccccccccaf......
 ....fcccccfcccccaff......
 .....ffccccffcccff.......
-.......ffff..fff.........`,
-    "width": 25
+.......ffff..fff.........`
   },
   {
-    "height": 18,
     "series": "PKMN",
     "label": "Seviper Side 2",
     "string": `................ffffff......
@@ -3045,11 +2857,9 @@ f22ccf........fcccc4555bbbbf
 ..fcccccccccccccccaf........
 ...fcccccccffccccaf.........
 ....fccccff..fcccff.........
-.....ffff.....fff...........`,
-    "width": 28
+.....ffff.....fff...........`
   },
   {
-    "height": 15,
     "series": "PKMN",
     "label": "Squirtle Back",
     "string": `....ccc....
@@ -3066,11 +2876,9 @@ c6d4699cd6c
 .cd4c96cdc.
 .c6dc6cd6c.
 .f66fff66f.
-..ff...ff..`,
-    "width": 11
+..ff...ff..`
   },
   {
-    "height": 15,
     "series": "PKMN",
     "label": "Squirtle Front",
     "string": `....ccc....
@@ -3087,11 +2895,9 @@ c99cfffc99c
 .cc4ddd4cc.
 .c6644466c.
 .f66fff66f.
-..ff...ff..`,
-    "width": 11
+..ff...ff..`
   },
   {
-    "height": 15,
     "series": "PKMN",
     "label": "Squirtle Side",
     "string": `.......ccccc...
@@ -3108,11 +2914,9 @@ f99f4444dc99c..
 f966f44dd9ccc..
 .f666ffc99c....
 ..fff.f66c.....
-.......fff.....`,
-    "width": 15
+.......fff.....`
   },
   {
-    "height": 22,
     "series": "PKMN",
     "label": "Umbreon Back",
     "string": `ff...............ff
@@ -3136,11 +2940,9 @@ fcc54f.......f45ccf
 ....fccccccccf.....
 .....fccfffccf.....
 .....fcf...fcf.....
-......ff...ff......`,
-    "width": 19
+......ff...ff......`
   },
   {
-    "height": 24,
     "series": "PKMN",
     "label": "Umbreon Front",
     "string": `..........ff.......
@@ -3166,11 +2968,9 @@ fcc44ffcccccff44ccf
 ....feffcccffef....
 .....fccfffccf.....
 .....fcf...fcf.....
-......ff...ff......`,
-    "width": 19
+......ff...ff......`
   },
   {
-    "height": 20,
     "series": "PKMN",
     "label": "Umbreon Side",
     "string": `...........fff..........
@@ -3192,11 +2992,9 @@ fccc5ef.....ffcccfccc4cf
 ......fc5c5fff5c5cf.....
 ......fc5fff..fc5f......
 ......fcf......fcf......
-.......ff.......ff......`,
-    "width": 24
+.......ff.......ff......`
   },
   {
-    "height": 24,
     "series": "PKMN",
     "label": "Vaporeon Back",
     "string": `.........f.........
@@ -3222,11 +3020,9 @@ f66fcc6666666cff66f
 .....f666c666f.....
 .....f66c.c66f.....
 ......f6f.f6f......
-......ff...ff......`,
-    "width": 19
+......ff...ff......`
   },
   {
-    "height": 27,
     "series": "PKMN",
     "label": "Vaporeon Front",
     "string": `.....fcc...ccf.....
@@ -3255,11 +3051,9 @@ f66fff6666666fff66f
 ....cddbfffbddc....
 .....ccddbddcc.....
 ......f6cc66f......
-.......ff.ff.......`,
-    "width": 19
+.......ff.ff.......`
   },
   {
-    "height": 20,
     "series": "PKMN",
     "label": "Vaporeon Side",
     "string": `..............fff..........
@@ -3281,11 +3075,9 @@ c6666c......cffff4466666f..
 ........f6666cccccbbcc.....
 ........f66cc...c6cc.......
 ........f6f......c6f.......
-.........fc.......ff.......`,
-    "width": 27
+.........fc.......ff.......`
   },
   {
-    "height": 22,
     "label": "[PKMN] Venusaur (F) Back",
     "string": `........eeeee.eeeee........
 .......ebbd3beb3dbbe.......
@@ -3308,11 +3100,9 @@ c777777fbbfc444cfbbf777777c
 ...f66996666ccc66669966f...
 ...f6666fc6666666cf6666f...
 ....f666c.fffffff.c666f....
-.....fff...........fff.....`,
-    "width": 27
+.....fff...........fff.....`
   },
   {
-    "height": 24,
     "label": "[PKMN] Venusaur (F) Front",
     "string": `.......eeeee.eeeee.......
 ......ebbd3beb3dbbe......
@@ -3337,11 +3127,9 @@ f777777ff77ccc77ff777777f
 ..f6cf6699999999966fc6f..
 ..f66ffb699696996bff66f..
 ..fb6bffff66666ffffb6bf..
-...fff....fffff....fff...`,
-    "width": 25
+...fff....fffff....fff...`
   },
   {
-    "height": 23,
     "label": "[PKMN] Venusaur (F) Side",
     "string": `.....eeeee.eeeee..........
 ....ebbd3beb3dbbe.........
@@ -3365,11 +3153,9 @@ f777cf777c777fee999999999c
 ..f69999999999969996b6ff..
 ..f669996cc69996ccffff....
 ..c6b6bff..f6b9bf.........
-...ffff.....ffff..........`,
-    "width": 26
+...ffff.....ffff..........`
   },
   {
-    "height": 22,
     "label": "[PKMN] Venusaur (M) Back",
     "string": `........eeeee.eeeee........
 .......ebbd3beb3dbbe.......
@@ -3392,11 +3178,9 @@ c777777fbbfc444cfbbf777777c
 ...f66996666ccc66669966f...
 ...f6666fc6666666cf6666f...
 ....f666c.fffffff.c666f....
-.....fff...........fff.....`,
-    "width": 27
+.....fff...........fff.....`
   },
   {
-    "height": 24,
     "label": "[PKMN] Venusaur (M) Front",
     "string": `.......eeeee.eeeee.......
 ......ebbd3beb3dbbe......
@@ -3421,11 +3205,9 @@ f777777ff77ccc77ff777777f
 ..f6cf6699999999966fc6f..
 ..f66ffb699696996bff66f..
 ..fb6bffff66666ffffb6bf..
-...fff....fffff....fff...`,
-    "width": 25
+...fff....fffff....fff...`
   },
   {
-    "height": 23,
     "label": "[PKMN] Venusaur (M) Side",
     "string": `.....eeeee.eeeee..........
 ....ebbd3beb3dbbe.........
@@ -3449,11 +3231,9 @@ f777cf777c777fee999999999c
 ..f69999999999969996b6ff..
 ..f669996cc69996ccffff....
 ..c6b6bff..f6b9bf.........
-...ffff.....ffff..........`,
-    "width": 26
+...ffff.....ffff..........`
   },
   {
-    "height": 21,
     "series": "PKMN",
     "label": "Zangoose Back",
     "string": `....ee.........cc.....
@@ -3476,11 +3256,9 @@ e22221fbc11111111ffe..
 ..ff.cbbbb11111bff....
 ...f.ccbbfbbbbff......
 .....fbbbcffccbf......
-......fff...fff.......`,
-    "width": 22
+......fff...fff.......`
   },
   {
-    "height": 21,
     "series": "PKMN",
     "label": "Zangoose Front",
     "string": `....ff.........ee....
@@ -3503,11 +3281,9 @@ e22221f11212221f2f2e.
 ..ff.f121111111f.f...
 ...f.ff11fff11ff.....
 .....fbbff.ffbbf.....
-......fff...fff......`,
-    "width": 21
+......fff...fff......`
   },
   {
-    "height": 21,
     "series": "PKMN",
     "label": "Zangoose Left",
     "string": `.........cc...........
@@ -3530,11 +3306,9 @@ f11efa3211bfcb11111bcc
 ...bbbbfcfbcbbbbc.....
 ...fbbbbfbc..ccc......
 ....cbbfff............
-....fff...............`,
-    "width": 22
+....fff...............`
   },
   {
-    "height": 21,
     "series": "PKMN",
     "label": "Zangoose Right",
     "string": `...........ee.........
@@ -3557,11 +3331,9 @@ c1bbb1111cfb1111afe11f
 .....cbbbbcbcfcf2bb...
 ......ccc..cbbfbbbf...
 ............fbbcff....
-.............fff......`,
-    "width": 22
+.............fff......`
   },
   {
-    "height": 16,
     "series": "SMB1",
     "label": "Mario Idle",
     "string": `.....22222......
@@ -3579,11 +3351,9 @@ c1bbb1111cfb1111afe11f
 ..442222222244..
 ....222..222....
 ...eee....eee...
-..eeee....eeee..`,
-    "width": 16
+..eeee....eeee..`
   },
   {
-    "height": 32,
     "series": "SMB1",
     "label": "Super Mario Idle",
     "string": `......22222.....
@@ -3617,11 +3387,9 @@ eeee24222242eeee
 ..eeee....eeee..
 ..eeee....eeee..
 eeeeee....eeeeee
-eeeeee....eeeeee`,
-    "width": 16
+eeeeee....eeeeee`
   },
   {
-    "height": 20,
     "series": "SMBW",
     "label": "Mario Idle",
     "string": `......ccccc...
@@ -3643,11 +3411,9 @@ cf4dfddf44444e
 ..e11e66868...
 ...eeeefef....
 ...feee4f4f...
-...ffffffff...`,
-    "width": 14
+...ffffffff...`
   },
   {
-    "height": 28,
     "series": "SMBW",
     "label": "Super Mario Idle",
     "string": `.......ccccc...
@@ -3677,11 +3443,9 @@ cf4dfddf44444e
 ....8888888....
 ....eeeeefef...
 ....feeee4f4f..
-....fffffffff..`,
-    "width": 15
+....fffffffff..`
   },
   {
-    "height": 15,
     "series": "SBM1",
     "label": "Boo",
     "string": `......fffff.....
@@ -3698,11 +3462,9 @@ fdd11111222221f.
 .fdddd11212121f.
 ..fffddd11111f..
 .....ffdddfff...
-.......fff......`,
-    "width": 16
+.......fff......`
   },
   {
-    "height": 25,
     "series": "PKMN",
     "label": "Luxray Back",
     "string": `.......ff........
@@ -3729,11 +3491,9 @@ ffe4efffffff.....
 ...fff6f.f6fff...
 ....f66f.f66f....
 ....f66f.f66f....
-.....ff...ff.....`,
-    "width": 17
+.....ff...ff.....`
   },
   {
-    "height": 29,
     "series": "PKMN",
     "label": "Luxray Front",
     "string": `............ee...
@@ -3764,11 +3524,9 @@ fc949fcccccf949cf
 ...fffffffffff...
 ....ffff.ffff....
 ....fccf.fccf....
-.....ff...ff.....`,
-    "width": 17
+.....ff...ff.....`
   },
   {
-    "height": 22,
     "series": "PKMN",
     "label": "Luxray Side",
     "string": `............fffff........
@@ -3792,11 +3550,9 @@ e55544e...fcccf996fccccf.
 .....f66fff..ffecff......
 .....fc6ff.....f6cff.....
 ......f66f......fccf.....
-.......ff........ff......`,
-    "width": 25
+.......ff........ff......`
   },
   {
-    "height": 24,
     "series": "SMB1",
     "label": "Blooper 1",
     "string": `......deed......
@@ -3822,11 +3578,9 @@ dddeddddddddeddd
 ...d.dd..dd.d...
 ...d.ed..de.d...
 ...d..d..d..d...
-......d..d......`,
-    "width": 16
+......d..d......`
   },
   {
-    "height": 16,
     "series": "SMB1",
     "label": "Blooper 2",
     "string": `......deed......
@@ -3844,11 +3598,9 @@ edddeddddddeddde
 dddd.dd..dd.dddd
 .edd.ed..de.dde.
 ..ddd.d..d.ddd..
-...dd.d..d.dd...`,
-    "width": 16
+...dd.d..d.dd...`
   },
   {
-    "height": 32,
     "series": "SMB1",
     "label": "Bowser 1",
     "string": `............111.................
@@ -3882,11 +3634,9 @@ dddd.dd..dd.dddd
 ...................4466444411111
 ..................44444444444411
 .................11441144114444.
-................1114111411144444`,
-    "width": 32
+................1114111411144444`
   },
   {
-    "height": 32,
     "series": "SMB1",
     "label": "Bowser 2",
     "string": `............111.................
@@ -3920,11 +3670,9 @@ dddd.dd..dd.dddd
 ...................4466444411111
 ..................44444444444411
 .................11441144114444.
-................1114111411144444`,
-    "width": 32
+................1114111411144444`
   },
   {
-    "height": 16,
     "series": "SMB1",
     "label": "Goomba",
     "string": `......eeee......
@@ -3942,11 +3690,9 @@ eeeeeeeeeeeeeeee
 ....ddddddddff..
 ...ffdddddfffff.
 ...fffdddffffff.
-....fff..fffff..`,
-    "width": 16
+....fff..fffff..`
   },
   {
-    "height": 23,
     "series": "SMB1",
     "label": "Piranha Plant 1",
     "string": `..6..........6..
@@ -3971,11 +3717,9 @@ eeeeeeeeeeeeeeee
 ..4464.44.4644..
 ..444644446444..
 ...4444444444...
-......4444......`,
-    "width": 16
+......4444......`
   },
   {
-    "height": 24,
     "series": "SMB1",
     "label": "Piranha Plant 2",
     "string": `......6..6......
@@ -4001,8 +3745,1350 @@ eeeeeeeeeeeeeeee
 ..4464.44.4644..
 ..444644446444..
 ...4444444444...
-......4444......`,
-    "width": 16
+......4444......`
+  },
+  {
+    "series": "IMPACT",
+    "label": "Frog",
+    "string": `....fff..fff....
+...f777ff777f...
+..f7111771117f..
+..f71f1771f17f..
+..f7111771117f..
+..f3777777773f..
+.f772333333277f.
+.f675222222577f.
+..f77555555776..
+.f767755557767f.
+f7c7755555577c7f
+f7c7755555577c7f
+f77c77755777c77f
+.ff77f7777f77ff.
+...ff.ffff.ff...
+`
+  },
+  {
+    "series": "IMPACT",
+    "label": "Buried Skull",
+    "string": `e.......eee.........
+..e...eeeeeee.e.....
+.e..eeeefffee.ee.e..
+..eeffefb11ffe.e....
+.eefb4fd44d1cee.....
+.efbddd1fc1dbfee....
+.efbd1111111bfee....
+.eefdfbdbbfdbfee....
+..eefeffffdbfeee.e.e
+..eeefcd1dbfeee.ee..
+e..efd1dbbfeee..e...
+...efbbbbfeee.......
+e..eeffffeeee.ee....
+.eeeeeeeeee...ee....
+.e.e........e.......
+`
+  },
+  {
+    "series": "IMPACT",
+    "label": "Archaeologist",
+    "string": `......ffffff....
+.....f4dddd4f...
+....feddddddf...
+..ffbbeeebb7ff..
+.fedddddddddddf.
+.fdddffffffffdf.
+..ffffbbeebbff..
+....fe9f449fef..
+...f1cebbd4cf...
+..f111f1ccc1f...
+..f1111f1111b...
+..f4dc11f1b9ef..
+...feed11fc4df..
+...feeeeeeeff...
+....ffffffff....
+....fff..fff....
+`
+  },
+  {
+    "series": "IMPACT",
+    "label": "Dinosaur 1",
+    "string": `...fffff..........
+..f2222ef.........
+.f2ccc222f........
+f221f9222f........
+f22bbb222f........
+f222222e2f........
+.ffeeeef22f....ff.
+...ffff2222f..f22f
+.....f222222ff224f
+....f2e22c2222244f
+...f2ec2ae222224f.
+...ffc22d4e2224ef.
+.....f255d4e22cf..
+......ffe55e2222f.
+.......fecfffe22f.
+.......f42f..f42f.
+......f122f.f122f.
+......ffff...fff..
+`
+  },
+  {
+    "series": "IMPACT",
+    "label": "Island",
+    "string": `.......bbb..........................
+......a666b.........................
+.....a77566bbbbba...................
+......aa756b77777a..................
+.....aa66767775557a.................
+....a6555666666666a.................
+...a677766667aaaa6a.................
+...a7aa6677675a..a..................
+....ac667cc6675a....................
+.....c67c.ec667a....................
+.....c6c.ee4a67a....................
+.....c6c.e4.a67a....................
+......c..e4..a6a....................
+........ee4.43a33333344.............
+........ee4e5555555555544...........
+......e5ee4ddd55dddd1d5554444.......
+....eb55ee4d1d11d1d5ddd1dd55d44.....
+...edddbee4dddd5d1d11dddd1bdd1d22...
+...ed5d3ee43dddddddd1d11dddddd5dd2..
+..3bddaeeee43ddd1dddd15dddddddddd52.
+.3ddbbaeeee43dd5ddd1ddd1dddddddddd3e
+e3bddbceeee4a1ddddd5ddd1ddddddd1dd3e
+e3ddbddccaaadddddddddddddddddadadd3e
+e3dbddbddbdddddddd1ddddd1dddbddddd3e
+e3ddddddddddddd5ddddddddddddd1bddd3e
+.edddd1dd55dddddddddddddddddddddd4e.
+..edddddddddddddddddddddddddd1dd4e..
+...2ddbdddddddddddddddddddddbddd2...
+....2dddbdddddddddddddddbdddddd2....
+.....222dddddbdddddddbdddddddd2.....
+........22dddddddddddddde22224......
+..........2dddd4ddddd222............
+...........22bdddd222...............
+.............22222..................
+`
+  },
+  {
+    "series": "IMPACT",
+    "label": "Pirate Ship",
+    "string": `....................aeff.............
+...................ad111df...........
+..................ad111df............
+..................ad111df............
+...................bd111df...........
+....................b4ef.............
+..................aecccccce..........
+.................ad11111ddc..........
+................ad1111dddc...........
+...............ad1111ddfc............
+...............ad1111ddf.............
+...............ad1111ddf.............
+................bd111ddc.............
+.................bd111ddc..888888888f
+..................bbc4ef.cc54eeeeeecf
+.ffffffffffff.......c4ef.c54eee22ccef
+c555555555333f......c4ef.c54442eeeef.
+.ccf444422222ef...ffffffff54eee22cf..
+...fe4ee4ee2eef..ce4e4e4e454422eeef..
+...f4444444e42efce4e4e4e454eeeeecccc.
+...cccccccccccccccccffffffffffffffff.
+.....fe4dddd4444eeeeeeeeeeaaaaaaeef..
+......fe4dccfb4eccfb22ccfbeaccfbaef..
+......fee4fffb44fffbe2fffbaafffbeef..
+......feeebbbb44bbbbeebbbbaabbbbeef..
+.......fe44ddddee222eeeeeeaaaaaaeef..
+.......feee44d44444222eeeeeaaaaeef...
+........feee444444222222aaaaaeeeef...
+.........feeeeeeeeeeeeeeeeeeeeeef....
+.......888ffffffffffffffffffffff888..
+.........888888888888888888888888....
+`
+  },
+  {
+    "series": "IMPACT",
+    "label": "Pirate",
+    "string": `.....55f55.....
+....5f5f5f5....
+...5ffffff5....
+..5fffd11ff5...
+55fffffdffff55.
+.ffff22222fffb.
+...2222222222..
+...fcffffffff..
+...fbbbbfffbf..
+..fcf1bbbbbfcf.
+.fccc211112cccf
+.fcfcc2222ccfff
+.fbffcc99ccffbf
+..ff8ff44eeeff.
+....f888ffeff..
+...fffffffff...
+`
+  },
+  {
+    "series": "IMPACT",
+    "label": "Dinosaur 2",
+    "string": `...............fff..
+..............f444f.
+.............f44444f
+............f441f44f
+............f44c644f
+............f44444f.
+............f444ff..
+............f444f...
+............f445f...
+............f445f...
+............f445f...
+........ffffe445f...
+.f....ff444444445f..
+f4f..f44444444445f..
+f44ff4444444444e5f..
+f44444444444444e5f..
+.f4444444444444e5f..
+..fd444444444444f...
+...fd544e5555e44f...
+..f44c44ff444f444f..
+..f44f44f.f44ff44f..
+..f44f44f.f44ff44f..
+...ff.ff...ff..ff...
+`
+  },
+  {
+    "series": "IMPACT",
+    "label": "Spaceship",
+    "string": `.......a.......
+......abc......
+.....2abc2.....
+....cfabafc....
+....aab98ac....
+...aaa918aac...
+...aaa196aac...
+..aada996adac..
+..abdab88adbc..
+.aa22ab8aa22ac.
+aaaaabbbaaaaaac
+d2accccccccca2e
+aac.245c542.cac
+.c....444....c.
+......242......
+.......2.......
+`
+  },
+  {
+    "series": "IMPACT",
+    "label": "Alien Saucer",
+    "string": `.....bbbbbb.....
+...bbccccccbb...
+..bccc177ccccb..
+..bcc17777cccb..
+.bccc751157cccb.
+.b7cc71f117cc7b.
+.bc7c71f117c7cb.
+.bc7c751157c7cb.
+.8cc17777777c86a
+a68888888888866a
+a66526666665266a
+a6666665266666a.
+.a6666666666aa..
+7.77aaaaaaaa77.7
+.777..7777..777.
+..7....77....7..
+`
+  },
+  {
+    "series": "IMPACT",
+    "label": "Bananas",
+    "string": `......eeeeee
+......eeeeee
+......555e55
+......555e55
+......555e55
+...555555555
+e55555555555
+55555555e555
+5555e...555e
+ee.e5555555.
+....555555..
+....e55555..
+`
+  },
+  {
+    "series": "IMPACT",
+    "label": "Wizard",
+    "string": `e42ef.ffffff....
+e5ceff366666f...
+fecefd6666686f..
+fee91888868f6f..
+fecf999188f.ff..
+fecf818991f.....
+.fef8fb1f999....
+.feffbd3b88f....
+.fefff888898f...
+.8d668ff86c98f..
+.8d68c9598c96f..
+.fe889ae9cdb8f..
+.fe8c9fffcc886f.
+.fef9ca3e98688f.
+..fe9ffffd98886f
+..fefff..ffffff.
+`
+  },
+  {
+    "series": "IMPACT",
+    "label": "Treasure Chest",
+    "string": `.bbbbbbbbbbbbbb.
+be4444444444444b
+be444444444444eb
+bee4444444444eeb
+bbbbbbbddbbbbbbb
+.bbbbbbccbbbbbb.
+bcd9ccbccbcc5ccb
+bd4525cbbc49545b
+b55d5d951153d55b
+b4dd3d5dddd5dddb
+bbbbbbbbbbbbbbbb
+beeeeeeeeeeeeeeb
+beeeeeeeeeeeeeeb
+bceeeeeeeeeeeecb
+bbbbbbbbbbbbbbbb
+.bb..........bb.
+`
+  },
+  {
+    "series": "IMPACT",
+    "label": "Fancy Tree",
+    "string": `.....445...4455....54...eeee.22.
+...444455545e.445..455..e.2e52..
+..45.474444.5e5.522222ee.225e222
+..4..44444444464222264e27626.2ee
+.55.7554556564472.4424e27c2266e.
+e4d5.5e45.5555422.44..e2222ee2e.
+.4.5555455544452226464226622.ee2
+..5.5655455.55442444622222266eee
+..544564c4..44242262622262d22226
+...45..455444422422225222d2c672e
+..44554545554554422445222222222e
+7445444.44.e46442422462222256ee6
+.45544e4ee.64446246446226266e2e7
+.4544.d44d2222222264e62226262...
+..5544.44.42244ee2ee262266e222ee
+.54.444.24.242dd224c422ee26ee2ee
+.54554.2244224dd24424222e26ee22e
+..4455.4444224.dd6464eeeeeee22e2
+....44444224424446e6ee2.eee22ee6
+......74..224.5544e46e.eee.e2ee.
+......57..2224222eeeeee..e6eee..
+......7....2222.2e2eee.ee.......
+............22222e6eee..........
+................deeec...........
+................deeec...........
+...............edeece...........
+...............eeeece...........
+..............ddeeecce..........
+............ddddeeeccc..........
+.........eeeddee.ececccec.......
+.......eeee.4ee..ece.cccec......
+....eee....e......e...eee.ccee..
+`
+  },
+  {
+    "series": "IMPACT",
+    "label": "Bunny",
+    "string": `...1...1.......
+..d11.d11......
+..db1.db1......
+..dc1.dc1......
+.11111111......
+116116111d.....
+11f11f111d.....
+11131111dd.....
+911111113......
+.b111d33db..11.
+..cccb111dcd111
+..d11111111bd1d
+..d11111111dbd.
+...d11b1111db..
+...11c111ddc...
+...ccbccccc....
+`
+  },
+  {
+    "series": "IMPACT",
+    "label": "Farmer",
+    "string": `.....bbcccc.....
+....b555555c....
+...b55555555c...
+..b55555dd555c..
+.5f555dddd555c5.
+54f4555555554e45
+555ee444444ee555
+bb555eeeeee555bb
+..ec55555555ce..
+...bcccccccce...
+...ef4fddf4fe...
+..b1819119181b..
+..4d18888881d4..
+...4b888888b4...
+....f886688f....
+.....ffbbff.....
+`
+  },
+  {
+    "series": "IMPACT",
+    "label": "Carrot",
+    "string": `..6.6.
+567678
+.5778.
+.578..
+.444e.
+44e44e
+4d44ee
+444e4e
+44444e
+34d4e.
+34e4e.
+.444e.
+.444e.
+.444e.
+.44e..
+..4e..
+`
+  },
+  {
+    "series": "IMPACT",
+    "label": "Sprout",
+    "string": `....f66...66...
+.....fb6.668...
+......f6.6f....
+...f66866f.....
+....f6668......
+....ec76ee.....
+..eeec76eee....
+.eeecf77fceee..
+eeeeeeffceeee..
+eeeeeceeeeee..e
+.eeeeeeeceeee..
+..e.eeeeeeee...
+...e..e.e......
+..........e....
+`
+  },
+  {
+    "series": "IMPACT",
+    "label": "Sprout (Rooted)",
+    "string": `...............
+...............
+...............
+...............
+...............
+....eeeeee.....
+..eeeeeeeee....
+.eeeeeeeeeeee..
+eeeeeeeeeeeee..
+eeeeeeeeeeee..e
+.eeeeeeeeeeee..
+..e.eeeeeeee...
+...e..e.e......
+..........e....
+`
+  },
+  {
+    "series": "IMPACT",
+    "label": "Castle",
+    "string": `..........................................
+................................fff.......
+.........fff...................fc22ff.....
+........fc22f.f................fc2222ff...
+........fc222f2f....f..........fc222222f..
+........fc22222f...f2f.........fcffffff...
+........fcff22f...f222f.......fe344f......
+.......fe4f.ff...f22422f.....fe22224f.....
+......fe224f....f2244322f...fcbbbbbbbf....
+......fcbbbf...f2e2e2e2e2f..fcbbbbbbbf....
+.ffffffcbccf..ffefefefefeff.fccbcccbcff...
+f669f669c6df.fcccccccccccccf669c669c6dcf..
+f669f669c6df.fcddddddddddddf669c669c6dcf..
+f669966996df..fffffffffffcff669966996dcf..
+f666666666df..fcb6b6b6b9b9ff666666666dcf..
+.f6666666dcf..fc6c6c6c6c6bf.f6666666dcf...
+.f88888888cf..fcbfbfbfbfb9f.f88888888cf...
+.fccccccccbf.fcccccccccccccffccccccccf....
+..fc666fffcfffcbb6bbb6b66b9f.fc66666f.....
+..fcbbfccccccffffffffb9bb9bf.fcbbbdbf.....
+..fcdfc699966ccccccccfb6bb9f.fcbbbdbf.....
+..fcdc9b666999666bbbcfbb69bfffcbbbdbf.....
+..fcdcbb6999999966666cffffffccccccdbf.....
+..fcdc6666666b66999666cccccc99996cbdbf....
+.fcdbc669ddd999966996666666966996cbdbf....
+.fcdbc9966666666666666999999966bbcbdbf....
+.fcdc666969966fff66666699b6669996cbdbf....
+.fcdc66999966fcecf6ddd69bb66d9996cbdbf....
+.fcdc6666666fececef99666966999dd9cbdbf....
+.fcdc666d99fcecececf6666666666bd9cbdbf....
+.fcdc669966fcecececf6966669999696cbdbf....
+.fcdc666666fcecececf6699969666696cbdbf....
+.fcdc66696fececececef699996699999cbdbf....
+.fcdc66999fececececef666dd6999996cbdbf....
+fcdbc66666fececececef666999666696cbbdbf...
+fcbbc666ddfececececef666666666bb6cbbbbf...
+fcaac66bb6fececececef9996669999b6caaaaf...
+fc66ccccccfececececefccccccccccccc6666f...
+fc66c66666fffffffffff666666666666c6666f...
+fffffffffffcccccccccfffffffffffffffffff...
+cccccccccccccccccccccccccccccccccccccccc..
+.ccccccccccccccccccccccccccccccccccccccccc
+`
+  },
+  {
+    "series": "IMPACT",
+    "label": "Key",
+    "string": `...ffff...
+..fddddf..
+.f55ffd1f.
+f55f..fd1f
+f5f....fdf
+f5f....fdf
+f5bf..fbdf
+.f5bffbdf.
+..f55ddf..
+...fb5f...
+...fb5ff..
+...fb5ddf.
+...fb5ff..
+...fb5dcf.
+...fb5ff..
+....ff....
+`
+  },
+  {
+    "series": "IMPACT",
+    "label": "Cow",
+    "string": `........111f.
+....fbbbb....
+...ff1111f...
+..ff1111fff..
+.bff11111ffb.
+.bdd11111ddb.
+fbffdf1fdffbf
+.ffff111ffff.
+.bdff111ffdb.
+.b1df111fd1b.
+.b1df616fd1b.
+.b1dcf1fcd1b.
+..c1cfdfc1c..
+..dcc3b3cc1..
+..d1.c3c.d1..
+..ff.....ff..
+`
+  },
+  {
+    "series": "IMPACT",
+    "label": "Chicken",
+    "string": `........222....
+......d11121d..
+.....d1111111d.
+.....d11111111.
+....d11bf111bf.
+...d111bb1144b1
+..d111111114411
+.d1111111112111
+d11111111111111
+bd11111d1111111
+ebddddde111111d
+.ebbbbe1111111b
+..eeee1111111b.
+....bbbbbbbbb..
+......e4..e4...
+`
+  },
+  {
+    "series": "IMPACT",
+    "label": "Cookie (1/3)",
+    "string": `.....fffffff.....
+...ffeeeeeeeff...
+..fee33333e4eef..
+.fe33d4d44ffe4ef.
+.fe44ff4d3ff4eef.
+fe343ffdddd3e4ecf
+fe3edd43d4344eecf
+fe4ddddd4dd434ecf
+fe4ffdd3dd43ffecf
+fe3cf43d34decfecf
+fe434d4d4344e4ecf
+fee4efc44e4e4eecf
+.fee4ff4e4ffe4cf.
+.feee44e4effeecf.
+..fcceeeeeeeccf..
+...ffcccccccff...
+.....fffffff.....
+`
+  },
+  {
+    "series": "IMPACT",
+    "label": "Cookie (2/3)",
+    "string": `.......fffff.....
+......feeeeeff...
+.......fe3e4eef..
+........f4ffe4ef.
+........f3ff4eef.
+.......fddd3e4ecf
+.f.....fd4344eecf
+fefffffd4dd434ecf
+fe4ffdd3dd43ffecf
+fe3cf43d34decfecf
+fe434d4d4344e4ecf
+fee4efc44e4e4eecf
+.fee4ff4e4ffe4cf.
+.feee44e4effeecf.
+..fcceeeeeeeccf..
+...ffcccccccff...
+.....fffffff.....
+`
+  },
+  {
+    "series": "IMPACT",
+    "label": "Cookie (3/3)",
+    "string": `.................
+........ff.......
+........e3f......
+........f4ff.....
+........f3ff....f
+.......fddd3fffff
+.f.....fd4344eecf
+fefffffd4dd434ecf
+fe4ffdd3dd43ffecf
+fe3cf43d34decfecf
+fe434d4d4344e4ecf
+fee4efc44e4e4eecf
+.fee4ff4e4ffe4cf.
+.feee44e4effeecf.
+..fcceeeeeeeccf..
+...ffcccccccff...
+.....fffffff.....
+`
+  },
+  {
+    "series": "IMPACT",
+    "label": "Parka",
+    "string": `....ffff....
+..ffeeeeff..
+.fee1999eef.
+.fe111119ef.
+fe11ffff11ef
+fe1ff44ff1ef
+fe14fddf41ef
+fe1d3dd3d1ef
+.fe111111ef.
+.efcbbbbcfe.
+fecc4ee4ccef
+f1cfeeeefc1f
+.ffeeeeeeff.
+.f11111111f.
+.ffffffffff.
+...ff..ff...
+`
+  },
+  {
+    "series": "IMPACT",
+    "label": "Snowball",
+    "string": `...666666...
+..69199196..
+.6919119196.
+691911119996
+699191111196
+691911111996
+691911111196
+699191111196
+691919911996
+.6999119996.
+..69999996..
+...666666...
+`
+  },
+  {
+    "series": "IMPACT",
+    "label": "Watermelon",
+    "string": `fffffffffffffffffffffff.
+f7612333333333333332167f
+f761233df33333df3332167f
+f761233bb33333bb3332167f
+.f7612333df33333332167f.
+.f7612333bb333df332167f.
+..f76123333333bb32167f..
+..f761122222222221167f..
+...f7661111111111667f...
+....f77666666666677f....
+.....ff7777777777ff.....
+.......ffffffffff.......
+`
+  },
+  {
+    "series": "IMPACT",
+    "label": "Penguin",
+    "string": `.....fffff...
+....fffffff..
+...fffffffff.
+..fff91ff91f.
+..fff1fff1ff.
+..ffffffffff.
+..ffffff444f.
+.fffffb444444
+fffffb91119fc
+fffffb91111fc
+fffffb91111fc
+f.fffb91111f.
+..fffb91111f.
+...ffcb999f..
+....24cfff2..
+...44444.222.
+`
+  },
+  {
+    "series": "IMPACT",
+    "label": "Snowflake",
+    "string": `.....8.8.....
+......8......
+...8..8..8...
+..88.8.8.88..
+....88.88....
+8..88.8.88..8
+.88..888..88.
+8..88.8.88..8
+....88.88....
+..88.8.8.88..
+...8..8..8...
+......8......
+.....8.8.....
+`
+  },
+  {
+    "series": "IMPACT",
+    "label": "Cactus",
+    "string": `......88......
+.....6756.....
+....877d5e..c.
+....e65778.cb8
+....eb7b58c71e
+....eb7b77177e
+.c..e17b58778.
+616.e6165888..
+87766776d8....
+8717617616....
+.877777776....
+..86e71b76....
+....e17616....
+....e67676....
+....e67776....
+....eb7616....
+...4eb66be4...
+.....eeee.....
+`
+  },
+  {
+    "series": "IMPACT",
+    "label": "Traffic Cone",
+    "string": `.....fff.....
+....f444f....
+....f444f....
+...fdddddf...
+...fdddddf...
+...f44444f...
+..f4444444f..
+..fdddddddf..
+.fedddddddef.
+f4eeeeeeeee4f
+f44444444444f
+f44444444444f
+.f444444444f.
+..fffffffff..
+`
+  },
+  {
+    "series": "IMPACT",
+    "label": "Raindrop Dude",
+    "string": `...ff2ff...
+..f54545f..
+.f5455545f.
+.f2222444f.
+f555555555f
+.fffffffff.
+fbd9a7a9dbf
+f1f1a7a1f1f
+f111a7a111f
+.f3866683f.
+..f66666f..
+.f2e686e2f.
+f22ef.fe22f
+f22ef.fe22f
+.fff...fff.
+`
+  },
+  {
+    "series": "IMPACT",
+    "label": "Umbrella",
+    "string": `....22c22....
+..222c24222..
+.222c2224222.
+.22c22222422.
+222c222224222
+222c222224222
+ccccccccccccc
+.....bb......
+.....bb......
+.....bb......
+.....bb......
+.....bb..b...
+.....bbbbb...
+......bbb....
+`
+  },
+  {
+    "series": "IMPACT",
+    "label": "Raindrop",
+    "string": `....6....
+...696...
+..69996..
+..69996..
+.6999996.
+.6999996.
+699999996
+699999996
+699991996
+699911996
+699999996
+.6999996.
+..66666..
+`
+  },
+  {
+    "series": "IMPACT",
+    "label": "Apiarist",
+    "string": `......ffff.......11111..
+....fff11fff....11..1.1.
+...fff1111fff...1..1.cc.
+..fff111111fff..1.1.c..c
+..ff111111111f.111..c..c
+..f12ffffff21f..11.11cc.
+..ffffeeeeffff...111c...
+.ff1fbf44fbf1ff....c....
+.ff1fbf44fbf1ff...c.....
+.f114111111411f.cc......
+fdf1141111411ffec.......
+fbff112222114fddc.......
+fbf4f222222f1edde.......
+fcf.f222222f44ee........
+.ff.f225522f............
+....ffffffff............
+.....ff..ff.............
+`
+  },
+  {
+    "series": "IMPACT",
+    "label": "Bee",
+    "string": `.....f...f.....
+......fff......
+.....fffff.....
+.666.55555.666.
+699965555569996
+699996fff699996
+69996fffff69996
+.666.55555.666.
+.....55555.....
+.....fffff.....
+......fff......
+`
+  },
+  {
+    "series": "IMPACT",
+    "label": "Coconut",
+    "string": `....eeeeeee.....
+..eeeeeeeeeee...
+.eeeeeeeeeeeee..
+.eeeeeeeeeeeee..
+eeeeeeeeeeeddee.
+eeeeeeeeeeeddeee
+eeeeeeeeeeeeeeee
+eeeeeeeeeeeeedde
+eeeeeeeeeeddedde
+eeeeeeeeeeddeeee
+eeeeeeeeeeeeeee.
+.eeeeeeeeeeeee..
+.eeeeeeeeeeeee..
+..eeeeeeeeeee...
+....eeeeeee.....
+`
+  },
+  {
+    "series": "IMPACT",
+    "label": "Turtle",
+    "string": `........ffffffffff....ffffff...
+......ffeeeeeeeeeeff.f767767f..
+.....feeeeeeeeeeeeddf67767777f.
+....fffdeeeeeeeeeedf777777777f.
+...ffdfdeeeeeeeeeedf6777777777f
+..fddefdeeeeeeeeedf6677f7777f7f
+.fdeeeefdeeeeeeeeff7777f7777f7f
+.fdeeeeefffffffffff77777777777f
+ffeeeeefddeeeeeeeedf77777ff77f.
+ffeeeeefdeeeeeeeeedff77777777f.
+fefeeefdeeeeeeeeeedef777777ff..
+feefefdeeeeeeeeeedfef7777ff....
+ffeeffdeeeeeeeeedfef7777ff.....
+..ffeefffffffffffeffffffff.....
+..f7feeeeeeeeeeeefeef.f77f.....
+..f77ffffffffffff77f..f77f.....
+..f77f..........f77f..f77f.....
+...fff...........ff....ff......
+`
+  },
+  {
+    "series": "IMPACT",
+    "label": "Soccer Ball",
+    "string": `..fffffff..
+.f11fff11f.
+f111fff111f
+f111fff111f
+ffff111ffff
+ffff111ffff
+ffff111ffff
+f111fff111f
+f111fff111f
+.f11fff11f.
+..fffffff..
+`
+  },
+  {
+    "series": "IMPACT",
+    "label": "Ninja",
+    "string": `....fffff...
+...fffffff..
+f.fffffffff.
+.ffbfffffbf.
+f.fd11b11df.
+..ff1fdf1ff.
+...fffffff..
+....fffff...
+...fffffff..
+..fffffffff.
+..fffffffff.
+.f.fffffff.f
+.f.fffffff.f
+....fffff...
+....ff.ff...
+...fff.fff..
+`
+  },
+  {
+    "series": "IMPACT",
+    "label": "Ninja Star 1",
+    "string": `...ff......
+....ff.....
+....fbf....
+....fcf...f
+..ffcacffff
+.fbca3acbf.
+ffffcacff..
+f...fcf....
+....fbf....
+.....ff....
+......ff...
+`
+  },
+  {
+    "series": "IMPACT",
+    "label": "Ninja Star 2",
+    "string": `..ff..........
+..ffff........
+...f8ff.....ff
+...ff8f...ffff
+....fff..ff8f.
+.....fffff8ff.
+.....f88ffff..
+..ffff88f.....
+.ff8fffff.....
+.f8ff..fff....
+ffff...f8ff...
+ff.....ff8f...
+........ffff..
+..........ff..
+`
+  },
+  {
+    "series": "IMPACT",
+    "label": "Archaeology Background",
+    "string": `9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
+9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
+9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
+9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
+9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
+9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
+9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
+9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
+9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
+9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
+9999999999999999999999999999999999999669999999999999999999999999999999999999966999999999999999999999999999999999999996699999999999999999999999999999999999999669
+9999999999999999999999999999999999999669999999999999999999999999999999999999966999999999999999999999999999999999999996699999999999999999999999999999999999999669
+9999999999999999999999999999999999999676999999999999999999999999999999999999967699999999999999999999999999999999999996769999999999999999999999999999999999999676
+9999999999966999999999999999999999999676999999999996699999999999999999999999967699999999999669999999999999999999999996769999999999966999999999999999999999999676
+9999999999967699999999999999999996699676999999999996769999999999999999999669967699999999999676999999999999999999966996769999999999967699999999999999999996699676
+9996996669996769999966999999996696769676999699666999676999996699999999669676967699969966699967699999669999999966967696769996996669996769999966999999996696769676
+9966999676996776999676966999967696769676996699967699677699967696699996769676967699669996769967769996769669999676967696769966999676996776999676966999967696769676
+6676999967699676999676667699677696776677667699996769967699967666769967769677667766769999676996769996766676996776967766776676999967699676999676667699677696776677
+6676669996769677696776667769676696676677667666999676967769677666776967669667667766766699967696776967766677696766966766776676669996769677696776667769676696676677
+6776769996776667696766666766776666677677677676999677666769676666676677666667767767767699967766676967666667667766666776776776769996776667696766666766776666677677
+6766776996667767667766666776766666677677676677699666776766776666677676666667767767667769966677676677666667767666666776776766776996667767667766666776766666677677
+7766676966677667667667766676766776667677776667696667766766766776667676677666767777666769666776676676677666767667766676777766676966677667667667766676766776667677
+7766677666776667777666776677767766667777776667766677666777766677667776776666777777666776667766677776667766777677666677777766677666776667777666776677767766667777
+7666667666776767777666676677667666767777766666766677676777766667667766766676777776666676667767677776666766776676667677777666667666776767777666676677667666767777
+7667667767766777776677677677677667766777766766776776677777667767767767766776677776676677677667777766776776776776677667777667667767766777776677677677677667766777
+7667767767766777776776667677677667666777766776776776677777677666767767766766677776677677677667777767766676776776676667777667767767766777776776667677677667666777
+7666767767666777676766667b776776b766677b7666767767666777676766667b776776b766677b7666767767666777676766667b776776b766677b7666767767666777676766667b776776b7666777
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbebbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbebbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbebbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbebbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbebbbbbbbbbbbbbbbbbbebbbbbbbbbbbbbbbbbbbbebbbbbbbbbbbbbbbbbbebbbbbbbbbbbbbbbbbbbbebbbbbbbbbbbbbbbbbbebbbbbbbbbbbbbbbbbbbbebbbbbbbbbbbbbbbbbbebbbbbbbbbb
+bbbeeeeebbbbbbbbbbbebbbeeeebbbbbbbbebbbbbbbeeeeebbbbbbbbbbbebbbeeeebbbbbbbbebbbbbbbeeeeebbbbbbbbbbbebbbeeeebbbbbbbbebbbbbbbeeeeebbbbbbbbbbbebbbeeeebbbbbbbbebbbb
+beeeebeeeebbbbeebbbbbeeeeeeeebbeebbbbbebbeeeebeeeebbbbeebbbbbeeeeeeeebbeebbbbbebbeeeebeeeebbbbeebbbbbeeeeeeeebbeebbbbbebbeeeebeeeebbbbeebbbbbeeeeeeeebbeebbbbbeb
+eeeeeeeeeeebbbeebbbbeebeeeeeeebeebbbbbbbeeeeeeeeeeebbbeebbbbeebeeeeeeebeebbbbbbbeeeeeeeeeeebbbeebbbbeebeeeeeeebeebbbbbbbeeeeeeeeeeebbbeebbbbeebeeeeeeebeebbbbbbb
+ebbeeeeeeeeebbbbbbbeeeeeeeeeeeebbbbbbbbeebbeeeeeeeeebbbbbbbeeeeeeeeeeeebbbbbbbbeebbeeeeeeeeebbbbbbbeeeeeeeeeeeebbbbbbbbeebbeeeeeeeeebbbbbbbeeeeeeeeeeeebbbbbbbbe
+ebbeeeeeeeeeeebbbeeeeeeeeeebbeeeebbbbeeeebbeeeeeeeeeeebbbeeeeeeeeeebbeeeebbbbeeeebbeeeeeeeeeeebbbeeeeeeeeeebbeeeebbbbeeeebbeeeeeeeeeeebbbeeeeeeeeeebbeeeebbbbeee
+eeeeeeeeeeeeeeeeeeeeeeeeeeebbeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeebbeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeebbeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeebbeeeeeeeeeee
+eeeeeeeeeebbeeeeeebbeeeeeeeeeeebeeeeeebeeeeeeeeeeebbeeeeeebbeeeeeeeeeeebeeeeeebeeeeeeeeeeebbeeeeeebbeeeeeeeeeeebeeeeeebeeeeeeeeeeebbeeeeeebbeeeeeeeeeeebeeeeeebe
+eeeeeeeeeebbeeeeeebbeeeeeeeeeeeeeebbeeeeeeeeeeeeeebbeeeeeebbeeeeeeeeeeeeeebbeeeeeeeeeeeeeebbeeeeeebbeeeeeeeeeeeeeebbeeeeeeeeeeeeeebbeeeeeebbeeeeeeeeeeeeeebbeeee
+eeeeeeeeeeeeeebeeeeeeeeeeeeeeeeeeebbeeeeeeeeeeeeeeeeeebeeeeeeeeeeeeeeeeeeebbeeeeeeeeeeeeeeeeeebeeeeeeeeeeeeeeeeeeebbeeeeeeeeeeeeeeeeeebeeeeeeeeeeeeeeeeeeebbeeee
+eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+eeeeeeeeeeffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+eeeeeeeeeefdbfeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeffffeeeeeeeeeeeeeeeeeeee
+eeeeeeeeffbddfeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeefdbfeeeeeeeeeeeeeeeeeeee
+eeeeeeeefddddfeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeffbddfeeeeeeeeeeeeeeeeeeee
+eeeeeeeefbdddffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeefddddffeeeeeeeeeeeeeeeeeee
+eeeeeeeeffffbdffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeefbdddbffeeeeeeeeeeeeeeeeee
+eeeeeeeeeeeffddfffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeefffffddffeeeeeeeeeeeeeeeee
+eeeeeeeeeeeeffbdddbfeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeffddffeeeeeeeeeeeeeeee
+eeeeeeeeeeeeeffddddfeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeffddffeeeeeeeeeeeeeee
+eeeeeeeeeeeeeefddbffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeffdbffffeeeeeeeeeeee
+eeeeeeeeeeeeeefbdfeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeffdddbfeeeeeeeeeeee
+eeeeeeeeeeeeeeffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeefddddfeeeeeeeeeeee
+eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeefddbffeeeeeeeeeeee
+eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeefbdfeeeeeeeeeeeeee
+eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeffffeeeeeeeeeeeeee
+eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeefffffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+eeeeeeeeeeeeeeeeeeeeeeeeeeffffffffffffddddddffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+eeeeeeeeeeeeeeeeeeeeeeeefffddddddddddddffddddfeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+eeeeeeeeeeeeeeeeeeeeeeeffddddddddffffdddffdddfeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+eeeeeeeeeeeeeeeeeeeeeeffdddfffddfffffdddddddffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+eeeeeeeeeeeeeeeeeeeeeffdddfffffdffffddddddbdfeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+eeeeeeeeeeeeeeeeeeeeffdddffffffddddddddbfdfdfeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+eeeeeeeeeeeeeeeeeeeefddddfffffdddddddfdffdfdfeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+eeeeeeeeeeeeeeeeeeeefdddddfffddddfffdffffffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+eeeeeeeeeeeeeeeeeeeefdddddddddffffefffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+eeeeeeeeeeeeeeeeeeeeffdddbbbbffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+eeeeeeeeeeeeeeeeeefffffbddddbbffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+eeeeeeeeeeeeeeeeeefdffefdddddddddffffffffffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+eeeeeeeeeeeeeeeeeefddfffddddddddddffddddfdfdfeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+eeeeeeeeeeeeeeeefffbbdfffdddddddddddddddbdbdfeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+eeeeeeeeeeeeeefffddfffffeffddddddddddddddddffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+eeeeeeeeeeeeeefdbbdddfbfeeffffddddddffffffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+eeeeeeeeeeeeeefddbbfffdfeeeeeffffffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+eeeeeeeeeeeeffffdddfefdffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+eeeeeeeeeeeefbbfffffffddffeeeeffffeeeeefffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+eeeeeeeeeeeeffbbbfffdbdddffffefddbfffffbdddffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+eeeeeeeeeeeeefffffdfdbbdddddfefdddddddbbbbddfeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+eeeeeeeeeeeeffbbbfdbddbbbffffefffffdddbddbfdfeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+eeeeeeeeeeeefbbfffdbbdddffffffeeeeffffbbbdfffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeefbdfeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+eeeeeeeeeeeefffffbddbbdddddddfeeeeeeeffdbdfeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeefddbffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+eeeeeeeeeeeefbbfdbbddbbfffffffeeeeeeffddfdfeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeffddddfeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+eeeeeeeeeeeefbffdbbbdddddddfeeeeeeeefddffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeffbdddbfeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+eeeeeeeeeeeeffffdddbbfffffffeeeeeeeeffffffffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeffddfffffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+eeeeeeeeeeeeffdffdddfeeeeeeeeeeeeeeeeeeffdffdfeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeffddffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+eeeeeeeeeeeffddffffffeeeeeeeeeeeeeeeeeefddffdffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeffddffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+eeeeeeeeeeefddbffffeeeeeeeeeefffffffeeffddffdbfeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeffffbdffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+eeeeeeeeeeeffbbfddfeeeeeeeeeefddbbdffefddfffddfeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeefbdddffeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+eefeeeeeeeeefdddbbffeeeeeeeeffddbdddfefdffffbdfeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeefeeeeeeeeefddddfeeeeeeeeeeeeeeeeeeeeeeeefeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+eeeeeeeeeefefffbbddfeeeeeeeefddfffddfffffeffbffeeefeeeeeeeeeeeeeeeeeefeeeeeeeeeeeeeeeeeeeefeffbddfeeeeeeeeeeefeeeeeeeeeeeeeeeeeeeefeeeeeeeeeeeeeeeeeefeeeeeeeeee
+eeefffffeeeeeefdddbffeeffffffddfeffddfffeefdbfffeeeeeeeeeeefeeeffffeeeeeeeefeeeeeeefffffeeeeeefdbfefeeeffffeeeeeeeefeeeeeeefffffeeeeefffffefeeeffffeeeeeeeefeeee
+effffeffffeeeefdfbbdfffffffbddfffeffdffeeffddfffffeeeeffeeeeeffffffffeeffeeeeefeeffffeffffeeeeffffeeeffffffffeeffeeeeefeeffffeffffeeefbdbfeeeffffffffeeffeeeeefe
+fffffffffffeeefffbdbffddddffbdfffeefffeefffbdffffffeeeffeeeeffefffffffeffeeeeeeefffffffffffeeeffeeeeffefffffffeffeeeeeeeffffffffffffffdddfeeffefffffffeffeeeeeee
+feefffffffffeeeefddffbdffddfbbfeeeeeeeefffdbbfffffffeeeeeeeffffffffffffeeeeeeeeffeefffffffffeeeeeeeffffffffffffeeeeeeeeffeefffffffffbdddbffffffffffffffeeeeeeeef
+feefffffffffffeefffffddfffdefffffeeeeffffbddffffffffffeeeffffffffffeeffffeeeeffffeefffffffffffeeeffffffffffeeffffeeeeffffeefffffffffddddddbffffffffeeffffeeeefff
+fffffffffffffffffffffdddffdddfffffffffffdbbdfffffffffffffffffffbdbfeeffffffffffffffffffffffffffffffffffffffeefffffffffffffffffffffffbddbddddbfffffffefffffffffff
+ffffffffffeeffffffeefffddddddffffffffdbddfffffffffeeffffffeefffdddfffffeffffffefffffffffffeeffffffeefffffffffffeffffffefffffffffffeffffffbddddbbddbffffeffffffef
+ffffffffffeeffffffeefffddddddfffddbbddbdffffffffffeeffffffeefffbdddbffffffeeffffffffffffffeeffffffeeffffffffffffffeeffffffffffffffeefffffffbdddddddfffffffeeffff
+ffffffffffffffefffffffffdddddffddfbddfffffffffffffffffeffffffbddddddffffffeeffffffffffffffffffefffffffffffffffffffeeffffffffffffffffffefffffffdddddfffffffeeffff
+fffffffffffffffffffffffffdddfffffffffffffffffffffffffffffffbddddbddbffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffdddbffffffffffffff
+fffffffffffffffffffffffffffffffffffffffffffffffffffffbddbbddddbfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffbddfffffffffffffff
+fffffffffffffffffffffffffffffffffffffffffffffffffffffdddddddbfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+fffffffffffffffffffffffffffffffffffffffffffffffffffffdddddffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffffffffffbdddffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+fffffffffffffffffffffffffffffffffffffffffffffffffffffffddbffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+`
+  },
+  {
+    "series": "IMPACT",
+    "label": "Tropical Background",
+    "string": `7777777777776999967777777777777777777777777776999999999999999999999999999999999999999999999999999999999999999999999677777777777777777777777777699999677777777777
+7776777777769999967777777777777777777777777777699999999999999999999999999999999999999999999999999999999999999999996777777777777777777777777777769999966777777777
+7776777777699999967777777777777666666777777777769999999999999999999999999999999999999999999999999999999999999999996777777777776666667777777777769999996777777777
+7777677777699999967777777777766677777777777777769999999999999999999999999999999999999999999999999999999999999999996777777777777777767777777777769999996777777777
+7777677777766999677777777777767777777777777777776999999999999999999999999999999999999999999999999999999999999999967777777777777777766777777777769999996777776777
+7777767777777699677777777777677777777777777777777699999999999999999999999999999999999999999999999999999999999999677777777777777777776777777777769999967777776777
+7777776777777769967777777777677777776666667777777699999999999999999999999999999999999999999999999999999999999996777777666666677777776777777777769999677777776777
+7777776677777769996777777776777777777699996677777769999999999999999999999999999999999999999999999999999999999967777776999999677777776677777777699996777777766777
+7777777667777776996777777766777777777769999667777769999999999999999999999999999999999999999999999999999999999967777776999996777777777677777777699967777777667777
+7777777776777777699677777767777777777776999996777776999999999999999999999999999999999999999999999999999999999967777769999996777777777777777776999677777776677777
+7777777776677777769967777677777777777776999999677776999999999999999999999999999999999999999999999999999999999677777699999967777777777677777769996777777766777777
+7777777777667777769967776677777776666669999999677776999999999999999999999999999999999999999999999999999999999677776999999996666667777767777769967777777667777777
+6677777777776777776967776777777769999999999999967777699999999999999999999999999999999999999999999999999999999677769999999999999996777767777699967777776677777777
+9966777777776677777667777777776699666666999999996677699999999999999999999999999999999999999999999999999999999666699999999999999999677767777699677777777777777666
+9999677777777767777777777777776996777777666999999667699999999999999999999999999999999999999999999999999999999999999999999966669999967776777696777777777777766999
+9999966667777777777777777777769996777777777669999996999999999999999999999999999999999999999999999999999999999999999999666677776999967776777767777777777776699999
+9999999996777777777777777777766666777777777776699999999999999999999999999999999999999999999999999999999999999999999966777777777699967776777777777777777669999999
+9999999999667777777777777777777777777777777777769999999999999999999999999999999999999999999999999999999999999999996677777777777766667776777777777777766999999999
+9999999999996777777777777777777777777777777777776699999999999999999999999999999999999999999999999999999999999999667777777777777777777777777777777777699999996669
+9999999999999677777777777777777777777666666667777769999999999999999999999999999999999999999999999999999999999996777777777777777777777777777777777776999996667776
+6999999999999677777777777777777776666777777777777776999999999999999999999999999999999999999999999999999999999967777777777777777777777777777777777776996667777777
+7666699999999677777ceeeec777777766777777777777777777699999999999999999999999999999999999999999999999999999999677777777776677777777777777777777777777667777777777
+777777666666677777eeeeeee777777777777777777777777777699999999999999999999999999999999999999999999999999999996777777777666777777777777777777777777777777777777777
+77777777777777777eeeeeeeec7777777777777777777777777776999999999999999999999999999999999999999999999999999996777777777667777777777777777777ccc7777777777777777777
+7777777777777777ceeeeeeeec777777777777777777777777777769999999999999999999999999999999999999999999999999996777777777667777777777777777777eeeeee77777777777777777
+7777777777777777eeeeeeeeeccecc7777777777777777777777777699999999999999999999999999999999999999999999999996777777777777777777777767777777eeeeeeee7777777777777777
+777777777667777ceeeeeeeecceecee777777776666677777777777769999999999999999999999999999999999999999999999996777777777777777777777767777777eeeeeeeee777777776666666
+776666666777777eeeeeeeeeceeeeeee7777777777776667777777776999999999999999999999999999999999999999999999999677777777777777777777776777777ceeeeeeeeec77777777777777
+776777777777777eedeecedeceeeeeee7777777777777766677777777699999999999999999999999999999999999999999999996777777777777777777777776777777ceeeeeeeeec77777777777777
+667777777777777eceeeeeecceeeeeec77777777777777777667777776999999999999999999999999999999999999999999999677777767777777777777777677777777eedeedeee777777777777777
+77777777777777cceeedeeecceeeeecc77777777777777777776777777699999999999999999999999999999999999999999996777777767777767777777777677777777eeeedeeeec77777777777777
+77777777777777ceeeeeeecccceeeeec777777777777777777776677776999999999999999999999999999999999999999999967777776777776967777777776777777777eeeeeeeccc7777777777777
+7777777777e77eccceeeeccceccedecc7777777777776777777776777776999999999999999999999999999999999999999999677777667777699677777777767777777777eeeeecceee777777777777
+7777776666eeeeeceeeccceeeceeeeec7777777777769677777776677776999999999999999999999999999999999999999996777777677776999677777777777777777777777699eeeeeee666667777
+666666999eeeeeecceecceeeecedeee77777777766769677777777677776999999999999999999999999999999999999999996777777677776999677777777777777777777777699ceeeeeee99996666
+99999999beeeeeeececceeeeceeeee7777777777666696777777776777776999999999999999999999999999999999999999967777766777769999677777777777777777777769999eeeeeeee9999999
+9999999beeeeeeeb9cceeeeceeeec77777777777696699677777776777776999999999999999999999999999999999999999677777767777699999967777777777777777777769999beeeeeeeb999999
+9999999eeeeeeee99999cccc77777777777777776999996777777776777769999999999999999999999999999999999999996777776777776999999967777777677777777766999999eeeeeeeeb99999
+999999beeeeeeeb99999999967777777767777776999999677777776777769999999999999999999999999999999999999996777776777769999999967777777677777777699999999beeeeeeee99999
+999999eeeeeeee9999999999677777777677777769999996777777766777699999999999999999999999999999999999999967777677777699999999677777766777777769999999999eeeeeeee99999
+999999eeeeeeee9999999999677677777677777769999999676677777777769999999999999999999999999999999999999967777677776999999999677777767777777769999999999eeeeeeee99999
+99999beeeeeeeb9999999999676967777677777776999999676967777777769999999999999999999999999999999999999677777777769999999996777777767777766769999999999beeeeeeee9999
+9999beeeeeeeeb99999999999669677776777777769999999699967777777699999999999999999999999999999999999967777777776999999999967777776677776967999999999999eeeeeeeeb999
+9999eeeeeeeeb999999999999699677767777777769999999999967777777699999999999999999999999999999999999967777777776999999999677777776777776996999999999999beeeeeeeeb99
+999beeeeeeeeb9999999999999996777677777777699999999999967777776999999999999999999999999999999999999677777777699999999996777777667777769999999999999999eeeeeeeeb99
+999eeeeeeeee99999999999999996777677767777699999999999967777776999999999999999999999999999999999999677777776999999999996777777677777769999999999999999eeeeeeeeeb9
+99beeeeeeeee99999999999999999677677767777699999999999996777776999999999999999999999999999999999999667777776999999999996777777677777769999999999999999beeeeeeeeb9
+99beeeeeeeeb99999999999999999677777776777699999999999996777776999999999999999999999999999999999999967777776999999999996777777677777769999999999999999beeeeeeeeb9
+99beeeeeeeeb99999999999999999677777776777699999999999999677776999999999999999999999999999999999999967777769999999999996777777677777769999999999999999beeeeeeeeb9
+9beeeeeeeee9999999999999999996777777767776999999999999999677769999999999999999999999999999999999999677776999999999999967777767777776999999999999999999beeeeeeeb9
+beeeeeeeeeb9999999999999999996777777767776999999999999999967769999999999999999999999999999999999999677769999999999999967777767777776999999999999999999beeeeeeeb9
+beeeeeeeee999999999999999999967777777677769999999999999999966999999999999999999999999999999999999996777699999999999999677777677777769999999999999999999eeeeeeeeb
+beeeeeeeeb999999999999999999967777777767769999999999999999999999999999999999999999999999999999999996777699999999999999677777677777699999999999999999999beeeeeeeb
+eeeeeeeeeb999999999999999999996776777767776999999999999999999999999999999999999999999999999999999996776999999999999999677776677777699999999999999999999beeeeeeee
+eeeeeeeeeb9999999999999999999967767777677769999999999999999999999999999999999999999999999999999999996699999999999999996777767777776999999999999999999999eeeeeeee
+eeeeeeeeeb9999999999999999999967767777677699999999999999999999999999999999999999999999999999999999999999999999999999999677777777776999999999999999999999eeeeeeee
+eeeeeeeee99999999999999999999996696777677699999999999999999999999999999999999999999999999999999999999999999999999999999677777777669999999999999999999999beeeeeee
+eeeeeeeeb99999999999999999999999996777677699999999999999999999999999999999999999999999999999999999999999999999999999999677777776999999999999999999999999beeeeeee
+eeeeeeeeb99999999999999999999999996777677699999999999999999999999999999999999999999999999999999999999999999999999999999677777769999999999999999999999999beeeeeee
+eeeeeeee9999999999999999999999999967776776999999999999999999999999999999999999999999999999999999999999999999999999999996777777699999999999999999999999999beeeeee
+eeeeeeeb9999999999999999999999999967776776999999999999999999999999999999999999999999999999999999999999999999999999999996777777699999999999999999999999999beeeeee
+eeeeeeeb9999999999999999999999999997776776999999999999999999999999999999999999999999999999999999999999999999999999999996777777699999999999999999999999999beeeeee
+eeeeeeeb9999999999999999999999999996776776999999999999999999999999999999999999999999999999999999999999999999999999999996777777699999999999999999999999999beeeeee
+eeeeeee999999999999999999999999999967777669999999999999999999999999999999999999999999999999999999999999999999999999999996777776999999999999999999999999999eeeeee
+eeeeeee999999999999999999999999999967777699999999999999999999999999999999999999999999999999999999999999999999999999999996777769999999999999999999999999999eeeeee
+eeeeeee999999999999999999999999999967777699999999999999999999999999999999999999999999999999999999999999999999999999999996777769999999999999999999999999999beeeee
+eeeeeeb999999999999999999999999999967777699999999999999999999999999999999999999999999999999999999999999999999999999999996777769999999999999999999999999999beeeee
+eeeeeeb9999999999999999999999999999677776999999999999999999999999999999999999999999999999999999999999999999999999999999967777699999999999999999999999999999eeeee
+eeeeee99999999999999999999999999999967769999999999999999999999999999999999999999999999999999999999999999999999999999999996776999999999999999999999999999999beeee
+eeeeeb99999999999999999999999999999967769999999999999999999999999999999999999999999999999999999999999999999999999999999996776999999999999999999999999999999beeee
+eeeeeb99999999999999999999999999999967769999999999999999999999999999999999999999999999999999999999999999999999999999999996776999999999999999999999999999999beeee
+eeeeeb99999999999999999999999999999967799999999999999999999999999999999999999999999999999999999999999999999999999999999999676999999999999999999999999999999beeee
+eeeeeb99999999999999999999999999999996699999999999999999999999999999999999999999999999999999999999999999999999999999999999676999999999999999999999999999999beeee
+eeeeeb99999999999999999999999999999996999999999999999999999999999999999999999999999999999999999999999999999999999999999999969999999999999999999999999999999beeee
+eeeeeb99999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999beeee
+eeeeeb99999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999beeee
+eeeeeb99999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999beeee
+eeeebb999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999beee
+eeeeb9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999beee
+eeeeb9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999beee
+eeeeb9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999beee
+eeeeb9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999beee
+eeeeb9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999beee
+eeeebdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbeee
+eeeebdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbeee
+eeeebddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddeee
+eeeedddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddeee
+eeeedddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddeee
+eeeedddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbee
+eeeedddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbee
+eeeedddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbee
+eeeedddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbee
+eeeed1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111deee
+eeeed1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111deee
+eeeed1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111deee
+eeeed1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111deee
+eeeed1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111deee
+eeeed1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111deee
+eeeed1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111dbee
+eeee111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111bee
+eeee111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111bee
+eeeedddddddddd1111111111111111111111111111111111111111111111111111111111111111111dddddddddd111111dddddddd11111111111111111111111111111111111111111dddddddddddbee
+eeeed111111111dddddd11111111111111111111111111111111111111111111111111111dddddd11111111111111111111111111111111ddddddddddddd1111111ddddddddddd11111111111111deee
+eeeed11111111111111111dd11111111111111111111111111111111111111111111ddd1111111111111111111111111111111111111111111111111111111111111111111111111111111111111deee
+eeeee1111111111111111111111ddd11111111111111111111111111111111ddd1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111deee
+eeeee1111111111111111111111111111dddddd1111ddddddd111dddddd1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111deee
+eeeee1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111deee
+eeeee1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111beee
+eeeeed111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111beee
+eeeeed111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111beee
+eeeee1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111beee
+eeeee1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111beee
+eeeee1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111beee
+eeeeed111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111beee
+eeeeed11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111deeee
+eeeeee11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111deeee
+eeeeee11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111beeee
+eeeeeed1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111beeee
+eeeeeed1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111eeeee
+eeeeeed1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111eeeee
+`
+  },
+  {
+    "series": "IMPACT",
+    "label": "Soccer Field Background",
+    "string": `7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111777777777777777777777777777777711111117
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111111111111111111111111111111111111111111
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111117717177717771771771777177177717777717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777711111717177717771771771777177177717777717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777771111111111111111111111111111111111111111
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111117177717771771771777177177717777717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777711111177717771771771777177177717777717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777771111111111111111111111111111111111111
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111117717771771771777177177717777717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777711111717771771771777177177717777717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777771111111111111111111111111111111111
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111117771771771777177177717777717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777711111771771771777177177717777717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777771111111111111111111111111111111
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111117771771777177177717777717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777711111771771777177177717777717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777771111111111111111111111111111
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111111771777177177717777717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777711111111111111111111111111
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777771111111111111111111111111
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111111111111111111111111
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111777177177177177717717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111777177177177177717717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111111111111111111111111
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111777177177177177717717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111777177177177177717717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111111111111111111111111
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111777177177177177717717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111777177177177177717717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111777177177177177717717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111111111111111111111111
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111777177177177177717717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111777177177177177717717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111777177177177177717717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111111111111111111111111
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111777177177177177717717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111777177177177177717717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111777177177177177717717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111111111111111111111111
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111777177177177177717717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111777177177177177717717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111777177177177177717717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111111111111111111111111
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111777177177177177717717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111777177177177177717717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111777177177177177717717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111111111111111111111111
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111777177177177177717717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111777177177177177717717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111777177177177177717717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111111111111111111111111
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111777177177177177717717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111777177177177177717717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111777177177177177717717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111111111111111111111111
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111777177177177177717717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111777177177177177717717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111777177177177177717717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111111111111111111111111
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111777177177177177717717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111777177177177177717717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111777177177177177717717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111111111111111111111111
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111777177177177177717717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111777177177177177717717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111777177177177177717717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111777177177177177717717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111111111111111111111111
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111777177177177177717717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111777177177177177717717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111777177177177177717717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111777177177177177717717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111111111111111111111111
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111777177177177177717717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111777177177177177717717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111777177177177177717717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111777177177177177717717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111111111111111111111111
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111777177177177177717717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111777177177177177717717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111777177177177177717717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111111111111111111111111
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111777177177177177717717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111777177177177177717717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111777177177177177717717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111111111111111111111111
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111777177177177177717717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111777177177177177717717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111777177177177177717717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111111111111111111111111
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111777177177177177717717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111777177177177177717717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111777177177177177717717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111111111111111111111111
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111777177177177177717717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111777177177177177717717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111777177177177177717717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111111111111111111111111
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111777177177177177717717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111777177177177177717717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111777177177177177717717
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111111111111111111111111
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111111111111111111111111
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777771111111111111111111111111
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777711111111771777717771111177
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111117771771777717771777177
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777711111111111111111111111111111
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111111717771771777717771777177
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777771111117717771771777717771777177
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777711111111111111111111111111111111
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111111177717771771777717771777177
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777771111177177717771771777717771777177
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777711111111111111111111111111111111111
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111111777177717771771777717771777177
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777711111111111111111111111111111111111111
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111111771777177717771771777717771777177
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777771111117771777177717771771777717771777177
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777711111111111111111111111111111111111111111
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111117777771777177717771771777717771777177
+7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111177777771111177711111771111117771111177
+`
   }
 ]
 gallery.innerHTML='';
