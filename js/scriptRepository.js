@@ -5,7 +5,12 @@ function createScript(scriptInfo) {
   container.classList.add('script-container');
   const label=document.createElement('div');
   label.classList.add('script-label');
-  label.textContent=scriptInfo.label||'Untitled';
+  console.log(scriptInfo.type);
+  if (scriptInfo.type) {
+    container.classList.add(scriptInfo.type.toLowerCase());
+    label.textContent=`[${scriptInfo.type}] `;
+  }
+  label.textContent+=scriptInfo.label||'Untitled';
   container.appendChild(label);
   repo.appendChild(container);
   container.addEventListener('click',function() {
@@ -40,6 +45,7 @@ function sortScripts() {
 
 data=[
   {
+    "type":"ROBLOX",
     "label": "Kill Brick",
     "script":`
 --KillBrick.lua
@@ -52,6 +58,7 @@ script.Parent.Touched:Connect(function(part)
 end)`
   },
   {
+    "type":"ROBLOX",
     "label": "Damage Brick",
     "script":`
 --DamageBrick.lua
@@ -75,6 +82,7 @@ script.Parent.Touched:Connect(function(part)
 end)`
   },
   {
+    "type":"ROBLOX",
     "label": "Jump Pad",
     "script":`
 --JumpPad.lua
@@ -101,6 +109,7 @@ script.Parent.Touched:Connect(function(part)
 end)`
   },
   {
+    "type":"ROBLOX",
     "label": "Speed Boost",
     "script":`
 --SpeedBoost.lua
@@ -125,6 +134,7 @@ script.Parent.Touched:Connect(function(part)
 end)`
   },
   {
+    "type":"ROBLOX",
     "label": "Door (No sound)",
     "script":`
 --Door.lua
@@ -167,6 +177,7 @@ proxPrompt.Triggered:Connect(function(player)
 end)`
   },
   {
+    "type":"ROBLOX",
     "label": "Door (With sound)",
     "script":`
 --Door.lua
@@ -225,6 +236,7 @@ proxPrompt.Triggered:Connect(function(player)
 end)`
   },
   {
+    "type":"ROBLOX",
     "label": "NPC Walking",
     "script":`
 --Walk.lua
@@ -249,6 +261,7 @@ while true do
 end`
   },
   {
+    "type":"ROBLOX",
     "label": "NPC Talking (Random)",
     "script":`
 --Talk.lua
@@ -275,6 +288,7 @@ prompt.Triggered:Connect(function()
 end)`
   },
   {
+    "type":"ROBLOX",
     "label": "NPC Talking (Ordered)",
     "script":`
 --Talk.lua
@@ -306,6 +320,7 @@ prompt.Triggered:Connect(function()
 end)`
   },
   {
+    "type":"ROBLOX",
     "label": "Jumping Part",
     "script":`
 --Jump.lua

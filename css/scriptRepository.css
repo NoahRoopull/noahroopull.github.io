@@ -42,3 +42,10 @@ main {
   text-align:center;
   color:#fff;
 }
+
+.script-container.roblox {
+  background-color:#113;
+}
+.script-container.impact {
+  background-color:#131;
+}
