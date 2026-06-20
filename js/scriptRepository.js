@@ -46,8 +46,7 @@ data=[
   {
     "type":"ROBLOX",
     "label": "Kill Brick",
-    "script":`
---KillBrick.lua
+    "script":`--KillBrick.lua
 --Attached to a part
 
 script.Parent.Touched:Connect(function(part)
@@ -59,8 +58,7 @@ end)`
   {
     "type":"ROBLOX",
     "label": "Damage Brick",
-    "script":`
---DamageBrick.lua
+    "script":`--DamageBrick.lua
 --Attached to a part
 
 --CUSTOMIZE:
@@ -83,8 +81,7 @@ end)`
   {
     "type":"ROBLOX",
     "label": "Jump Pad",
-    "script":`
---JumpPad.lua
+    "script":`--JumpPad.lua
 --Attached to a part
 
 --CUSTOMIZE:
@@ -110,8 +107,7 @@ end)`
   {
     "type":"ROBLOX",
     "label": "Speed Boost",
-    "script":`
---SpeedBoost.lua
+    "script":`--SpeedBoost.lua
 --Attached to a part
 
 --CUSTOMIZE:
@@ -135,8 +131,7 @@ end)`
   {
     "type":"ROBLOX",
     "label": "Door (No sound)",
-    "script":`
---Door.lua
+    "script":`--DoorSilent.lua
 --Attached to the Door part itself
 --Door should have a ProximityPrompt and two parts named OpenPosition and ClosedPosition respectively
 
@@ -178,8 +173,7 @@ end)`
   {
     "type":"ROBLOX",
     "label": "Door (With sound)",
-    "script":`
---Door.lua
+    "script":`--Door.lua
 --Attached to the Door part itself
 --Door should have a ProximityPrompt and two parts named OpenPosition and ClosedPosition respectively
 --Door should now also have 3 sounds titled TriggerSound, OpenSound, and CloseSound.
@@ -237,8 +231,7 @@ end)`
   {
     "type":"ROBLOX",
     "label": "NPC Walking",
-    "script":`
---Walk.lua
+    "script":`--Walk.lua
 --Attached to the Rig model, in the same level as the Humanoid
 --Workspace should have a Folder named Waypoints with parts labelled as numbers.
 --Waypoints must be accessible.
@@ -262,12 +255,9 @@ end`
   {
     "type":"ROBLOX",
     "label": "NPC Talking (Random)",
-    "script":`
---Talk.lua
---Attached to the Rig model, in the same level as the Humanoid
---The Rig must have a ProximityPrompt
---Workspace should have a Folder named Waypoints with parts labelled as numbers.
---Waypoints must be accessible.
+    "script":`--TalkRandom.lua
+--Attached to a Rig head
+--The Rig head must have a ProximityPrompt with RequiresLineOfSight disabled
 
 --CUSTOMIZE:
 -- Chat lines. Every line should be in quotes, and all except the last should have a comma afterward.
@@ -289,12 +279,9 @@ end)`
   {
     "type":"ROBLOX",
     "label": "NPC Talking (Ordered)",
-    "script":`
---Talk.lua
---Attached to the Rig model, in the same level as the Humanoid
---The Rig must have a ProximityPrompt
---Workspace should have a Folder named Waypoints with parts labelled as numbers.
---Waypoints must be accessible.
+    "script":`--TalkOrdered.lua
+--Attached to a Rig head
+--The Rig head must have a ProximityPrompt with RequiresLineOfSight disabled
 
 --CUSTOMIZE:
 -- Chat lines. Every line should be in quotes, and all except the last should have a comma afterward.
@@ -321,8 +308,7 @@ end)`
   {
     "type":"ROBLOX",
     "label": "Jumping Part",
-    "script":`
---Jump.lua
+    "script":`--Jump.lua
 --Attached to the Part that should jump
 --The part must not be anchored
 
