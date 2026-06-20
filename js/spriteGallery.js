@@ -50,11 +50,10 @@ function createCanvas(pixelInfo) {
   label.classList.add('canvas-label');
   if (pixelInfo.series) {
     label.textContent=`[${pixelInfo.series}] `;
-    container.classList.add(pixelInfo.series.toLowerCase());
+    container.classList.add(pixelInfo.series.toLowerCase().replace(' ','_'));
   }
   let height=pixelInfo.string.split('\n').length-1;
   let width=pixelInfo.string.split('\n')[0].length;
-  console.log(`${pixelInfo.label} (${width}x${height})`);
   label.textContent+=(pixelInfo.label||'Untitled')+`\n(${width}×${height})`;
   const canvas=document.createElement('canvas');
   canvas.width=width;
@@ -75,6 +74,7 @@ function createCanvas(pixelInfo) {
     pixels[i*4+3]=color.a;
   }
   ctx.imageSmoothingEnabled=false;
+  console.log(pixelInfo);
   const imgData=new ImageData(pixels,canvas.width);
   ctx.putImageData(imgData,0,0);
   container.appendChild(label);
@@ -620,7 +620,7 @@ cddcdddddddddddcddc........
   },
   {
     "series": "Galaga",
-    "label": "Boss Galaga (1/2)",
+    "label": "Boss Galaga(1/2)",
     "string": `......6.6......
 ......6.6......
 ...664464466...
@@ -640,7 +640,7 @@ cddcdddddddddddcddc........
   },
   {
     "series": "Galaga",
-    "label": "Boss Galaga (2/2)",
+    "label": "Boss Galaga(2/2)",
     "string": `......6.6......
 ......6.6......
 ...664464466...
@@ -1125,7 +1125,7 @@ c111ccc.....f5eee4ee...fbbbcffff...
   },
   {
     "series": "PKMN",
-    "label": "Blastoise Back",
+    "label": "BlastoiseBack",
     "string": `...........cccc...........
 .........ccbbbbcc.........
 .......ffcb6666bcff.......
@@ -1153,7 +1153,7 @@ f1dddcfbb66666666bbfcddd1f
   },
   {
     "series": "PKMN",
-    "label": "Blastoise Front",
+    "label": "BlastoiseFront",
     "string": `..........cccccc..........
 .......ccc666666ccc.......
 ......c666b6666b666c......
@@ -1180,7 +1180,7 @@ f1dddcfbb66666666bbfcddd1f
   },
   {
     "series": "PKMN",
-    "label": "Blastoise Side",
+    "label": "BlastoiseSide",
     "string": `................ccc......
 .............fccbb6cc....
 ........cc..f66bc6666cc..
@@ -1264,7 +1264,7 @@ c777777f6777777777c
   },
   {
     "series": "PKMN",
-    "label": "Charizard Back",
+    "label": "CharizardBack",
     "string": `............eeee............
 ..........eeeeeeee..........
 .........eeee44eeee.........
@@ -1292,7 +1292,7 @@ fffeeeeeeeef44feeeeeeeeeefff
   },
   {
     "series": "PKMN",
-    "label": "Charizard Front",
+    "label": "CharizardFront",
     "string": `..........e......e..........
 .........e4e....e4e.........
 .........f4e....e4f.........
@@ -1320,7 +1320,7 @@ ee...cccfef4e44e4fefccc...ee
   },
   {
     "series": "PKMN",
-    "label": "Charizard Side",
+    "label": "CharizardSide",
     "string": `............eee.............
 ............eeeee...........
 .............eeeeeee........
@@ -1408,7 +1408,7 @@ feeeee444e4eeffe..
   },
   {
     "series": "PKMN",
-    "label": "Eevee Back",
+    "label": "EeveeBack",
     "string": `fff....ff.ff..fff
 fe4ff.f4ff4fff4ef
 .f444fe4e4ef444f.
@@ -1428,7 +1428,7 @@ fe4ff.f4ff4fff4ef
   },
   {
     "series": "PKMN",
-    "label": "Eevee Front",
+    "label": "EeveeFront",
     "string": `........ff.......
 fff..ff.f4f...fff
 fe4fff4fe4efff4ef
@@ -1448,7 +1448,7 @@ fe4fff4fe4efff4ef
   },
   {
     "series": "PKMN",
-    "label": "Eevee Side",
+    "label": "EeveeSide",
     "string": `.....fff..........
 .....feeff.f.ff...
 ......feeef4f4f...
@@ -2027,7 +2027,7 @@ ccccc66fcdfc66c....
   },
   {
     "series": "PKMN",
-    "label": "Lugia Back 1",
+    "label": "LugiaBack 1",
     "string": `.....ff..............................ff.....
 ....f11f............................f11f....
 ...f111f.............ff.............f111f...
@@ -2071,7 +2071,7 @@ fddddddd1111c.....cdd11ddc.....c1111dddddddf
   },
   {
     "series": "PKMN",
-    "label": "Lugia Back 2",
+    "label": "LugiaBack 2",
     "string": `...............ff...............
 ..............f11f..............
 ..............f11f..............
@@ -2114,7 +2114,7 @@ fdbddddf....f8c11c8f....fddddbdf
   },
   {
     "series": "PKMN",
-    "label": "Lugia Front 1",
+    "label": "LugiaFront 1",
     "string": `.....ff..............................ff.....
 ....f11f............................f11f....
 ...f111f............................f111f...
@@ -2152,7 +2152,7 @@ fdddddddd11dc....c11f11f.......cd11ddddddddf
   },
   {
     "series": "PKMN",
-    "label": "Lugia Front 2",
+    "label": "LugiaFront 2",
     "string": `..............ff..............
 .............f1f..............
 .........ffc.f1fcff...........
@@ -2193,7 +2193,7 @@ fdbdddbdc............cdbdddbdf
   },
   {
     "series": "PKMN",
-    "label": "Lugia Side 1",
+    "label": "LugiaSide1",
     "string": `...................cc.......................
 ..................cddcc.....................
 ................cccdcddc....................
@@ -2232,7 +2232,7 @@ f11ccc8c....ccc118b18bcbddddddf.............
   },
   {
     "series": "PKMN",
-    "label": "Lugia Side 2",
+    "label": "LugiaSide2",
     "string": `..............................cffffff.......
 ...........................ccc1111111bcc....
 ..........................c111111111111bc...
@@ -2436,7 +2436,7 @@ f3dddc..c3dfddbdddc.
   },
   {
     "series": "PKMN",
-    "label": "Mightyena Back",
+    "label": "MightyenaBack",
     "string": `..c........c..
 .cbc......cbc.
 .cbf.cccc.fbc.
@@ -2463,7 +2463,7 @@ fccccfffccccf.
   },
   {
     "series": "PKMN",
-    "label": "Mightyena Front",
+    "label": "MightyenaFront",
     "string": `..........ffcc....
 ........ffcccc....
 .......fccccc.....
@@ -2493,7 +2493,7 @@ ccccfbfbbbbfbfcccc
   },
   {
     "series": "PKMN",
-    "label": "Mightyena Side",
+    "label": "MightyenaSide",
     "string": `...............cc..........
 ...............cbc.........
 ...............cbbc........
@@ -2645,7 +2645,7 @@ f444ce44444ee54c.
   },
   {
     "series": "PKMN",
-    "label": "Rayquaza Back",
+    "label": "RayquazaBack",
     "string": `......ff.........................ff........
 ......f7f.......................f7f........
 ......f77f.....................f77f........
@@ -2690,7 +2690,7 @@ f2f6fff6f62f.22222fff664ff.................
   },
   {
     "series": "PKMN",
-    "label": "Rayquaza Front",
+    "label": "RayquazaFront",
     "string": `............22..........................
 ............222.fff.....................
 .......fffff26ff66f............fffff....
@@ -2734,7 +2734,7 @@ f2f6fff6f62f.22222fff664ff.................
   },
   {
     "series": "PKMN",
-    "label": "Rayquaza Side",
+    "label": "RayquazaSide",
     "string": `........................................ff....
 ...............................fff.....f6f....
 ...............................f6f....f66f....
@@ -2832,7 +2832,7 @@ fccc2ca2cccf....
   },
   {
     "series": "PKMN",
-    "label": "Seviper Side 1",
+    "label": "Seviper Side1",
     "string": `.....222.....ffffff......
 ...22222...ffb24555ff....
 ..f22cf...fbbb2554442f...
@@ -2854,7 +2854,7 @@ f22ccf....fccccb555222bf.
   },
   {
     "series": "PKMN",
-    "label": "Seviper Side 2",
+    "label": "Seviper Side2",
     "string": `................ffffff......
 .....222......ffb24555ff....
 ...22222.....fbbb2554442f...
@@ -2876,7 +2876,7 @@ f22ccf........fcccc4555bbbbf
   },
   {
     "series": "PKMN",
-    "label": "Squirtle Back",
+    "label": "SquirtleBack",
     "string": `....ccc....
 ..cc999cc..
 .c9999999c.
@@ -2895,7 +2895,7 @@ c6d4699cd6c
   },
   {
     "series": "PKMN",
-    "label": "Squirtle Front",
+    "label": "SquirtleFront",
     "string": `....ccc....
 ..cc999cc..
 .c9999999c.
@@ -2914,7 +2914,7 @@ c99cfffc99c
   },
   {
     "series": "PKMN",
-    "label": "Squirtle Side",
+    "label": "SquirtleSide",
     "string": `.......ccccc...
 ......c69999c..
 .....c6999999c.
@@ -3256,7 +3256,7 @@ f777cf777c777fee999999999c
   },
   {
     "series": "PKMN",
-    "label": "Zangoose Back",
+    "label": "ZangooseBack",
     "string": `....ee.........cc.....
 ...fe2e.......c1bf....
 ...f2e2f.....f1b1f....
@@ -3281,7 +3281,7 @@ e22221fbc11111111ffe..
   },
   {
     "series": "PKMN",
-    "label": "Zangoose Front",
+    "label": "ZangooseFront",
     "string": `....ff.........ee....
 ...ff1f.......e2ef...
 ...f1b1f.....f2e2f...
@@ -3306,7 +3306,7 @@ e22221f11212221f2f2e.
   },
   {
     "series": "PKMN",
-    "label": "Zangoose Left",
+    "label": "ZangooseLeft",
     "string": `.........cc...........
 ........b1cc..........
 .......c1b1c..........
@@ -3331,7 +3331,7 @@ f11efa3211bfcb11111bcc
   },
   {
     "series": "PKMN",
-    "label": "Zangoose Right",
+    "label": "ZangooseRight",
     "string": `...........ee.........
 ..........ee2e........
 ..........e222e.......
@@ -3715,7 +3715,7 @@ eeeeeeeeeeeeeeee
   },
   {
     "series": "SMB1",
-    "label": "Piranha Plant 1",
+    "label": "PiranhaPlant 1",
     "string": `..6..........6..
 .6411......1146.
 .661........166.
@@ -3742,7 +3742,7 @@ eeeeeeeeeeeeeeee
   },
   {
     "series": "SMB1",
-    "label": "Piranha Plant 2",
+    "label": "PiranhaPlant 2",
     "string": `......6..6......
 .....64..46.....
 ....666..666....
@@ -3769,7 +3769,7 @@ eeeeeeeeeeeeeeee
 ......4444......`
   },
   {
-    "series": "IMPACT",
+    "series": "Animals",
     "label": "Frog",
     "string": `....fff..fff....
 ...f777ff777f...
@@ -3789,8 +3789,8 @@ f77c77755777c77f
 `
   },
   {
-    "series": "IMPACT",
-    "label": "Buried Skull",
+    "series": "Dinosaurs",
+    "label": "Skull Fossil",
     "string": `e.......eee.........
 ..e...eeeeeee.e.....
 .e..eeeefffee.ee.e..
@@ -3809,7 +3809,7 @@ e..eeffffeeee.ee....
 `
   },
   {
-    "series": "IMPACT",
+    "series": "Dinosaurs",
     "label": "Archaeologist",
     "string": `......ffffff....
 .....f4dddd4f...
@@ -3830,8 +3830,8 @@ e..eeffffeeee.ee....
 `
   },
   {
-    "series": "IMPACT",
-    "label": "Dinosaur 1",
+    "series": "Dinosaurs",
+    "label": "Trex",
     "string": `...fffff..........
 ..f2222ef.........
 .f2ccc222f........
@@ -3853,7 +3853,70 @@ f222222e2f........
 `
   },
   {
-    "series": "IMPACT",
+    "series": "Dinosaurs",
+    "label": "Stegosaurus",
+    "string": `..................
+..................
+..................
+..................
+.........f......f.
+.....ff.fbf.ff.fbf
+....fabfacbfabfbac
+....fc4335dd4cff3f
+.ffff334334334f33f
+f394433333333333ef
+f3fd34333333333ef.
+f333333e333e333f..
+ffff43be333ee43f..
+..f433f3bce33f43f.
+..fd3fc33cf43fd3f.
+...ff..ff..ff.ff..
+`
+  },
+  {
+    "series": "Dinosaurs",
+    "label": "Triceratops",
+    "string": `..f..ff...........
+.fdcf5df..........
+.fdd855df.........
+.fcd8555d.........
+.ff855555f........
+fdbc55555fff......
+fdd566555cddff..f.
+fc75f9555b53ddff5f
+.6855555575535355f
+f5555555755555555f
+f555553b555555553f
+f5553cb555555553f.
+.ffff5555555555f..
+...f556556355655f.
+...f55f55ff55f55f.
+...fff.ff..ff.ff..
+`
+  },
+  {
+    "series": "Dinosaurs",
+    "label": "Flying Dino",
+    "string": `................
+................
+................
+....ff.....fff..
+...ff....ffcbf..
+..fff...ffcbf...
+.ff9ff.ffcbff...
+ffbfcfffcbbf....
+f.fdfccccbbf....
+...fdffcccffff..
+...ffdffffcccc..
+..ffbfddddfc....
+..fbbbfffffccc..
+.ffcc...........
+.f..............
+................
+`
+  },
+  {
+    "series": "Ocean",
     "label": "Island",
     "string": `.......bbb..........................
 ......a666b.........................
@@ -3892,8 +3955,8 @@ e3ddddddddddddd5ddddddddddddd1bddd3e
 `
   },
   {
-    "series": "IMPACT",
-    "label": "Pirate Ship",
+    "series": "Ocean",
+    "label": "PirateShip",
     "string": `....................aeff.............
 ...................ad111df...........
 ..................ad111df............
@@ -3928,7 +3991,7 @@ c555555555333f......c4ef.c54442eeeef.
 `
   },
   {
-    "series": "IMPACT",
+    "series": "Ocean",
     "label": "Pirate",
     "string": `.....55f55.....
 ....5f5f5f5....
@@ -3949,8 +4012,8 @@ c555555555333f......c4ef.c54442eeeef.
 `
   },
   {
-    "series": "IMPACT",
-    "label": "Dinosaur 2",
+    "series": "Dinosaurs",
+    "label": "Brontosaurus",
     "string": `...............fff..
 ..............f444f.
 .............f44444f
@@ -3977,7 +4040,7 @@ f44444444444444e5f..
 `
   },
   {
-    "series": "IMPACT",
+    "series": "Space",
     "label": "Spaceship",
     "string": `.......a.......
 ......abc......
@@ -3998,7 +4061,7 @@ aac.245c542.cac
 `
   },
   {
-    "series": "IMPACT",
+    "series": "Space",
     "label": "Alien Saucer",
     "string": `.....bbbbbb.....
 ...bbccccccbb...
@@ -4019,7 +4082,7 @@ a6666665266666a.
 `
   },
   {
-    "series": "IMPACT",
+    "series": "Misc",
     "label": "Bananas",
     "string": `......eeeeee
 ......eeeeee
@@ -4036,7 +4099,7 @@ ee.e5555555.
 `
   },
   {
-    "series": "IMPACT",
+    "series": "Fantasy",
     "label": "Wizard",
     "string": `e42ef.ffffff....
 e5ceff366666f...
@@ -4057,8 +4120,8 @@ fecf818991f.....
 `
   },
   {
-    "series": "IMPACT",
-    "label": "Treasure Chest",
+    "series": "Misc",
+    "label": "TreasureChest",
     "string": `.bbbbbbbbbbbbbb.
 be4444444444444b
 be444444444444eb
@@ -4078,7 +4141,7 @@ bbbbbbbbbbbbbbbb
 `
   },
   {
-    "series": "IMPACT",
+    "series": "Misc",
     "label": "Fancy Tree",
     "string": `.....445...4455....54...eeee.22.
 ...444455545e.445..455..e.2e52..
@@ -4115,7 +4178,7 @@ e4d5.5e45.5555422.44..e2222ee2e.
 `
   },
   {
-    "series": "IMPACT",
+    "series": "Animals",
     "label": "Bunny",
     "string": `...1...1.......
 ..d11.d11......
@@ -4136,7 +4199,7 @@ e4d5.5e45.5555422.44..e2222ee2e.
 `
   },
   {
-    "series": "IMPACT",
+    "series": "Farm",
     "label": "Farmer",
     "string": `.....bbcccc.....
 ....b555555c....
@@ -4157,7 +4220,7 @@ bb555eeeeee555bb
 `
   },
   {
-    "series": "IMPACT",
+    "series": "Farm",
     "label": "Carrot",
     "string": `..6.6.
 567678
@@ -4178,7 +4241,7 @@ bb555eeeeee555bb
 `
   },
   {
-    "series": "IMPACT",
+    "series": "Farm",
     "label": "Sprout",
     "string": `....f66...66...
 .....fb6.668...
@@ -4197,7 +4260,7 @@ eeeeeceeeeee..e
 `
   },
   {
-    "series": "IMPACT",
+    "series": "Farm",
     "label": "Sprout (Rooted)",
     "string": `...............
 ...............
@@ -4216,7 +4279,7 @@ eeeeeeeeeeee..e
 `
   },
   {
-    "series": "IMPACT",
+    "series": "Fantasy",
     "label": "Castle",
     "string": `..........................................
 ................................fff.......
@@ -4263,7 +4326,7 @@ cccccccccccccccccccccccccccccccccccccccc..
 `
   },
   {
-    "series": "IMPACT",
+    "series": "Misc",
     "label": "Key",
     "string": `...ffff...
 ..fddddf..
@@ -4284,7 +4347,7 @@ f5bf..fbdf
 `
   },
   {
-    "series": "IMPACT",
+    "series": "Animals",
     "label": "Cow",
     "string": `........111f.
 ....fbbbb....
@@ -4305,7 +4368,7 @@ fbffdf1fdffbf
 `
   },
   {
-    "series": "IMPACT",
+    "series": "Animals",
     "label": "Chicken",
     "string": `........222....
 ......d11121d..
@@ -4325,8 +4388,8 @@ ebddddde111111d
 `
   },
   {
-    "series": "IMPACT",
-    "label": "Cookie (1/3)",
+    "series": "Misc",
+    "label": "Cookie(1/3)",
     "string": `.....fffffff.....
 ...ffeeeeeeeff...
 ..fee33333e4eef..
@@ -4347,8 +4410,8 @@ fee4efc44e4e4eecf
 `
   },
   {
-    "series": "IMPACT",
-    "label": "Cookie (2/3)",
+    "series": "Misc",
+    "label": "Cookie(2/3)",
     "string": `.......fffff.....
 ......feeeeeff...
 .......fe3e4eef..
@@ -4369,8 +4432,8 @@ fee4efc44e4e4eecf
 `
   },
   {
-    "series": "IMPACT",
-    "label": "Cookie (3/3)",
+    "series": "Misc",
+    "label": "Cookie(3/3)",
     "string": `.................
 ........ff.......
 ........e3f......
@@ -4391,7 +4454,7 @@ fee4efc44e4e4eecf
 `
   },
   {
-    "series": "IMPACT",
+    "series": "Artic",
     "label": "Parka",
     "string": `....ffff....
 ..ffeeeeff..
@@ -4412,7 +4475,7 @@ f1cfeeeefc1f
 `
   },
   {
-    "series": "IMPACT",
+    "series": "Artic",
     "label": "Snowball",
     "string": `...666666...
 ..69199196..
@@ -4429,7 +4492,7 @@ f1cfeeeefc1f
 `
   },
   {
-    "series": "IMPACT",
+    "series": "Misc",
     "label": "Watermelon",
     "string": `fffffffffffffffffffffff.
 f7612333333333333332167f
@@ -4446,7 +4509,7 @@ f761233bb33333bb3332167f
 `
   },
   {
-    "series": "IMPACT",
+    "series": "Artic",
     "label": "Penguin",
     "string": `.....fffff...
 ....fffffff..
@@ -4467,7 +4530,7 @@ f.fffb91111f.
 `
   },
   {
-    "series": "IMPACT",
+    "series": "Artic",
     "label": "Snowflake",
     "string": `.....8.8.....
 ......8......
@@ -4485,7 +4548,7 @@ f.fffb91111f.
 `
   },
   {
-    "series": "IMPACT",
+    "series": "Desert",
     "label": "Cactus",
     "string": `......88......
 .....6756.....
@@ -4508,8 +4571,8 @@ f.fffb91111f.
 `
   },
   {
-    "series": "IMPACT",
-    "label": "Traffic Cone",
+    "series": "City",
+    "label": "TrafficCone",
     "string": `.....fff.....
 ....f444f....
 ....f444f....
@@ -4527,7 +4590,7 @@ f44444444444f
 `
   },
   {
-    "series": "IMPACT",
+    "series": "Misc",
     "label": "Raindrop Dude",
     "string": `...ff2ff...
 ..f54545f..
@@ -4547,7 +4610,7 @@ f22ef.fe22f
 `
   },
   {
-    "series": "IMPACT",
+    "series": "Misc",
     "label": "Umbrella",
     "string": `....22c22....
 ..222c24222..
@@ -4566,7 +4629,7 @@ ccccccccccccc
 `
   },
   {
-    "series": "IMPACT",
+    "series": "Misc",
     "label": "Raindrop",
     "string": `....6....
 ...696...
@@ -4584,7 +4647,7 @@ ccccccccccccc
 `
   },
   {
-    "series": "IMPACT",
+    "series": "Farm",
     "label": "Apiarist",
     "string": `......ffff.......11111..
 ....fff11fff....11..1.1.
@@ -4606,7 +4669,7 @@ fcf.f222222f44ee........
 `
   },
   {
-    "series": "IMPACT",
+    "series": "Farm",
     "label": "Bee",
     "string": `.....f...f.....
 ......fff......
@@ -4622,7 +4685,7 @@ fcf.f222222f44ee........
 `
   },
   {
-    "series": "IMPACT",
+    "series": "Ocean",
     "label": "Coconut",
     "string": `....eeeeeee.....
 ..eeeeeeeeeee...
@@ -4642,7 +4705,7 @@ eeeeeeeeeeeeeee.
 `
   },
   {
-    "series": "IMPACT",
+    "series": "Ocean",
     "label": "Turtle",
     "string": `........ffffffffff....ffffff...
 ......ffeeeeeeeeeeff.f767767f..
@@ -4665,7 +4728,7 @@ ffeeffdeeeeeeeeedfef7777ff.....
 `
   },
   {
-    "series": "IMPACT",
+    "series": "Sports",
     "label": "Soccer Ball",
     "string": `..fffffff..
 .f11fff11f.
@@ -4681,7 +4744,7 @@ f111fff111f
 `
   },
   {
-    "series": "IMPACT",
+    "series": "Ninjas",
     "label": "Ninja",
     "string": `....fffff...
 ...fffffff..
@@ -4702,8 +4765,8 @@ f.fd11b11df.
 `
   },
   {
-    "series": "IMPACT",
-    "label": "Ninja Star 1",
+    "series": "Ninjas",
+    "label": "NinjaStar 1",
     "string": `...ff......
 ....ff.....
 ....fbf....
@@ -4718,8 +4781,8 @@ f...fcf....
 `
   },
   {
-    "series": "IMPACT",
-    "label": "Ninja Star 2",
+    "series": "Ninjas",
+    "label": "NinjaStar 2",
     "string": `..ff..........
 ..ffff........
 ...f8ff.....ff
@@ -4737,8 +4800,8 @@ ff.....ff8f...
 `
   },
   {
-    "series": "IMPACT",
-    "label": "Background (Archaeology)",
+    "series": "Backgrounds",
+    "label": "Archaeology",
     "string": `9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
 9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
 9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
@@ -4862,8 +4925,8 @@ ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
 `
   },
   {
-    "series": "IMPACT",
-    "label": "Background (Tropical)",
+    "series": "Backgrounds",
+    "label": "Tropical",
     "string": `7777777777776999967777777777777777777777777776999999999999999999999999999999999999999999999999999999999999999999999677777777777777777777777777699999677777777777
 7776777777769999967777777777777777777777777777699999999999999999999999999999999999999999999999999999999999999999996777777777777777777777777777769999966777777777
 7776777777699999967777777777777666666777777777769999999999999999999999999999999999999999999999999999999999999999996777777777776666667777777777769999996777777777
@@ -4987,8 +5050,8 @@ eeeeeed1111111111111111111111111111111111111111111111111111111111111111111111111
 `
   },
   {
-    "series": "IMPACT",
-    "label": "Background (Soccer Field)",
+    "series": "Backgrounds",
+    "label": "Soccer Field",
     "string": `7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111777777777777777777777777777777711111117
 7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111111111111111111111111111111111111111111
 7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111117717177717771771771777177177717777717
@@ -5109,6 +5172,2630 @@ eeeeeed1111111111111111111111111111111111111111111111111111111111111111111111111
 7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777711111111111111111111111111111111111111111
 7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111117777771777177717771771777717771777177
 7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777111177777771111177711111771111117771111177
+`
+  },
+  {
+    "series": "Misc",
+    "label": "Magnifying Glass",
+    "string": `...ffff...
+..fccccf..
+.fc9999cf.
+fc991199cf
+fc999119cf
+fc699999cf
+.fc6999cf.
+..fccccf..
+...fbbf...
+...f4df...
+...f4df...
+...f4df...
+...f4df...
+...f4df...
+....ff....
+`
+  },
+  {
+    "series": "Misc",
+    "label": "Shovel",
+    "string": `.fffffff.
+.faaaddf.
+..ffcff..
+...fef...
+...fef...
+...f4f...
+...f4f...
+...f4f...
+ffff4ffff
+fbbbcabbf
+fbbbcabbf
+fbbbcbbbf
+fbbbbbbbf
+fbbbbbbdf
+.fbbbbdf.
+..fffff..
+`
+  },
+  {
+    "series": "Misc",
+    "label": "Tree",
+    "string": `....ffccf.....
+...f67556f....
+..fcc57677fff.
+.f775c6777757f
+f675757767675f
+f777777667776f
+f678767e86767f
+f8cec66ec6eff.
+.f8ce8ceceef..
+..ffcecee4f...
+....feee4f....
+.....fee4f....
+.....fce4f....
+.....fcee4f...
+.....fceaeef..
+....fcefffef..
+`
+  },
+  {
+    "series": "Misc",
+    "label": "Magnifying Glass",
+    "string": `...ffffff......
+..fccccccf.....
+.fc699996cf....
+.f69911996f....
+fc99991199cf...
+fc99999999cf...
+fc99999999cf...
+.f69999996f....
+.fc699996cf....
+..fccccccff....
+...ffffffbdf...
+........f44df..
+.........f44df.
+..........f44df
+...........f44f
+............ff.
+`
+  },
+  {
+    "series": "Misc",
+    "label": "Acorn",
+    "string": `........f.....
+.......cbf....
+....cccbbcf...
+...c33bebbbf..
+..cd4edde33bf.
+.fd4edddee33bf
+.fd4eddedde33f
+.fde4ddedde33f
+.fbcccccccccbf
+..ceeeeeeeccf.
+..cee4eeeeecf.
+..ceee4eeeecf.
+...ceeeeeecf..
+...ceeeeeec...
+....ceeeeac...
+.....ccccc....
+`
+  },
+  {
+    "series": "Animals",
+    "label": "Squirrel",
+    "string": `.........fffff...
+........feeeeef..
+.......feeeeeeef.
+..fffffeeeeeeeeec
+.f44444ceeeeefeec
+.f4ddd4ceeeef.fec
+c4dfdd44ceeef..f.
+c4ddd444cceef....
+.c44444444ceef...
+..fd3444444cef...
+...fd344444ceef..
+....ccc44444ceef.
+....c4444444ceef.
+...c44444444ceef.
+...c44444444cef..
+..c44444444cff...
+...cccccccef.....
+`
+  },
+  {
+    "series": "Animals",
+    "label": "Mouse",
+    "string": `........ccc..ca.
+.......c333cc3a.
+.....ff3ffa33a..
+....fbbbbbfaa...
+...fbbbbbbbf....
+..fffbbbbbfff...
+.fbbbfbbbfbbbf..
+fb23dbbfbbd32bf.
+fb333bbbbb333bf.
+fbd3cbbbbbc3dbf.
+.fbcbbbbbbbcbf..
+..fcb1bbb1bcf...
+...fbfbbbfbf....
+...fbbbbbbbf....
+....fbb3bbf.....
+.....f333f......
+......fff.......
+`
+  },
+  {
+    "series": "Animals",
+    "label": "Mouse",
+    "string": `........ff......ff..
+.......fbbff...fbbf.
+......fbbbbbfffbbbbf
+.....fb333bbbbbb333f
+.....f3334cbbbbb43f.
+......f34cbbbbbbb4f.
+.......fcbbbbbbbbf..
+.......fcbbf1bbf1...
+....afaacbbffbbff...
+...a44bbbf3bbbba....
+..a34fbbbbccffc.....
+..a3fabbbbbbbba.....
+.a34fcabbbbbbbf.....
+c34c.fcabbbbbf......
+.cc...faccabf.......
+......cc..cc........
+`
+  },
+  {
+    "series": "Misc",
+    "label": "Cheese",
+    "string": `........ff
+.......fdf
+.....ff53f
+....f5555f
+...f53d55f
+.ff553355f
+f3d555555f
+f55555553f
+.ffffffff.
+`
+  },
+  {
+    "series": "Misc",
+    "label": "Cheese",
+    "string": `.............
+.............
+..........ff.
+........ff55f
+.......f53d5f
+....fff55335f
+...f55555555f
+..f5553d5555f
+..f555335555f
+.f3d55555555f
+f53355555dd5f
+f555555553d5f
+f55555555555f
+.fffffffffff.
+.............
+.............
+`
+  },
+  {
+    "series": "Misc",
+    "label": "Mushroom",
+    "string": `....cccccc.....
+...fe22122c....
+..fed222222c...
+.fe222222122c..
+fe22222222222c.
+fe222dd222222c.
+fe222dd222222c.
+.fe222222222c..
+..fffffffffc...
+.....fabc......
+.....fabc......
+.....fabba.....
+....fabbbc.....
+....fabbbba....
+....faaaaac....
+.....fffff.....
+`
+  },
+  {
+    "series": "Animals",
+    "label": "Bear",
+    "string": `...ff.....ff...
+..fd3eccce3df..
+..feeeeeeeeef..
+.feeffeeeffeef.
+.fee1fdddf1eef.
+.fee3dfffd3eef.
+.fceeddfddeecf.
+..fceedddeecf..
+..fefffffffef..
+.feeeeeeeeeeef.
+feeeeedddeeeeef
+f4eeedddddeee4f
+.feeeedddeeeef.
+.fceeeeeeeeecf.
+.feeeeffffeeef.
+..ffff....fff..
+`
+  },
+  {
+    "series": "Misc",
+    "label": "Honeypot",
+    "string": `.................
+...f.......f..f..
+..55f.......ff...
+.5f5........55...
+.55.........ff...
+.................
+........e........
+.......e4e.......
+...eeeeeeeeee....
+..f4444444eeef...
+.c5ffffffffff5c..
+..c55555555555c..
+..eff55ee5555ee..
+..e4eff4ee55eee..
+..e444444ee5e4e..
+..e4dd444ee5e4e..
+...e4dd4444e4e...
+...e44dd44ee4e...
+....e444eeeef....
+.....fffffff.....
+`
+  },
+  {
+    "series": "Misc",
+    "label": "Flower",
+    "string": `.bbddbb.
+b113311b
+b135531b
+bd3553db
+c11dd11c
+cd1dd1dc
+.cc76cc.
+..676...
+..668886
+..687776
+..87776.
+..8886..
+`
+  },
+  {
+    "series": "Animals",
+    "label": "Fox",
+    "string": `.......cc...cc..
+......c44ccc44c.
+..d...c4e444e4c.
+.ddd..c4444444c.
+.d44.cd4444444dc
+.444.cdd44444ddc
+.4444cddd444dddc
+.4444cdfdd4ddfdc
+..444.c3ddedd3c.
+..444c4cbbbbbc..
+..444444444444c.
+...444444ddd44c.
+....c4444ddd44c.
+.....c444ddd44c.
+......ceeccceec.
+`
+  },
+  {
+    "series": "Fantasy",
+    "label": "Knight",
+    "string": `.....f2fff......
+....f22cccf.....
+....fc22bbc.....
+....fcccbdbc....
+....fccbbbdc....
+....fffcfffc....
+...ffccbbfdcdf..
+..fcfffbbcdc2df.
+.fcdccffbcbc2edf
+fcbb8fe8fcff5edf
+4cb8fcbe88fcfe5f
+ecb552bbedffee4f
+ffdd982233f2ee4f
+..d619ff8df42e4f
+..fd619ffbdf44f.
+..fff61fffff....
+`
+  },
+  {
+    "series": "Fantasy",
+    "label": "Villager",
+    "string": `....ffffff......
+...feeeeeef.....
+..ffecbbb4ef....
+..f9fbdddb4f....
+..f91eedeeef....
+..f91bfdf1ef....
+..f91bfdf1ef....
+..f91f1d1f55f...
+.f8918fff5ed5f..
+f85555bbf4e45f..
+f8855b77f4ee5f..
+.f8ddee5ef4e5f..
+..ffbbb777f5f...
+..f688ff886f....
+..feef..feef....
+.ffff....fff....
+`
+  },
+  {
+    "series": "Fantasy",
+    "label": "King",
+    "string": `....f.ff7ff.f...
+...fdf52525fdf..
+...f4d5e5ed2df..
+..fcc444455d4f..
+..fecfeeceeccf..
+..feca99b991cf..
+..fecb1fb1fdcf..
+...f9cbfdbf3f...
+..fe11f444b11f..
+.fe2e11fff11e4f.
+.f222e16995e24f.
+.f5b2e56665235f.
+.fd42e5fff523d..
+..fe2e5699582f..
+...e885fff5888..
+...fff.....fff..
+`
+  },
+  {
+    "series": "Fantasy",
+    "label": "King",
+    "string": `......ff5ff.....
+....ff5f5f5f....
+...fbf5f9f5bf...
+..f4ff4929dfbf..
+..f4444494444bf.
+..ffff11bf1ffff.
+..ffcd1fd1fbcff.
+...f9c3fbdf3cf..
+..f919fb44b11f..
+..fc991fff199f..
+..f6ceed1149cf..
+.fd6fe25155c6df.
+..ffce251553ff..
+...fe25d11523f..
+..fe25d1111522f.
+...ffddffffddf..
+`
+  },
+  {
+    "series": "Fantasy",
+    "label": "Cauldron",
+    "string": `...7......7.....
+..77.....777....
+...fffffff7ff...
+..fc777bbbbbcf..
+.fcbc7ccccccdcf.
+fcbcfffff7ffc1cf
+fcbbccccccccdbcf
+fccbbbddddddbccf
+.ffccccccccccff.
+fccffffffffffcbf
+fcbccccccccccbbf
+fcbbbbbbbdd1dbbf
+fcbbbbbbbbddbbcf
+.fcbbbbbbbbbbcf.
+..fccccccccccf..
+...fffffffffff..
+`
+  },
+  {
+    "series": "Fantasy",
+    "label": "Torch",
+    "string": `.....f...
+....f4f..
+...f44f..
+..f4544f.
+.f45954f.
+.f4d1d4f.
+f664d466f
+.fc666cf.
+.fecccef.
+..feeef..
+...fef...
+...fef...
+...fef...
+...fef...
+....f....
+`
+  },
+  {
+    "series": "Fantasy",
+    "label": "Candle",
+    "string": `..............
+..............
+........f.....
+.......f5f....
+......f5f.....
+.....f595f....
+.....fd9df....
+......fbf.....
+.....f111f....
+.....f111f....
+..ff.f111f....
+.f44ff111fff..
+fecc4f111c4ef.
+.fe444ffc4eeef
+..ffeeeeeeecf.
+....ffffffff..
+`
+  },
+  {
+    "series": "Fantasy",
+    "label": "Banner",
+    "string": `...............
+.fffffffffffff.
+fe5ebee2ee2e5ef
+.f4fbff2ff2f4f.
+..ffd22222dff..
+...fbddddd2f...
+...fb2222b2f...
+...fb444d32f...
+...fb2222b2f...
+...fb2222b2f...
+...fb2222b2f...
+...fb222bd2f...
+....fb5b52f....
+....f2b522f....
+.....f222f.....
+......f2f......
+.......f.......
+`
+  },
+  {
+    "series": "Misc",
+    "label": "Chair",
+    "string": `..ffff....
+.f5be3f...
+fc4beb3f..
+fc4ebe3f..
+fc4beb3f..
+fc4bbbb4f.
+ff4fcccf4f
+fcf4f444ff
+fcefdddddf
+fce4cccb4f
+fce4fffc4f
+fcc4f.fc4f
+.fff...fff
+`
+  },
+  {
+    "series": "Misc",
+    "label": "Table",
+    "string": `...ffffffffff...
+..febbbaaebbaf..
+.feeeeeeeeeeeef.
+f444deddd11ded4f
+fbeeeeeeeeeeeeef
+fde4444ddedd4edf
+.f5eeeeeeeeee5f.
+.cf5555555555fc.
+.fccccccccccccf.
+.faeeffffffeeef.
+.faef......feef.
+.fff........fff.
+`
+  },
+  {
+    "series": "Fantasy",
+    "label": "Red Potion",
+    "string": `..f...........
+.f2f.....f....
+f232f...f5f...
+.f2f..f..f....
+..f..fef......
+....f888f.....
+.....fbf......
+.....f9f....f.
+....f999f..f3f
+...f99199f..f.
+..f9919999f...
+..f2122222f...
+..f22222c2f...
+..fe222c22f...
+...fee222f....
+....fffff.....
+`
+  },
+  {
+    "series": "Fantasy",
+    "label": "Green Potion",
+    "string": `....ff....
+...fe4f...
+..f6996f..
+...f68f...
+...f19f...
+..f1999f..
+.f775776f.
+f77517776f
+f77757776f
+.f777776f.
+..f6666f..
+...ffff...
+`
+  },
+  {
+    "series": "Misc",
+    "label": "House",
+    "string": `..........ffffffffffff..........
+.......fff444444faeeeefff.......
+....fff444eeeeeefaeeeeeeefff....
+.fff4d4eeeeeeeeefaeeeeeeeeeefff.
+f4ddeeeeeeeeeeeefaeeeeeeeeeeeeef
+fdeeeeeeeeeeeeeefaeeeeeeeeeeeeef
+f4eeeeeeeeeeeeeefaeeeeeeeeeeeeef
+f4eeeeeeeeeeeeffcffeeeeeeeeeeeef
+f4eeeeeeeeeeefcceccfeeeeeeeeeeef
+f3eeeeeeeeeffceeeeecfeeeeeeeeeaf
+f4eeeeeeeefcceeeeeeecffaeeeeeeaf
+f3eeeeeeffceeeeeeeeeeccfaaeeeeaf
+f3eeeeefcceeeeeeeeeeeeecffaeeeaf
+f3eeeffceeeeeeeeeeeeeeeeccfaeeaf
+f4eefcceeeeeeeeeeeeeeeeeeecfaaaf
+f4ffccccccccccccccccccccccccffaf
+.ffffffffffffffffffffffffffffff.
+.febbbefcccfbbbbbbbbfcccfebbbef.
+.fedddef6e6fddddddddf6e6fedddef.
+.feddedfeeefddddddddfeeefdeddef.
+.feddedf6e6fddddddddf6e6fdeddef.
+.fededdf6e6cffffffffc6e6fddedef.
+.fededdfceccfeeeeeefccecfddedef.
+.feedd727272fe4ee4ef727272ddeef.
+.feeddfeeeeefefeefefeeeeefddeef.
+.fedddcfcaacfe4ee4efcaacfcdddef.
+.feeeeeeeeeefefeefefeeeeeeeeeef.
+.feddddddddefeeeeeefeddddddddef.
+.febddddddbefe4ee4efebddddddbef.
+.febbddddbbefeffffefebbddddbbef.
+.feeeeeeeeeefeeeeeefeeeeeeeeeef.
+..ffffffffffffffffffffffffffff..
+`
+  },
+  {
+    "series": "Misc",
+    "label": "Lever Left",
+    "string": `................
+.ddd5...........
+.5115...........
+.5555...........
+..eee...........
+...eee..........
+...beeebbbbbb...
+..cbfeeeffffbcc.
+.ccbfceeeecfbcac
+cacbffffffffbcac
+cacbbbbbbbbbbccc
+cccaaaaaaaaaaccc
+ccaaaaaaaaaaaacc
+caaaaaaaaaaaaaac
+aaaaaaaaaaaaaaaa
+ffffffffffffffff
+`
+  },
+  {
+    "series": "Misc",
+    "label": "Lever Right",
+    "string": `................
+..........ddd5..
+..........5115..
+..........5555..
+..........eee...
+.........eee....
+...bbbbbeeebb...
+..cbfffeeeffbcc.
+.ccbfceeeecfbcac
+cacbffffffffbcac
+cacbbbbbbbbbbccc
+cccaaaaaaaaaaccc
+ccaaaaaaaaaaaacc
+caaaaaaaaaaaaaac
+aaaaaaaaaaaaaaaa
+ffffffffffffffff
+`
+  },
+  {
+    "series": "Misc",
+    "label": "Door",
+    "string": `ffffffffffffffff
+fcccceeeeeeecccf
+feeeeeeeeeeac33f
+feeeeeeeeeeac33f
+feeeeeeeeeeac33f
+feeeeeeeeeeac33f
+feeeeeeeeeeac33f
+fe4deeeeeeeac33f
+fe45eeeeeeeac33f
+feeeeeeeeeeac33f
+feeeeeeeeeeac33f
+feeeeeeeeeeac33f
+feeeeeeeeeeac33f
+fcccceeeeeeac33f
+ffffffffffffcccf
+ffffffffffffffff
+`
+  },
+  {
+    "series": "Fantasy",
+    "label": "Knight",
+    "string": `...22fffffff....
+....22889888f...
+...f88896988f...
+...f899666998f..
+...f966f6f669f..
+...f6f6f6f6f6f..
+...f866f6f668f..
+...ff8666668ff..
+..f19c88888c91f.
+..f9968fff8699f.
+...fc8998998cf..
+...f926989629f..
+..f96c22222c69f.
+...ffc69996cff..
+....f99fff99f...
+.....ff...ff....
+`
+  },
+  {
+    "series": "Space",
+    "label": "Astronaut",
+    "string": `.....111111.....
+....11ffff11....
+...11f5555f11...
+..11f551155f11..
+..1f55555155f1..
+..1f55555515f1..
+..11f555555f11..
+...11f5555f11...
+....11ffff11....
+...1611111161...
+..111666666111..
+..111911999111..
+...1b111111b1...
+....b221122b....
+....11111111....
+....444..444....
+`
+  },
+  {
+    "series": "Space",
+    "label": "Astronaut",
+    "string": `....fffffff.....
+...f1111111f....
+..f118666611f...
+.f11855555611f..
+.f18555515561f..
+.f18555551561f..
+.f1185555561f...
+..f118866611fff.
+...f1111111ff19f
+..fbfcbbb8fb11f.
+.f11cb1111bb1f..
+f11b1881811f....
+f99f22111121ff..
+.fff112fff1119f.
+..f999f...f19f..
+...fff.....ff...
+`
+  },
+  {
+    "series": "Space",
+    "label": "Alien",
+    "string": `.....2....2.....
+......2..2......
+.....e22222.....
+....e2b11b23....
+...e2e11f1223...
+...22e1ff1232...
+...22e1f11222...
+..8222c11c232...
+..82222cc22228..
+.a8222222222e8..
+.2e82215222e822.
+.2.882ee22e88a2.
+2..a38222e8aa..2
+...cc38888acc...
+.22ecc...ccce22.
+...222...2222...
+`
+  },
+  {
+    "series": "Space",
+    "label": "Saucer",
+    "string": `......8888......
+.....899998.....
+....89991998....
+...8999199998...
+..899999999998..
+..aa99999999aa..
+.a8a33bbaaaaa8a.
+abb8888888888bba
+adbbbbbbbbbbbbba
+.a3bbbbbbbbbb3a.
+..a5b2b55bb25a..
+...cccccccccc...
+.....cccccc.....
+`
+  },
+  {
+    "series": "Space",
+    "label": "Meteor",
+    "string": `................
+......aacccccc..
+...cccbbcaacbbb.
+...cdbbbbbccbbbb
+...dbbdbbbbbbbaa
+..cbaabbbccccbaa
+..cbbabbbddacbbd
+..ccbbbbbdaacbbb
+.ccbbbbbbaaacdbb
+.cbbbbbbbaaccbbd
+.cbabbcabbccbbbb
+.cbabcccdbbddbdd
+.ccbbdbcbbbaadb.
+..cbbcccbbbaad..
+...cbbdbddbdbd..
+....ccccccccc...
+`
+  },
+  {
+    "series": "Space",
+    "label": "Mars",
+    "string": `.....5d5d44.....
+...5445442445...
+..444d55552445..
+.4e4d4555544e45.
+.e44454445445e4.
+444554444442e222
+e5455544444d2242
+ee444442c2242d2e
+e444ee25cce42ee4
+e4e42eeeeeee4eee
+ee22425ee5eeeee4
+.e222225c2eec2e.
+.ceec2e2222e2c2.
+..2e2eee24242c..
+...ceeeee44ec...
+.....ccceec.....
+`
+  },
+  {
+    "series": "Space",
+    "label": "Moon",
+    "string": `.....111919.....
+...111dbdb919...
+..11d9991db111..
+.d1dddd9bdbdd19.
+.dddbcb11bbbbd1.
+dddbbbc11b1bcd19
+dcdbdcb11bbccdd1
+bbbbd9111111bdd9
+bbbbdd1d1d1bbdd1
+dbcbbd1dd1dbcdd1
+dbbcbdddd1dccd11
+.dbcbbbd1199999.
+.dbbccbbd9911dd.
+..dbbbbcd191dd..
+...dddbbd19dd...
+.....dddddd.....
+`
+  },
+  {
+    "series": "Space",
+    "label": "Uranus",
+    "string": `.........988896.........
+.......9866968896.......
+......989966698899......
+.....96996699998886.....
+.....66166996996889.....
+....9d9d166666699986455.
+....6966666966669886.445
+....66dd999966699996..54
+....ddd699d6699d9886554.
+....666d9d1111d9555544..
+...5666999d955554444....
+..54.66666554444986.....
+.54..9555544d699689.....
+.455554444699d8889......
+..4444.99dd666686.......
+.........66d686.........
+`
+  },
+  {
+    "series": "Space",
+    "label": "Earth",
+    "string": `.....687687.....
+...5788877787...
+..578788888887..
+.57778886866577.
+.57788696995767.
+5778688661575978
+6878869695757788
+6888866665777778
+6788888897777777
+6885768661577777
+6857778888697778
+.85777776888578.
+.68577778687778.
+..687778888788..
+...6677888888...
+.....777668.....
+`
+  },
+  {
+    "series": "Space",
+    "label": "Sun",
+    "string": `.....345252.....
+...4354145452...
+..545555545442..
+.455d5d15545542.
+.5d5515d1555453.
+4555151554545442
+5451111515554554
+4d55115155455542
+2551155555554534
+5d555d5154555452
+2451515555545542
+.54515154545534.
+.25545455455442.
+..245454555452..
+...2453545342...
+.....242424.....
+`
+  },
+  {
+    "series": "Space",
+    "label": "Vortex",
+    "string": `......66...a....
+.9...99916.89a..
+....9888916.89a.
+..aa.....91689a.
+.aa..99..891696a
+.a.9998.9.89996.
+..6998.....9996.
+a6198..a...996..
+.1998.aa..896..9
+96998.aaa.99....
+.698.....89689..
+.698....896.896.
+.9698.986..8996.
+.9.698....8996..
+....698888996...
+.9a..699996.....
+`
+  },
+  {
+    "series": "Space",
+    "label": "Stars",
+    "string": `..........c.....
+.........c4c....
+.........cdc....
+...c....c414c...
+..c4c....cdc....
+..cdc....c4c....
+..c5c.....c.....
+.cd1dc..........
+c45154c.........
+.cd1dc..........
+..c5c...........
+..cdc........c..
+..c4c.......c4c.
+...c.......c414c
+............c4c.
+.............c..
+`
+  },
+  {
+    "series": "Space",
+    "label": "Star",
+    "string": `.....c.....
+....c5c....
+...c5d5c...
+.cc555d5cc.
+c55d11d555c
+.c5511d5dc.
+..b55dd5b..
+..c5d55dc..
+..cdcccdc..
+..cc...cc..
+`
+  },
+  {
+    "series": "Space",
+    "label": "BlueLaser",
+    "string": `..6668888888....
+8991119919969668
+.8668888888.....
+`
+  },
+  {
+    "series": "Space",
+    "label": "RedLaser",
+    "string": `21922.2922.22..2
+.22....2........
+`
+  },
+  {
+    "series": "Space",
+    "label": "Rocket",
+    "string": `...........3............
+..........322...........
+.........3222c..........
+.........2222c..........
+.........ddddb..........
+.........4444c..........
+.........d11db..........
+.........d11db..........
+.........d198b..........
+.........d168b..........
+.......9cd188bc9........
+......91cd11dbc19.......
+.....911cd11dbc119......
+....9111cd11dbc1119.....
+....d11dcd11dbcd11d.....
+....d1ddcd11dbcd11d.....
+....d1bbcd11dbcbb1d.....
+....dbb..d11db..bbd.....
+....db...d11db...bd.....
+....bb...311bc...bb.....
+.........22222..........
+........2444442.........
+........2222222.........
+`
+  },
+  {
+    "series": "Space",
+    "label": "Saucer",
+    "string": `..........88888.........
+........886666688.......
+.......89669196668......
+......8966666119668.....
+.....866666666619668....
+....89666666666696668...
+....f596666666666665f...
+...bcf5566666666655fbb..
+.eba1cff555555555ffc1ce.
+e2eccba1fffffffff1ccc22e
+e22eecbcbbba1cbbbcc32e2e
+.e222222ccccccccc2223ee.
+..eeee2222222222222eee..
+...cceeeee22222eeeeac...
+....caaaaaeeeeeaaadc....
+.....ccccaaaaaaacccc....
+.....bb..ccccccc..bb....
+....4.......b.......4...
+...555......4......555..
+...........555..........
+`
+  },
+  {
+    "series": "Space",
+    "label": "Artemis",
+    "string": `.................1..................
+.................d..................
+.................d..................
+.................1..................
+................9dd.................
+................d11.................
+................911.................
+...............6911d................
+...............69111................
+..............ddddddd...............
+..............969111d...............
+..............bb44444...............
+..............bb44444...............
+..............eeccccc...............
+..............bb54444...............
+..............bb44444...............
+..............dd55555...............
+..............bb44444...............
+..............dd55555...............
+............1.bb44444.1.............
+...........91dbb4444491d............
+...........911dd55555911............
+...........dddbb46444ddd............
+...........911dd58555911............
+...........966bb45444966............
+...........911bb4c444911............
+...........911bb45444911............
+...........911bb4c444911............
+...........911bb45444911............
+...........911bb4c444911............
+...........911bb45444911............
+...........911bb4c444911............
+...........911bb45444911............
+...........911bb4c444911............
+...........911dd55555911............
+...........9119611111911............
+...........9119611111911............
+...........966bbb.bbb966............
+...........111.ff.ff.911............
+...........fff.ff.ff.fff............
+`
+  },
+  {
+    "series": "Space",
+    "label": "Rover",
+    "string": `.....6.....................
+.1..a16....................
+..5a916....................
+..addd6....................
+.adbbdc....................
+8bbbbb8.............d8.....
+.88888...1..........d8.....
+.....d....1.........d8.....
+.....d....b1........d8.....
+.....d..91..1.......d8.....
+....44..91..........d844...
+...5554.91......dddd85554..
+..5ccc5491......bbbb5ccc54.
+.5cfffc5466666666665cfffc54
+5cfabafc5ddddddddd5cfacafc5
+.cfddbfc58888888888cfbdcfc5
+.cfadafc...........cfabafc.
+..cfffc.............cfffc..
+...ccc...............ccc...
+`
+  },
+  {
+    "series": "Space",
+    "label": "Lander",
+    "string": `................bbbbbbbb................
+.............bbdddddddddb...............
+...........bb11111111111db..............
+.........bb11111111111111dbb............
+........bd1111111111111111d3b...........
+........bd1111111111111111d3dc..........
+........bb11111111111111dd3dcc..........
+........b1a11111111111dd33dcac..........
+........b13aaddd11113333ddcadc..........
+........b1d33aaaddddddddccaddc..........
+........b1ddda33ccccccccaadddc..........
+........b11ddadd3333aaaadddddc..........
+........b11ddadddddddddddfffdc..........
+........b11ddaddddddddfffd5cdc..........
+........b111daddddddddfddd5cdc..........
+........b111dad11dddddfddd5cdc..........
+........b111dfd111ddddcddd5cdc..........
+........b111dfd111ddddcddd5cdc..........
+........b111dfd1111dddcddd5cdc..........
+........a111dfd1111dddcddd5cdc..........
+........a111dfd11111ddcddd5cdc..........
+........a111dfd11111ddcddd5cdc..........
+........a1111fd11111ddcddd5cdc..........
+........a1111fd11111ddcddccddc..........
+.........f111fdd1111dddccddddc..........
+........55ff1faddd111dddddddf...........
+.......d44aefffadddddddddfff............
+.......54ae1111ffffffffff...............
+.......4de111fbcd6666668................
+.......dbeccfbbcdbbbbbbb8...............
+......adbeddbbcdbbd5dbd5d8..............
+.....a.dbeddbcddbc455c455d8.............
+.....aaaaecccdddbc455c455cd8............
+.....a.dbaaabcddbc4eeb4eecdd8...........
+.....a.dbeddaaaaaaaaaaaaaaaaa...........
+....a...ddccbddad..........da...........
+...aaa....deeddad..........dda..........
+...........ddddad.............a.........
+...............a.............aaa........
+..............aaa.......................
+`
+  },
+  {
+    "series": "Desert",
+    "label": "Cowgirl",
+    "string": `.....ccca....
+....ceeeeb...
+cecfceeeeefea
+feef4ccee4eec
+.8eef4454ee8.
+.f28eeeeee2f.
+.f2bdfbbfde28
+f2ee114411e2f
+.f2e3b44432f.
+...ec1ee1cb..
+..49ccb1acd4.
+..41ccd1cc14.
+..bcfff8ffcb.
+...86666668..
+...8e68.8e8..
+..feeef.eeef.
+`
+  },
+  {
+    "series": "Desert",
+    "label": "Cowboy",
+    "string": `.....cccc......
+....ceeeea.....
+.888eeeeeea.cc.
+ceeceeeeeebfeec
+.ceecfff4ffeec.
+..cceeeeeeeec..
+...ffbfbafbf...
+....6411411f...
+....cb34443....
+...8cc8848c8...
+..89bc8d98c8...
+..69fc8d9cb6...
+..6bd48d9c4....
+...cfffffff....
+...ceffffef....
+...ceef.feef...
+`
+  },
+  {
+    "series": "Desert",
+    "label": "Cobra",
+    "string": `.....fffffc....
+....fab22bac...
+...f29f22f92c..
+...fcc2222ccf..
+...fe582285ef..
+...f2edccde2f..
+....f2e55e2f...
+.....feddef....
+.....fe55ef..f.
+......fddf..f4f
+...88855cccce.f
+..8222224422e.f
+.82222222222cf.
+eecccccccccceee
+`
+  },
+  {
+    "series": "Desert",
+    "label": "Vulture",
+    "string": `...........fffff...
+..f.......fffffffff
+..ffff...fffffffffc
+...ccffeefffffcccc.
+.....cf11ffffceeee.
+..eaa2221bccceeeec.
+.e2222ff13eeeeeaf..
+.c4f3fcbbceeeeaf...
+c55bf..ccffffff....
+.fff...44c..cea....
+.......cc...c4c....
+............4c.....
+`
+  },
+  {
+    "series": "Desert",
+    "label": "Blazing Sun",
+    "string": `......5555555....
+.............5...
+..5..5555555..5..
+.5..5.......5....
+5..5..55555..5...
+5.5..5555555..5..
+5.5.555511555.5.5
+5.5.555551155.5.5
+5.5.555555555.5.5
+5.5.555555555.5.5
+5.5.555555555.5.5
+..5..5555555..5.5
+...5..55555..5..5
+....5.......5...5
+..5..5555555...5.
+...5..........5..
+....5555555......
+`
+  },
+  {
+    "series": "Desert",
+    "label": "Cactus",
+    "string": `......888..
+...e6e33d8.
+..e6c33b5d8
+.665c33233c
+e6166c333cd
+6656d6ccc5e
+e75616d7156
+6757d7d765e
+e717d7d7576
+66d6d71651e
+.e7dd6156e.
+..661556e..
+.44efffe444
+`
+  },
+  {
+    "series": "Desert",
+    "label": "Dead Bush",
+    "string": `........be.....
+....ce..e....e.
+e....ceeb.ee.ee
+e.....ce...e.e.
+ce..e.ce...eeb.
+.c...eee.e.eb..
+..ce..ce.eeb...
+...ceeeeee.....
+...eccccccee...
+`
+  },
+  {
+    "series": "Desert",
+    "label": "Rocks",
+    "string": `......eaaa......
+....ccb333a.....
+...ebb3ddd3a....
+...cb3dd11d3a...
+.bbcbddddd13e...
+b5dbbb33ddbe....
+bbbbcbbbbbe..bb.
+.beebccccceead36
+............bbbb
+`
+  },
+  {
+    "series": "Desert",
+    "label": "Crate",
+    "string": `.eeeeeeeeee.
+ef4443333dfe
+e4ccccaaaade
+e4c4ceeebade
+e3cb3aeeeade
+e3ccbd2eea3e
+e3cecbd2ec3e
+e4ceecb4ac3e
+e4caeecb4c4e
+e4ccccaacc4e
+ef443dd334fe
+.eeeeeeeeee.
+`
+  },
+  {
+    "series": "Desert",
+    "label": "Arrow Sign",
+    "string": `.........ae...
+.........abe..
+cbaaaeeea433e.
+c443333334443e
+c444444444443c
+ceeeeeeeeeb4c.
+ccccccccccbc..
+...aaab..cc...
+...eb3b.......
+...eb4b.......
+...cb4b.......
+...ce4b.......
+...cee7.......
+..c76e6c......
+`
+  },
+  {
+    "series": "Desert",
+    "label": "Animal Skull",
+    "string": `....a.........
+...ab.......a.
+..cb3a3eee.c3a
+..cb3eb11dc3bc
+...ced1111dbbc
+..bed11bb1dbc.
+.bd1111fbddc..
+.ed1b1dddde...
+4ebb4beeee44..
+`
+  },
+  {
+    "series": "Desert",
+    "label": "Train",
+    "string": `........................5555....
+..22222222.f.............ff.....
+..55555555.22.....44.....ff.....
+...2cc2cc2f44fe2..22.....55.....
+...2..2..2cccce22222a222fbbb....
+...2..2.f2bbbbe22222a444fccf4...
+...2ff2ff2cccce22222a222ffff4...
+...2222222cccce22222a222ffff5...
+...2222222cbbce44444a422ffff5...
+...2222222cccce22222a222fbbf4...
+..f555552fffffccccccc222ffff4...
+.f544ccc52ccc5ccc522a222555...f.
+f54fc222c5555c222c5fffffcc44fff.
+f54c2efe2cffc2efe2ccc55e22e45.4.
+.54c2fbf2c..c2fdf2c..5c2ff2c444.
+...c2efffffffffffffffffffd2c....
+....c222c....c222c.....e22e.....
+.....ccc......ccc.......cc......
+`
+  },
+  {
+    "series": "Desert",
+    "label": "Train Track",
+    "string": `................
+................
+.ce..ce..ce..ce.
+eceeeceeeceeecee
+bcebbcebbcebbceb
+.ce..ce..ce..ce.
+.ce..ce..ce..ce.
+.ce..ce..ce..ce.
+.ce..ce..ce..ce.
+.ce..ce..ce..ce.
+.ce..ce..ce..ce.
+bcebbcebbcebbceb
+eceeeceeeceeecee
+.ce..ce..ce..ce.
+................
+................
+`
+  },
+  {
+    "series": "Desert",
+    "label": "Warning Sign",
+    "string": `.....eeeeee.....
+....e222222e....
+...e21111112e...
+..e2111ff1112e..
+..e2111ff1112e..
+..e2111ff1112e..
+..e2111111112e..
+..e2111ff1112e..
+...e21111112e...
+....e222222e....
+.....eeeeee.....
+.......4c.......
+.......ec.......
+.......ec.......
+......becbb.....
+.......bb.......
+`
+  },
+  {
+    "series": "Animals",
+    "label": "Cow",
+    "string": `.............b...b...
+...........fffbdbffff
+............fd1111ff.
+............d111111f.
+...........d1f1111f1.
+...........d1f333df1.
+...........e33333333.
+ff..ffffff1e33c33c33.
+f11ffffff11be333333..
+.1b1ffff1111beeeee...
+..b1111111111bfff....
+..f1111111111bfff....
+..ff11111ff111bfc....
+..cff111bccf111db....
+..bcf11b333b111d.....
+...d113333..d11b.....
+...d1b1......11b.....
+...cffc......ffc.....
+`
+  },
+  {
+    "series": "Farm",
+    "label": "Hay",
+    "string": `..54e54e45bb..
+.5de5de45553b.
+55e5deb554453b
+5d45de5555545b
+5e551e5455554b
+5e155e5455455b
+5e555eb545545b
+54e55be555454b
+.5e545eb5554b.
+.44e54be444b..
+..eeeeeeeee...
+`
+  },
+  {
+    "series": "Farm",
+    "label": "Milk",
+    "string": `...fffff..
+..fbbbbbf.
+...fcccf..
+...f999f..
+..f99999f.
+..f9d999f.
+.f1d99911f
+.f1d11111f
+.f1111111f
+.f1111111f
+.f1111111f
+.f1111111f
+..f11111f.
+...fffff..
+`
+  },
+  {
+    "series": "Animals",
+    "label": "Pig",
+    "string": `.d.....dd.......
+dcddddddcdd.....
+3b1ddddd1bd.....
+d1fdddddf1b.....
+bddd333ddd......
+.dd3c3c3dd......
+.ddd333ddd3.....
+.3ddddddd333.d3.
+..3333333c33b.d3
+..3acccca3333d3.
+.33bbbb333d33b..
+.d133333ddd3b...
+.dd1dddddd33b...
+..3ddddd333bb...
+..d3333333bb....
+..ff.ac.cbff....
+`
+  },
+  {
+    "series": "Misc",
+    "label": "Apple",
+    "string": `....6..
+....66.
+...e6..
+.22e22.
+2322222
+2322222
+2222222
+.22222.
+..222..
+`
+  },
+  {
+    "series": "Farm",
+    "label": "Fence",
+    "string": `55d..........d55
+eeb..........bee
+eeb4333333334bee
+eebeeeeeeeeeebee
+eebeeeeeeeeeebee
+eeb..........bee
+eeb..........bee
+eeb4333333334bee
+eebeeeeeeeeeebee
+eebeeeeeeeeeebee
+eeb..........bee
+ffc..........cff
+`
+  },
+  {
+    "series": "Farm",
+    "label": "Fence",
+    "string": `.dd..........
+.d5..........
+bee..........
+bee..........
+bee4.........
+beee3........
+beeee3.......
+bee.ee3....dd
+bee4.ee3...d5
+beee3.ee3.bee
+beeee3.ee4bee
+bee.ee3.eebee
+cff..ee3.ebee
+......ee3.bee
+.......ee4bee
+........eebee
+.........ebee
+..........bee
+..........bee
+..........cff
+`
+  },
+  {
+    "series": "Farm",
+    "label": "Barn",
+    "string": `........................................
+...............ccccccccccccc............
+..............cbabbbbbbbbbabc...........
+.............cbbabbabbbbbbabbc..........
+............cbbbabbabbbabbabbbc.........
+...........cbbbbabbabbaabbabbbbc........
+..........cbbbbbabbbbbbabbabbbbbc.......
+.........cbbbbbbabbbbbbbbbabababbc......
+........cbbabbbbabbbbbbbbbabbbabbbc.....
+.......cbbbbbabb11111111111bbbabbbbc....
+.......cbbbbbbb1fffffffffff1bbbbbabc....
+.......cbabbbb1feeeeeeeeeeef1bbbbbbc....
+.......cbabbb1fe222222222222f1bbbabc....
+.......cbbbb1fe22222222222222f1bbbbc....
+.......cbb11fe2222221111222222f11bbc....
+.......c11cfe2222221ffff1222222fc11c....
+.......cccfe22222221cccc12222222fccc....
+.......fffe22222222111111222222e2fff....
+.......fec22e322222222222222222e2cef....
+.......fec22e322211111111112222e2cef....
+.......fec22e222211ffffff11222222cef....
+.......fec22e23e2111ccccba1242222cef....
+.......fec22e23e21f11ccbac1242222cef....
+.......fec22e23e21ff11bacc1242222cef....
+.......fec22e23e21fcf11ccc1222222cef....
+.......fac22e23221fccf11cc1222222caf....
+........fc22e22221fcbaf11c1222222cf.....
+.........fa2222221fbaccf11122222af......
+..........fa222221baccccf112222af.......
+...........fffffffffffffffffffff........
+`
+  },
+  {
+    "series": "Farm",
+    "label": "Farmland",
+    "string": `7cc7cccccc7cccc7
+eee67eee767ee6ee
+eee77eeef7fee76e
+eeeffeeeeeeeeffe
+cc3cccc3ccccc3cc
+ee47eee47eeee47e
+ee7eeee7eeeee7ee
+e6fe6eefeee26f6e
+c2c62ccccccc662c
+ef6eeeeeeeeee6ee
+eefeeeeee57eefee
+eee5eeeee7eeeeee
+ccc75cccc7cccccc
+ee77eeeee66eeeee
+eeffeeeeeffeeeee
+7cccccccccccccc7
+`
+  },
+  {
+    "series": "Farm",
+    "label": "Hay",
+    "string": `..bbbbbbbb..
+.45e555e554.
+bdddedddeddb
+b515e555e55b
+bdd1edddeddb
+b555f555f55b
+b444f444f44b
+.cccccccccc.
+`
+  },
+  {
+    "series": "Ocean",
+    "label": "Beachball",
+    "string": `................
+.....aaaaa......
+...cc55511cc....
+..c444555d1dc...
+.c411d455511dc..
+.c1d1114fc699c..
+e1d1d1dfddb699c.
+ed1d111cd1b169c.
+edd11222bb1116c.
+edd1222222111de.
+ed12e22e22111de.
+ec1e22222211db..
+..e2e2e221dd1c..
+..ceeeee2dddc...
+...cc2e211cc....
+.....ccccc......
+`
+  },
+  {
+    "series": "Ocean",
+    "label": "Sandcastle",
+    "string": `.........ccc..........
+........f223cc........
+........c22233cc......
+........cbee2223c.....
+........caffffff......
+........cb4c..........
+.......f4b44c.........
+......c4bb314c........
+......cf44441c........
+....cccf55551ccccc....
+...cfdfe3dd51f5f1bc...
+..cb1d3e3dd5145d1bc...
+..cb1e3e3dd514edebc...
+..fb1d3f3cc5145d1bc...
+.cbc1d3f3c65145d1cdb..
+.c3dcdbbccbb5db3c45db.
+eeecccccccccccccccceee
+`
+  },
+  {
+    "series": "Ocean",
+    "label": "Turtle",
+    "string": `.......aa.......
+......e77c......
+.....ef77fc.....
+..cc.eb671c.cc..
+.c6786dbbd6b74c.
+.c776ccddcc677c.
+c676f4e44edc674c
+c73c3d5eecdde57c
+a7bcebd44dceeb5a
+.c.44ee15eed4.c.
+...434edde4d4...
+...edc4e4eede...
+...f3c5e45dde...
+...cf4cbed4cc...
+..c76fe44ec65c..
+..c776ffee677c..
+..c77b....b77c..
+...c7e....e7c...
+....a......e....
+`
+  },
+  {
+    "series": "Ocean",
+    "label": "Starfish",
+    "string": `.......aa.......
+......a34a......
+......a34a......
+.....ab334a.....
+....ced3344b....
+abac4bd13d44bcca
+a444d34d33d3443a
+aa33335d134333aa
+.a45531d3d33dda.
+..aee343d345ea..
+...e4533334de...
+...a433dd434a...
+..c43dbaabd34c..
+..c3dbccccbd3c..
+..ccce....eccc..
+`
+  },
+  {
+    "series": "Ocean",
+    "label": "Scuba",
+    "string": `................ccc.ffff..
+..............c83daf4d22f.
+............ac3fbb8e42222f
+...........cb3bbf8e228888f
+.f...fff..cabbbb82e226991f
+f5fff55effcabb8f22be22cccf
+.c5555e422faa8f22b66e22ef.
+..ccccc22eefcc684622ffff..
+.....fffe222222688222cccc.
+....f5522233444effe444225c
+...f5554442eefffc.ffffcc4c
+..f5cccffffff.............
+.f5c......................
+f5c.......................
+.c........................
+`
+  },
+  {
+    "series": "Ocean",
+    "label": "Surfboard",
+    "string": `......cccccccccccccccc....
+....cc7777777777777777cc..
+...c33333333333333333333c.
+..c777777777777777777777bc
+.cd777777777747777777777bc
+cbd5555555554c4555555555bc
+.cb177777777747777777777bc
+..cb11777777777777777771bc
+...cbb111ddddddddddddd1bc.
+....ccbbbbbbbbbbbbbbbbbc..
+......ccccccccccccccccc...
+`
+  },
+  {
+    "series": "Misc",
+    "label": "Treasure",
+    "string": `..cccccccccccc5.
+.43eeeeeeeeeeee5
+4cc3555555555555
+4cf5cfffffffffcc
+4f44f65ff5952fcc
+44f55455455455c.
+4cc455ee5f5ee55.
+4cc45eeee5eeee5.
+ffffccccccccccc.
+cccceeeeeeeeeec.
+ffffccccccccccc.
+4cc45eeeeeeeee5.
+4c4455eeeeeee55.
+`
+  },
+  {
+    "series": "Misc",
+    "label": "Coin",
+    "string": `..ccccc..
+.ad555bc.
+bd53455bc
+b531545bc
+b531545bc
+b5315e5bc
+b5415e5bc
+a5415e5bc
+a5455e5bc
+ad54ed5bc
+.a5555bc.
+..ccccc..
+`
+  },
+  {
+    "series": "Ocean",
+    "label": "Octopus",
+    "string": `......a33ddb......
+.....b444444b.....
+....a42424444b....
+....a4b1144514....
+....a4bff44fc4....
+....a42ff44ff455..
+.4..3444444444444.
+43.34443444434434.
+b444bc44444444cc34
+.cccc44c444444..c4
+....444c43cb43..34
+....4cc.44cb44....
+.4.44c4.44ccb4.3c.
+.c44cc443c..c444c.
+..cc..ccc....ccc..
+`
+  },
+  {
+    "series": "Ocean",
+    "label": "Shell",
+    "string": `.....11511.....
+...515535515...
+..135dd3dd531..
+.1535dd3dd5351.
+ddd35dd3dd53ddd
+ddd53dd4dd35ddd
+bddd4dd4dd4dddb
+a3dd34d4d43dd3a
+.a3d343e343d3a.
+..a33e3e3e33a..
+...e3e3e3e3e...
+....e3e3e3e....
+...bdd3d3ddb...
+`
+  },
+  {
+    "series": "Ocean",
+    "label": "Bubble",
+    "string": `...6666...
+.66888866.
+.68....86.
+68.13...86
+68.3....86
+68......86
+68....9.86
+.68....86.
+.66888866.
+...6666...
+`
+  },
+  {
+    "series": "Ocean",
+    "label": "Boat",
+    "string": `..................cc............
+.................cd4c...........
+.................cbbbcc.........
+.................c11111cc.......
+.................fd311111c......
+.................fd3111111cc....
+.................fd311111111c...
+.................fd31111116c....
+.................fd4111116c.....
+.................f1111116c......
+.................f666666c.......
+.................fd4cccc........
+.................fd4c...........
+.................fd4c...........
+..ffffffffffffffffd4cffffffffff.
+.feeeeeeeeeeeeeeefd4ceeeeeeeeeef
+f2ffcccccccccccaafd4caaacccccffe
+fceefffffffffffffffffffffffffa2f
+fc22eeeeeeeeeeeebbbdddddddbbbb2f
+fcaab33344444444eeee2222244bbb2f
+fccc222222444444333333ddd34442cf
+fcaecccccccccc44444dddd444bbb2cf
+fcaee444aa334444ddddd44443342cf.
+.fcccce33333bbbb444444ddde44ccf.
+..fcaee4444aaaa44444222bbbb2cf9.
+...f8cccceee4444444444444cccf.9.
+...9ffffffffffffffffffffffff.9..
+9...99999.....999999999999999...
+9...............................
+.9..............................
+..999999999999999...............
+`
+  },
+  {
+    "series": "Ocean",
+    "label": "Submarine",
+    "string": `...................fff..........
+..................fab9f.........
+..................faff..........
+..................faf...........
+.................f2222f.........
+................f44333f.........
+.............ffff44443ffff......
+.....ff....ff4444ccccc4444fcc...
+.ff.f44ff.fb44444444444444d66c..
+fbb.f3d22f44444444444444ad6116c.
+fbf.f3322244444addd4433bd66616c.
+fbf.f442244334cd669d443bd666166c
+fbfff442243344cd666d444ad666966c
+f5ccc442e44444cd666d444cd666666c
+fbfff442e444444cddda444cd666666c
+fbf.f442ee444444cca44444cdddddc.
+fbf.f4422fe22244444444444cccccf.
+bbf.f44ff.fee2222222222222eeff..
+ff..fff....ffeeeeeeeeeeeeeff....
+.............fffffffffffff......
+`
+  },
+  {
+    "series": "Backgrounds",
+    "label": "Distant Castle",
+    "string": `5555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
+5555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
+5555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
+5555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
+5555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
+5555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
+5555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
+5555555544444555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
+5444444444444555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
+4444444444444455555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
+4444444444444455555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
+4444444444444455555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
+4444444444444445555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
+4444444444444444555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
+4444444444444444555555555555555555555555555555555555555555e55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
+4444444444444444455555555555555555555555555555555555555555e55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
+4444444444444444444555555555555555555555555555555555555555e55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
+4444444444444444444455555555555555555555555555555555555555ee5555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
+4444444444444444444445555555555555555555555555555555555555ee5555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
+4444444444444444444444555555555555555555555555555555555555ee5555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
+4444444444444444444444455555555555555555555555555555555555eee555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
+4444444444444444444444445555555555555555555555555555555555eee555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
+444444444444444444444444455555555555555555555555555555555eeee555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
+444444444444444444444444444555555555555555555555555555555eeee555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
+444444444444444444444444444455555555555555555555555555555eeeee55555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
+44444444444444444444444444444555555555555555555555555555eeeeee55555555555555555555555555555555555555555555555555555511111111155555555555555555555555555555555555
+44444444444444444444444444444445555555555555555555555555eeeeeee5555555555555555555555555555555555555555555555555551111111111111555555555555555555555555555555555
+4444444444444444444444444444444445555555555555555555555eeeeeeeee555555555555555555555555555555555555555555555555511111111111111155555555555555555555555555555555
+4444444444444444444444444444444444555555555555e5555555eeeeeeeeeee55555555555555555555555555555555555555555555555111111111111111115555555555555555555555555555555
+4444444444444444444444444444444444445555555555e555555eeeeeeeeeeee55555555555555555555555555555555555555555555551111111111111111111555555555555555555555555555555
+4444444444444444444444444444444444444544555555e55555555eeeeeeeee555555555555555555555555555555555555555555555511111111111111111111155555555555555555444445555555
+4444444444444444444444444444444444444444455555e55555555eeeeeeee5555555555555555555555555555555555555555555555511111111111111111111155555555555554444444444555555
+4444444444444444444444444444444444444444444455e5555555555eeeeee5555555555444444455555555555555555555555555555111111111111111111111115555555554444444444444455555
+4444444444444444444444444444444444444444444444e5544445544eeeeee5555555544444444445555555555555555555555555555111111111111111111111115555555444444444444444445555
+4444444444444444444444444444444444444444444444e4444444444eeedee4444455444444444444555555555555555555555555555111111111111111111111115555544444444444444444444455
+4444444444444444444444444444444444444444444444e4444444444eeedee4444444444444444444455555555555555555555555555111111111111111111111115544444444444444444444444445
+4444444444444444444444444444444444444444444444ee444444444eeeeee4444444444444444444444455555555555555555555555111111111111111111111115444444444444444444444444444
+4444444444444444444444444444444444444444444444ee444444444eeeeee444444444444e444444444444444444555555555444445111111111111111111114444444444444444444444444444444
+444444444444444444444444444444444444444444444eeee44444444eeeeee444444444444e444444444444444444444445554444444144411111111111444444444444444444444444444444444444
+444444444444444444444444444444444444444444444eeee44444444edeeee444444444444e444444444444444444444444444444444444444441444444444444444444444444444444444444444444
+44444444444444444444444444444444444444444444eeeeee4444444edeeee44444444444ee444444444444444444444444444444444444444444444444444444444444444444444444444444444444
+4444444444444444444444444444444444444444444eeeeeeee444444eeeeee44444444444ee444444444444444444444444444444444444444444444444444444444444444444444444444444444444
+444444444444444444444444444444444444444444eeeeeeeeee44444eeeeee44444444444ee444444444444444444444444444444444444444444444444444444444444444444444444444444444444
+444444444444444444444444444444444444444444444eeeee4444444eeeeee44444444444ee444444444444444444444444444444444444444444444444444444444444444444444444444444444444
+444444444444444444444444444444444444444444444eeeee4444444eeeeee44444444444ee444444444444444444444444444444444444444444444444444444444444444444444444444444444444
+444444444444444444444444444444444444444444444eeeee4444444eeeeee44444444444eee44444444444444444444444444444444444444444444444444444444444444444444444444444444444
+444444444444444444444444444444444444444444444eeeee4444444eeeeee4444444444eeee44444444444444444444444444444444444444444444444444444444444444444444444444444444444
+444444444444444444444444444444444444444444444edeee4444444eeeeee4444444444eeeee4444444444444444444444444444444444444444444444444444444444444444444444444444444444
+444444444444444444444444444444444444444444444edeee444444eeeeeee444444444eeeeeee444444444444444444444444444444444444444444444444444444444444444444444444444444444
+444444444444444444444444444444444444444444444eeeeee44444eeeeeee4444444eeeeeeeee444444444444444444444444444444444444444444444444444444444444444444444444444444444
+444444444444444444444444444444444444444444444eeeeee44444eeeeeee444444444eeeee44444444444444444444444444444444444444444444444444444444444444444444444444444444444
+444444444444444444444444444444444444444444444eeeede44444eeeeeee444444444eeeeee4444444444444444444444444444444444444444444444444444444444444444444444444444444444
+444444444444444444444444444444444444444444444eeeede44444eeeeeeee44444444eeeeee4444444444444444444444444444444444444444444444444444444444444444444444444444444444
+444444444444444444444444444444444444444444444eeeeee44444eeeeeeeee4444444eeeeee4444444444444444444444444444444444444444444444444444444444444444444444444444444444
+44444444444444444444444444444444444444444444eeeeeee44444eeeeeeeee4444444eeeee44444444444444444444444444444444444444444444444444444444444444444444444444444666666
+44444444444444444444444444444444444444444444eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeede44444444444444444444444444444444444444444444444444444444444444444444444444449666666
+44444444444444444444444444444444444444444444eeeeeeeeeeeeeeeeeeeeeeeedeeeeeede44444444444444444444444444444444444444444444444444444444444444444444444444469666666
+4444444444444444444444444444444444444444444eeeeeeeeeeeeeeeeeeeeeeeeedeeeeeeee44444444444444444444444444444444444444444444444444444444444444444444444444996666666
+4444444444444444444444444444444444444444444eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee44444444444444444444444444444444444444444444444444444444444444444444444444966666666
+4444444444444444444444444444444444444444444eeeeeeedeeeeeeeeeeeeeeeeeeeeeeeeee44444444444444444444444444444444444444444444444444444444444444444444444444466666666
+4444444444444444444444444444444444444444444eeeeeeedeeeeeeeeeeeeeeeeeeeeeeeeee44444444444444444444444444444444444444444444444444444444444444444444449966666666666
+444444444444444444444444444444444444444444eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee44444444444444444444444444444444444444444444444444444444444444444444499666666666666
+94446699944444444444444444444444444444eee4eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee44444444444444444444444444444444444444444444444444444444444444444444996666666666666
+69966666999444444444444444444444444444eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee44444444444444444444444444444444444444444444444444444444444444444446966666666666666
+666666666699444444444444444444444444444eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee44444444444444444444444444444444444444444444444499966644444444444466666666666666666
+666666666669944444444444444444444444444eeedeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeedee44444444444444444444444444444444444444444444444966666664444444466666666666666666666
+666666666666944444446666644444444444444eeedeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeedeee4444444444444444444444444444444444444444444499666666666444444966666666666666666666
+666666666666966664466666669994444444444eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeedeee4444444444449999966444444444444444444996666696666666666444499666666666666666666666
+666666666666966669996666666669444444444eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee444444444499666666444444444444444449966666999999666666644996666666666666666666666
+666666666999966666669966666669444444444eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee444444444996666666469999944444444449666666666666666666669966666666666666666666666
+666666666666999966666996666666444444444eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee444444444666666669466666666644446669666666666666666666669666666666666666666666666
+666666666666666996666696666666444666666eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee999996444444666666996966666666664996666999666666666666666699666666666666666666666666
+6666666666666666966666666666664466666666eeeeeeeeeeeeeeeeddeeeeeeeeeeeeeeeee9966699499999666699966666666666669966666666666666666666666666666666666666666666666666
+6666666666666666666666666666994666666666eeeeeeeeeeeeeeeddddeeeeeeeeeeeeeeee6666699966666966696666666666699999999666666666666666666666666666666666666666666666666
+6666666666666666666666666666699966666666666eeeeeeeeeeeeddddeeeeeeeeeeee66666666666666666666666666666666666666669666666666666666666666666666666666666666666666666
+6666666666666666666666666666666996666666666eeeeeeeeeeeeddddeeeeeeeeeee666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666
+6666666666666666666666666666666696666666666eeeeeeeeeeeeddddeeeeeeeeeee666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666
+666666666666666666666666666666666666666666eeeeeeeeeeeeeddddeeeeeeeeeee666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666
+6666666666666666666666666666666666666666666eeeeeeeeeeeccccceeeeeeeeeeeee6666666666666666666666666666666666666666666666666666666666666666666666666666666666666666
+66666666666666666666666666666666666666666666eeeeeeeeeeecceeeeeeeeeeeeeee6666666666666666666666666666666666666666666666666666666666666666666666666666666666666666
+6666666666666666666666666666666666666666666666eeeeeeeeccceeeeeeeeeeeeeeee666666666666666666666666666666666666666666666666666666666666666666666666666666666666666
+666666666666666666666666666666666666666666666666eeeeeecccccceeeeeeeeee666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666
+6666666666666666666666666666666666666666666666666eeeeeeccccccccceeee66666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666
+6666666666666666666666666666666666666666666666666eeeeeeeeeeeccccceee66666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666
+6666666666666666666666666666666666666666666666666eeeeeeeeeeeeeccceee66666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666
+6666666666666666666666666666666666666666666666666eeeeeeeeeeccccceeee66666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666
+6666666666666666666666666666666666666666666666666eeeecccccccccceeee666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666
+6666666666666666666666666666666666666666666666666eecccccceeeeeeeeee666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666
+6666666666666666666666666666666666666666666666666eccceeeeeeeeeeeeee666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666
+6666666666666666666666666666666666666666666666666ecceeeeeeeeeeeeeee666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666
+6666666666666666666666666666666666666666666666666eccccceeeeeeeeeeeee66666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666
+6666666666666666666666666666666666666666666666666eccccccccceeeeeeeeeeeeee666666666666666666666666666666666666666666666666666666666666666666666666666666666666666
+6666666666666666666666666666666666666666666666666eccccccccccceeeeeeeeeeeee66666666666666666666666666666666666666666666666666666666666666666666666666666666666666
+666666666666666666666666666666666666666666666eeeeeeeeeeecccccccceeeeeeeeeee6666666666666666666666666666666666666666666666666666666666666666666666666666666666666
+6666666666666666666666666666666666666666666eeeeeeeeeeeeeeeeeeccccccceeeeeee6666666666666666666666666666666666666666666666666666666666666666666666666666666666666
+6666666666666666666666666666666666666666eeeeeeeeeeeeeeeeeeeeeeeecccccceeeee6666666666666666666666666666666666666666666666666666666666666666666666666666666666666
+6666666666666666666666666666666666666666eeeeeeeeeeeeeeeeeeeeeeeeeecccccceeee66666eeeeeeeeeeeeeee6666666666666666666666666666666666666666666666666666666666666666
+666666666666666666666666666666eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeecccceeeeeeeeeeeeeeeeeeeeeeeee66666666666666666666666666666666666666666666666666666666666666
+66666666666666666666666666eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeecccceeeeeeeeeeeeeeeeeeeeeeeeee6666666666666666666666666666666666666666666666666666666666666
+6666666666666666666666666eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeccccceeeeeeeeeeeeeeeeeeeeeeeee6666666666666666666666666666666666666666666666666666666666666
+6666666666666666666666666eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeccccccceeeeeeeeeeeeeeeeeeeeeeeeee666666666666e66666666666666666666666666666666666666666666666
+66666666eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeecccccccceeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6666666eee6666666666666666666666666666666666666666666666
+66666666eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeecccccccccceeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee66666666666666666666666666666666666666666666
+66666666eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeccccccccccceeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee66666666666666666666666666666666666eee
+66666666eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeecccccccccccccccceeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee66666666666666666666666eeee
+66666666eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeccccccccccccccccceeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee666666666666666666666eeeee
+66666eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeecccccccccccccccceeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6666666666666666666eeeeee
+eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeecccccccccccceeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee6666666666666666eeeeee
+eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeccccceeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+eeeeeeeeeeeeeeeeeeeeecccccccccceeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+eeeeeeeeeeeeeeecccccccccccccceeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+eeeeeeeeeeeeeecccccccccccceeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+eeeeeeeeeeeeccccccccccceeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+eeeeeeeeeecccccccccccceeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+eeeeeeeeecccccccccccceeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+eeeeeeeeccccccccccccceeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+eeeeeeeccccccccccccccceeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+eeeeeeecccccccccccccccccceeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+eeeeeecccccccccccccccccccccceeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+eeeeeeccccccccccccccccccccccccccceeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+`
+  },
+  {
+    "series": "Fantasy",
+    "label": "Dragon",
+    "string": `...........ffff.................
+...ffff...f7777ffff.............
+..f77ffffffff6f7777f............
+ff77677777666f777ff.............
+f7777777777f7777f..ffffff.......
+f777777777777777f.f77777ff......
+.f666877777777777f.f777777f.....
+.f776688888777777f.f7787777f....
+..f777777667777777.f78887777f...
+...f77777766777777.f76688777f...
+....f7777776777777f7766687777f..
+.....f77777777777777767668777f..
+.ff.f777777777777777667676877f..
+f66ff77777777777777767767667ff..
+f688f77777777777777ff7f77ff7f...
+f668866f6777777777f..ff7f..f....
+ff6886f777777777777fffff........
+.f6886f77777777777777777f.......
+..f686f67f777f77777777777f......
+...ff66ff6f7ff777777777777f.....
+....f766676ff67777777777777f....
+.....ff666766777777666677777f...
+.......f666677776666f6677777f...
+........f66666668fff.f667777f...
+.........fff88888f....f67777f...
+.......ffffff68886ff..f67777f...
+......f7777fff66886f.ff6777f....
+.....f76ff677fff666fff77777f....
+.....f6f..ff777776f77777776f....
+......f.....ff777777777776f.....
+..............ff777777776f......
+...............ffffffffff.......
+`
+  },
+  {
+    "series": "Fantasy",
+    "label": "Monk",
+    "string": `..fffffff.......
+.fdddddddf......
+fdddddeeeef.....
+ffdfddeedeff....
+fddddddddbebf...
+fddddddddeeebf..
+fdddddddeeeeebf.
+.fdddddeeeeeeef.
+..fececeeeeeeebf
+.feeccceeeeeeeef
+.feeeeeeeeeeeeef
+.feeeeeeeeeeceef
+.fceeeeeeecceeef
+..fccccccccceeef
+...fcccccceeeeef
+...ffffffffffff.
+`
+  },
+  {
+    "series": "Fantasy",
+    "label": "Knight",
+    "string": `....f222f.......
+...f222f2fff..f.
+fff299999999ffbf
+2226999999999fbf
+f226999999999fbf
+.ff6998888889fbf
+..f6999998999fbf
+..f6999998999fbf
+..f6999998999fbf
+...f66666666fbbb
+...ff6999999f69f
+..fbbbb99999669f
+..fbbbb99999fff.
+..fbbbb99999f...
+...fbb6ff66f....
+....f69ff69f....
+`
+  },
+  {
+    "series": "Fantasy",
+    "label": "Knight",
+    "string": `.......f555f....
+.f..fff5f555f...
+fcffffffffff5fff
+fcffffffffff8555
+fcffffffffff855f
+fcff222222ff8ff.
+fcffff2fffff8f..
+fcffff2fffff8f..
+fcffff2fffff8f..
+cccf88888888f...
+ff8fffffff8ff...
+ff88fffffccccf..
+.ffffffffccccf..
+...ffffffccccf..
+....f88ff8ccf...
+....ff8fff8f....
+`
+  },
+  {
+    "series": "Misc",
+    "label": "Chest",
+    "string": `...ffffffffff...
+..f5555555555f..
+.f5beeeeee5ce5f.
+f5beeeeee5ceee5f
+f5eeeeeee5ceee5f
+f55555555555555f
+f5be55cee5ceee5f
+f5beeeeee5ceee5f
+f5beeeeee5ceee5f
+f5beeeeee5ceee5f
+f5beeeeee5ceee5f
+f5eeeeeee5ceee5f
+f55555555555555f
+ffffffffffffffff
+`
+  },
+  {
+    "series": "Fantasy",
+    "label": "Monster",
+    "string": `.ccb........bcc.
+b11cbbbccbbbc11b
+bff1bbc11cbb1ffb
+.aabbb1ff1bbbaa.
+...bbbbaabbbbb..
+..bbcccccccccb..
+..bbc1212121cb..
+..bbc2222222cb..
+...bba12121abb..
+...bbbaaaaabb...
+.996bbbbbbbb699.
+bb966666666669bb
+b..9966666699..b
+....99999999....
+..b.99...999.b..
+...bb.....bbb...
+`
+  },
+  {
+    "series": "Fantasy",
+    "label": "Monster",
+    "string": `..66666666.
+.6accccccc6
+.66a99919c6
+.66c9f9f1c6
+.66cb999bc6
+.66c99f99c6
+.66ccccccc6
+..6aaaaaa6.
+..66666666.
+.666bbb5666
+6666b999666
+6666b2926c6
+.6c6b992696
+.696666666.
+..69966996.
+...66..66..
+`
+  },
+  {
+    "series": "Fantasy",
+    "label": "Monster",
+    "string": `....fffffff....
+...f6666666f...
+.fc911999966cf.
+f7c91999999bc7f
+f7799999999b77f
+f7c9bba9baa6c7f
+.fc98f898f86cf.
+..f699996666f..
+...f6999996f...
+....fffffff....
+...f7666667f...
+..f776259677f..
+..f7f66666f7f..
+...f.f8f8f.f...
+....f88f88f....
+....fff.fff....
+`
+  },
+  {
+    "series": "Misc",
+    "label": "Person",
+    "string": `..fceeeaf..
+...fffff...
+.fceeeeeaf.
+fce43333eaf
+fee3ddddeef
+fe43dddd3ef
+f43e4d4ed3f
+f41f1d1f13f
+.f111d111f.
+..43dddd3..
+.fbb666bbf.
+f7b6666677f
+f3d66666d3f
+.ff86668ff.
+..fcfffcf..
+.ffff.ffff.
+`
+  },
+  {
+    "series": "Misc",
+    "label": "Mushroom Man",
+    "string": `.....ffffff.....
+....f222d2ef....
+...f2132222ef...
+..f2432222d2ef..
+.f24322222222ef.
+f244321d222222ef
+f2344311222222ef
+.fe2222222222ef.
+..feeeeeeeeeef..
+...ffffffffff...
+....f9fb9fbf....
+....f1fd1fbf....
+....f3ddd3bf....
+....fdddddbf....
+....f2eff2ef....
+.....ff..ff.....
+`
+  },
+  {
+    "series": "Misc",
+    "label": "Cursor",
+    "string": `fbb.........
+f11bb.......
+f1111bb.....
+f111111bb...
+f11111111b..
+f111111111b.
+f11111111b..
+f1111111b...
+f11111111b..
+f111ff111b..
+ffff..f111b.
+.......f111b
+........f11b
+.........bb.
+`
+  },
+  {
+    "series": "Misc",
+    "label": "Pink Guy",
+    "string": `.....fffffffff..
+...ff33333333bf.
+..fa333ddddd33f.
+.fa333333dddd33f
+.fa3333333dddd3f
+.fab33333333dd3f
+.fab11ff331ffd3f
+.fabffff33fffd3f
+.fa4ffff33fff43f
+.fa243333333443f
+..fabb333333d3f.
+.fffabb3333d3ff.
+f886fabbbbbbf66f
+f8886ffffff8886f
+.ffff......ffff.
+`
+  },
+  {
+    "series": "Misc",
+    "label": "Purple Guy",
+    "string": `...fffffff...
+..faaaaaacf..
+.fa1dbaaaacf.
+fadbbaaaaaacf
+fabaaaaaaaaaf
+faacccccccaaf
+fac6666666caf
+fa6ff666ff6af
+faf1f666f1faf
+fafff999fffaf
+.fa9999999af.
+..ffabbbaff..
+.ffcccccccff.
+fdff88888ffdf
+.f.fdfffdf.f.
+...fff.fff...
+`
+  },
+  {
+    "series": "Ninjas",
+    "label": "Ninja",
+    "string": `....ffff..
+f..ffffff.
+.fffffffff
+f.fffffbbb
+..fffbb11d
+..ffffd1fd
+...fffffff
+....fffff.
+..ffffff..
+.ffffffff.
+.ffffffff.
+.f.fffffff
+...fffff..
+..fffffff.
+.fff...ff.
+.f......ff
+`
+  },
+  {
+    "series": "Backgrounds",
+    "label": "Castle",
+    "string": `bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbdddddddddddddddddbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbdddddddddddddddddbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbdddddddddddbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbddddddddddddddddddddbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbdddddddddddddddddddddddbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbddddddddbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbddddddddddddddddddddddbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbddddddddbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+b9999bbbdddd9999bbb9dddddbbbbb99999bbbbdddddd9bbb999999bbbdddddd9bbb9999bbbbdddddbbbb9999bbbbddd999bbb9999ddbbbbdd999bbbb999ddddbbbbb999999bbbdddddddbbbb99999bb
+9999999ddddd99999999ddddddd9999999999dddddddd99999999999dddddddd9999999999dddddddd999999999ddddd9999999999dddddddd9999999999dddddddd999999999ddddddddd9999999999
+ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+aaaaaaaaaaaaaaaaaaaafffffffaaaaaaaaaaaaaaaaaaaaaaaaaaafffffffaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaafffffffaaaaaaaaaaaaaaaaaaaaaaaaaafffffffaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaafccdddccfaaaaaaaaaaaaaaaaaaaaaaaaafccdddccfaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaafccdddccfaaaaaaaaaaaaaaaaaaaaaaaafccdddccfaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaafdaaaaaaadfaaaaaaaaaaaaaaaaaaaaaaafdaaaaaaadfaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaafdaaaaaaadfaaaaaaaaaaaaaaaaaaaaaafdaaaaaaadfaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaafcaabbbbbbbcfaaaaaaaaaaaaaaaaaaaaafcaabbbbbbbcfaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaafcaabbbbbbbcfaaaaaaaaaaaaaaaaaaaafcaabbbbbbbcfaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaafcabbbbbbbbcfaaaaaaaaaaaaaaaaaaaaafcabbbbbbbbcfaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaafcabbbbbbbbcfaaaaaaaaaaaaaaaaaaaafcabbbbbbbbcfaaaaaaaaaaaaaaaa
+ffffffffffffffffffdabbbbbbbbdfffffffffffffffffffffffdabbbbbbbbdffffffffffffffffffffffffffffffffffffdabbbbbbbbdffffffffffffffffffffffdabbbbbbbbdfffffffffffffffff
+88888888888888888fdabbbbbbbbdf888888888888888888888fdabbbbbbbbdf88888ffeeeeeeeeeeeeeeeeeeeeff88888fdabbbbbbbbdf88888888888888888888fdabbbbbbbbdf8888888888888888
+88888888888888888fcabbbbbbbbcf888888888888888888888fcabbbbbbbbcf88888ffeeeeeeeeeeeeeeeeeeeeff88888fcabbbbbbbbcf88888888888888888888fcabbbbbbbbcf8888888888888888
+ffffffffffffffffffcabbbbbbbbcfffffffffffffffffffffffcabbbbbbbbcffffffffeeeeeeeeeeeeeeeeeeeeffffffffcabbbbbbbbcffffffffffffffffffffffcabbbbbbbbcfffffffffffffffff
+cc6777766ccc66666fcaabbbbbbbcf666666666666666666666fcaabbbbbbbcf6666666ffffffffffffffffffff6666666fcaabbbbbbbcf66666666666666666666fcaabbbbbbbcf66666ccccc777777
+c61dc77ccccccccc66fdaabbbbbdf66666666666666666666666fdaabbbbbdf666666666666666666666666666666666666fdaabbbbbdf6666666666666666666666fdaabbbbbdf666666cccccc77777
+77717776cc666666666fccdddccf6666666666666666666666666fccdddccf66666666666666666666666666666666666666fccdddccf666666666666666666666666fccdddccf66666666666cc1d777
+1777777ccc6666666666fffffff666666666666666666666666666fffffff6666666666666666666666666666666666666666fffffff66666666666666666666666666fffffff666666666cccc777777
+7777c77ccc666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666cc61d1777776
+7767771d1c666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666cc6717777c77
+777667717ccc6666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666cc7c77767771
+76667777776c66666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666c7767776677
+6717676777cc66666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666c7777666777
+61d176777777666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666ccc1776717676
+771777777176666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666cc177661d1767
+7777c7671d176666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666c77677717777
+777777767176666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666ccc7c77777c76
+17767777777676666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666667c7777777771
+7777ccccccc666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666c777677661d
+77677cc6ccc666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666cc677617771
+c771776cccc6666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666cccccd1777
+771d176cc666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666cc17777
+67717776c66666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666ccc77767
+77777767c666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666ccc7767776
+676777c7c66666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666cc617777666
+76777777cc6666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666c61d1776717
+777771766c6666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666667177661d1
+c7671d1766c66666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666777677117
+7776717666c66666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666677661d17
+177777767cc66666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666771777177
+d17676cccc66666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666661d177777
+17766c6c66666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666c717777c7
+777677ccc666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666661666666c7c7776777
+7c771776c66666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666661616666c6776777667
+7771d176c6666661666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666818666cc1777766677
+667717776c666616166666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666c1d177671767
+677777767c666681866666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666cc177661d176
+7676777c7cc666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666c7767771777
+1767777776c66666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666cc77c77777c7
+7777771766c66666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666cc7777777777
+7c7671d17c6666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666ccc77677617
+77776717ccc66666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666c677661d1
+7667777767c666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666cccccc77717
+7677676ccc6666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666cccccc17777
+771776ccc666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666cc6717777c
+71d1766c66666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666c7c777677
+7717776c66666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666c77677766
+7777767cc6666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666177776667
+76777c76c6666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666661d17767176
+67777776c6666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666667177661d17
+7777176cc6666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666667776777177
+7671d17c6666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666677c77777c
+7667176c66666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666667777777777
+767777c76666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666c677767767
+771776c66666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666c6767c6661
+71d17cccc666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666cccccc1777
+771777ccc6666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666c6cccd177
+777776cc6c66666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666c671777
+76777ccc666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666cc7c7776
+6777177cc6666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666cc6776777
+7661d16cc66666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666c1777766
+177717cc666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666cd177671
+d17777c6776666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666c177661d
+17777c7717766666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666c77767771
+77767771d1766666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666c677c7177
+6777667717776666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666c77661d17
+7766677777767666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666661777177
+76717676777c7c6666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666661d177777
+661d176777777c666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666717777c7
+77717777771ccc666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666667c7776777
+77777c7671d1c666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666776777667
+717777776717c666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666661777766677
+1d1767777ccc6766666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666c1d177671767
+717766676cccc666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666c7177661d176
+777767cccc666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666c77767771777
+77c77ccc6cc6666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666c6677c77777c7
+67771d176cc6666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666116666666ccc7777777777
+766771777c6666666666666661166666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666311366666666c6777677671
+667777776cc66666666666663113666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666118811666666ccc76776661d
+17676777c7666666666666611881166666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666d1661d666666666ccc617771
+d1767777776666666666666d1661d66666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666831138666666666c6c1d1777
+177777717666666666666668311386666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666668dd8666666666666c717777
+77c7671d17666666666666668dd86666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666ccc77767
+777771717c6666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666c7767776
+76661d177c766666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666617777666
+717771776c6666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666661d1776717
+1d1777776c7666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666661666666666666666666666666667177661d1
+717777c77ccc6666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666661616666666666666666666666666777677717
+c77767771d17c666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666668186666666666666666666666666677c77777
+767776677177c666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666777777777
+7776667777776766666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666667771776
+776717676777c76666666666666666666666666666166666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666661d176
+7661d17677777766666666666666666666666666616166666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666cccc71776
+67771777777176666666666666666666666666666818666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666cc1dcc77776
+c7777717671d1766666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666cc6717777c77
+777661d17671766666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666c667c77767771
+77177717766776c66666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666cc667767776677
+61d17777767766c66666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666cc617777666777
+6717777c77177c6666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666c1d1776717676
+7c77767771d17cc666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666cc177661d1767
+77677766771777c6666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666c77677717777
+77776667777776ccc6666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666cc77c77777c76
+1776717676777c76c666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666cccc7777777777
+77661d17677777ccc666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666c6cccc76776777
+76777177777717ccccccc666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666ccc7cc7676667
+`
+  },
+  {
+    "series": "IMPACT",
+    "label": "Gargoyle",
+    "string": `......f...f......
+....ffcfffcff....
+...fbfcccccfbf...
+...fbbcbbbcbbf...
+..fbbfddbddfbbf..
+..fbcafdbdfacbf..
+.fbbfacbbbcafbbf.
+fbbfaafbbbcaafbbf
+fbfacfafffafcafbf
+fbccfbbaaabbfccbf
+ffffcbbbcbbbcffff
+....fcbcccbcf....
+....fffffccff....
+...fcaaaaaaacf...
+....fcccccccf....
+.....fffffff.....
+`
+  },
+  {
+    "series": "Backgrounds",
+    "label": "Basketball Court",
+    "string": `bbbffdddddddddddddddfff66666666666666666666666666666ff9999999999999999999999999999999999999999999999999ff66666666666666666666666666666fffddddddddddddddddffbbbbb
+bbbffdddddddddddddddfff66666666666666666666666666666ff9999999999999999999999999999999999999999999999999ff66666666666666666666666666666fffddddddddddddddddffbbbbb
+bbbffdddddddddddddddfff66666666666666666666666666666ff9999999999999999999999999999999999999999999999999ff66666666666666666666666666666fffddddddddddddddddffbbbbb
+bbbffdddddddddddddddfff666666666666666666666666fffffff9999999999999999999999999999999999999999999999999fffffffff6666666666666666666666fffddddddddddddddddffbbbbb
+bbbffdddddddddddddddfff666666666666666666666666fffffff9999999999999999999999999999999999999999999999999fffffffff6666666666666666666666fffddddddddddddddddffbbbbb
+bbbffdddddddddddddddcff66666666666666666666666666666ff99999999999999999999bbccccccbb9999999999999999999ff66666666666666666666666666666ffcddddddddddddddddffbbbbb
+bbbffdddddddddddddddcff66666666666666666666666666666ff9999999999999999bccffffffffffffccb999999999999999ff66666666666666666666666666666ffcddddddddddddddddffbbbbb
+bbbffdddddddddddddddcff66666666666666666666666666666ff99999999999999ccffffffffffffffffffcc9999999999999ff66666666666666666666666666666ffcddddddddddddddddffbbbbb
+bbbffdddddddddddddddbff66666666666666666666666666666ff999999999999ccffffc699999999996cffffcc99999999999ff66666666666666666666666666666ffcddddddddddddddddffbbbbb
+bbbffdddddddddddddddbffc6666666666666666666666666666ff9999999999bcfffcb9999999999999999bcfffcc999999999ff6666666666666666666666666666cffbddddddddddddddddffbbbbb
+bbbffddddddddddddddddfff6666666666666666666666666666ff999999999ccffc9999999999999999999999cffcc99999999ff6666666666666666666666666666cffdddddddddddddddddffbbbbb
+bbbffddddddddddddddddfff6666666666666666666666666666ff9999999dcfffb999999999999999999999999bfffcd999999ff6666666666666666666666666666fffdddddddddddddddddffbbbbb
+bbbffddddddddddddddddcff66666666666666666666666fffffff9999996cffc9999999999999999999999999999cffc699999fffffffff666666666666666666666ffcdddddddddddddddddffbbbbb
+bbbffddddddddddddddddcff66666666666666666666666fffffff999996cffb999999999999999999999999999999bffc69999fffffffff666666666666666666666ffcdddddddddddddddddffbbbbb
+bbbffddddddddddddddddbffc666666666666666666666666666ff9999dcff6999999999999999999999999999999996ffcd999ff666666666666666666666666666cffbdddddddddddddddddffbbbbb
+bbbffdddddddddddddddddfff666666666666666666666666666ff9999cff699999999999999999999999999999999996ffc999ff666666666666666666666666666fffddddddddddddddddddffbbbbb
+bbbffdddddddddddddddddcff666666666666666666666666666ff999cffb9999999999999999999999999999999999996ffc99ff666666666666666666666666666ffcddddddddddddddddddffbbbbb
+bbbffdddddddddddddddddbffc66666666666666666666666666ff99bcfc99999999999999999999999999999999999999cfcb9ff66666666666666666666666666cffcddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddfff66666666666666666666666666ff99cff9999999999999999999999999999999999999999fff9ff66666666666666666666666666fffdddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddcff66666666666666666666666666ff9fffb9999999999999999999999999999999999999999bfffff66666666666666666666666666fffdddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddbffc6666666666666666666666666ffcffc999999999999999999999999999999999999999999cffff6666666666666666666666666cffcdddddddddddddddddddffbbbbb
+bbbffdddddddddddddddddddfff66666666666666666666ffffffffff99999999999999999999999999999999999999999999fffffffffff666666666666666666fffddddddddddddddddddddffbbbbb
+bbbffdddddddddddddddddddcff66666666666666666666fffffffffc99999999999999999999999999999999999999999999cffffffffff666666666666666666ffcddddddddddddddddddddffbbbbb
+bbbffdddddddddddddddddddbfff666666666666666666666666ffffb99999999999999999999999999999999999999999999bfff666666666666666666666666fffbddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddfff666666666666666666666666ffff9999999999999999999999999999999999999999999999fff666666666666666666666666fffdddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddbffc66666666666666666666666fffc9999999999999999999999999999999999999999999999cff66666666666666666666666cffbdddddddddddddddddddddffbbbbb
+bbbffdddddddddddddddddddddfff66666666666666666666666fff69999999999999999999999999999999999999999999999cff66666666666666666666666fffddddddddddddddddddddddffbbbbb
+bbbffdddddddddddddddddddddbfff6666666666666666666666fff999999999999999999999999999999999999999999999999ff6666666666666666666666fffbddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddcff6666666666666666666666fff999999999999999999999999999999999999999999999999ff6666666666666666666666fffdddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddbfff666666666666666666666fff999999999999999999999999999999999999999999999999ff666666666666666666666fffbdddddddddddddddddddddddffbbbbb
+bbbffdddddddddddddddddddddddcffc66666666666666666666fff999999999999999999999999999999999999999999999999ff66666666666666666666cffcddddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddddfff66666666666666666666fff999999999999999999999999999999999999999999999999ff66666666666666666666fffdddddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddddbfff6666666666666666666fffffffffffffffffffffffffffffffffffffffffffffffffffff6666666666666666666fffcdddddddddddddddddddddddddffbbbbb
+bbbffdddddddddddddddddddddddddcffc666666666666666666fffffffffffffffffffffffffffffffffffffffffffffffffffff666666666666666666cfffddddddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddddddfffc66666666666666666fff999999999999999999999999999999999999999999999999ff66666666666666666cfffdddddddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddddddbfff66666666666666666cff999999999999999999999999999999999999999999999999ff66666666666666666fffbdddddddddddddddddddddddddddffbbbbb
+bbbffdddddddddddddddddddddddddddcfff66666666666666666ff999999999999999999999999999999999999999999999999ff6666666666666666fffcddddddddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddddddddcfff6666666666666666ff999999999999999999999999999999999999999999999999ff666666666666666fffcdddddddddddddddddddddddddddddffbbbbb
+bbbffdddddddddddddddddddddddddddddfffc666666666666666ffc9999999999999999999999999999999999999999999999cff66666666666666cfffddddddddddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddddddddddfffc66666666666666cff9999999999999999999999999999999999999999999999ffc6666666666666cfffdddddddddddddddddddddddddddddddffbbbbb
+bbbffdddddddddddddddddddddddddddddddfffc66666666666666ff999999999999999999999999999999999999999999999bff6666666666666cfffddddddddddddddddddddddddddddddddffbbbbb
+bbbffdddddddddddddddddddddddddddddddbfffc6666666666666ffc99999999999999999999999999999999999999999999cff666666666666cfffbddddddddddddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddddddddddddbffff666666666666cff99999999999999999999999999999999999999999999ffc66666666666ffffbdddddddddddddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddddddddddddddffff666666666666ffc999999999999999999999999999999999999999999cff66666666666ffffdddddddddddddddddddddddddddddddddddffbbbbb
+bbbffdddddddddddddddddddddddddddddddddddffffc6666666666cff99999999999999999999999999999999999999999bffc666666666cffffddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddddddddddddddddcfffc6666666666fff9999999999999999999999999999999999999999cff666666666cfffcdddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffdddddddddddddddddddddddddddddddddddddcffff666666666cffc99999999999999999999999999999999999999cffc66666666ffffcddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddddddddddddddddddbffffc66666666fff69999999999999999999999999999999999996fff6666666cffffbdddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddddddddddddddddddddcffff66666666fff699999999999999999999999999999999996fff6666666fffffdddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffdddddddddddddddddddddddddddddddddddddddddcfffff6666666fff6999999999999999999999999999999996fff666666fffffbddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffdddddddddddddddddddddddddddddddddddddddddddcffffc666666fff69999999999999999999999999999996fffc6666cffffcddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffdddddddddddddddddddddddddddddddddddddddddddddffffff66666fffc9999999999999999999999999999cfff6666ffffffbdddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddddddddddddddddddddddddddbffffffc666fffcb999999999999999999999999bcfff66cffffffbdddddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddddddddddddddddddddddddddddbcffffffc6ffffc9999999999999999999999cffffffffffffbdddddddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddddddddddddddddddddddddddddddbcffffffffffffcb9999999999999999bcfffffffffffcbdddddddddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffdddddddddddddddddddddddddddddddddddddddddddddddddddddbfffffffffffffc699999999996cffffffffffffbddddddddddddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddddddddddddddddddddddddddddddddddddbcfffffffffffffffffffffffffffffffccdddddddddddddddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbccfffffffffffffffffffffffccbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbbccffffffffffffccbdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbccffffffccbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbcffffffffffffffcbdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbfffffcbbddddbbcfffffbdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddcfffcddddddddddddddcfffcddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddbfffbddddddddddddddddddbfffbddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddcffcddddddddddddddddddddddcffcdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddddddddddddddddddddddddddddddddddddddcffbddddddddddddddddddddddddbffcddddddddddddddddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffdddddddddddddddddddddddddddddddddddddddddddddddddddddddddcffbddddddddddddddddddddddddddbffcdddddddddddddddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddddddddddddddddddddddddddddddddddddbffbddddddddddddddddddddddddddddbffbddddddddddddddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddddddddddddddddddddddddddddddddddddffcddddddddddddddddddddddddddddddcffddddddddddddddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffdddddddddddddddddddddddddddddddddddddddddddddddddddddddcfcddddddddddddddddddddddddddddddddcfcdddddddddddddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddddddddddddddddddddddddddddddddddbffddddddddddddddddddddddddddddddddddffbddddddddddddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddddddddddddddddddddddddddddddddddffbddddddddddddddddddddddddddddddddddbffddddddddddddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffdddddddddddddddddddddddddddddddddddddddddddddddddddddbffddddddddddddddddddddddddddddddddddddffbdddddddddddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffdddddddddddddddddddddddddddddddddddddddddddddddddddddcfcddddddddddddddddddddddddddddddddddddcfcdddddddddddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffdddddddddddddddddddddddddddddddddddddddddddddddddddddffddddddddddddddddddddddddddddddddddddddffdddddddddddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddddddddddddddddddddddddddddddddbffddddddddddddddddddddddddddddddddddddddcfbddddddddddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddddddddddddddddddddddddddddddddcfcddddddddddddddddddddddddddddddddddddddcfcddddddddddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddddddddddddddddddddddddddddddddcfbddddddddddddddddddddddddddddddddddddddbfcddddddddddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddddddddddddddddddddddddddddddddffbddddddddddddddddddddddddddddddddddddddbffddddddddddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffbbbbb
+bbbffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffbbbbb
+bbbffddddddddddddddddddddddddddddddddddddddddddddddddddddffddddddddddddddddddddddddddddddddddddddddffddddddddddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddddddddddddddddddddddddddddddddffddddddddddddddddddddddddddddddddddddddddffddddddddddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+bbbffddddddddddddddddddddddddddddddddddddddddddddddddddddffbddddddddddddddddddddddddddddddddddddddbffddddddddddddddddddddddddddddddddddddddddddddddddddddffbbbbb
+`
+  },
+  {
+    "series": "IMPACT",
+    "label": "Soccer Ball",
+    "string": `.....bbbbbbb....
+....bc11111fcb..
+...ccf111111fcb.
+..cfff111111ffcb
+.dfffd111111d1fb
+.df111d1111d111b
+cd11111dfff1111f
+ccd1111fffff111f
+ff11111fffff111f
+ff11111fffff11db
+cf1111d1fffd11db
+dfd111d11111dffc
+.d1dff111111ffcb
+..dffff11111fcb.
+...ccfcdddddcb..
+.....bbbbbbb....
+`
+  },
+  {
+    "series": "IMPACT",
+    "label": "Basketball",
+    "string": `....bcffffc....
+..cc44fe444cf..
+.b4fe44fe4b44b.
+.c44fe44cefcfc.
+c4444ce4ff4444b
+feccefff44f4b2f
+ff44fe4fe44ffff
+f44f4fe4fe4b42f
+f2ef44fe4fe424f
+cef4e4fe44fe42f
+befe4e4fe4bfecb
+.fe4e4ef4e2ecf.
+.b2e4e4fe2e4fb.
+..cf2ef22ecfc..
+....ccfffffb...
+`
+  },
+  {
+    "series": "IMPACT",
+    "label": "Basketball Hoop",
+    "string": `......fffffffffff.......
+.....f3ddddddddddf......
+...ff311111111111dff....
+.ff331111111111111ddff..
+f3311111111111111111ddf.
+f31111111111111111111df.
+fd111fffffffffffff111df.
+fd111f11111111111f111df.
+fd111f11111111111f111df.
+fd111f11111111111f111df.
+fd111f11111111111f111df.
+fd111f11111111111f111df.
+fd111f11111111111f111df.
+fd111f11111111111f111df.
+fd1112222222222222111df.
+fd112ddddddddddddd211df.
+fd1112222222222222111df.
+fd111cbcdcdcdcdcdc111df.
+fd1111cdcdcdcdcdc1111df.
+.ffffffcfcfcfcfcffffff..
+......cbcdcdcdcdc.......
+......bcdcdcdcdcb.......
+.......bcdcdcdcb........
+.......cbcbcbcbc........
 `
   }
 ]
