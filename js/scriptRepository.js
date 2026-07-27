@@ -351,7 +351,7 @@ function launchToSprite(sprite:Sprite,othersprite:Sprite,force:number) {
     "type":"IMPACT",
     "label": "Launch Sprite to Position",
     "script":`// launchToPosition
-// launches `sprite` towards `othersprite` at `force` pix/s
+// launches sprite towards othersprite at force pix/s
 function launchToPosition(sprite:Sprite,targetX:number,targetY:number,force:number) {
     let a=Math.atan2(targetY-sprite.y,targetX-sprite.x)
     sprite.setVelocity(Math.cos(a) * force, Math.sin(a) * force)
